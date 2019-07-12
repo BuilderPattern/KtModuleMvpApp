@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme_V23" parent="AppTheme_V21" >
+        <item name="android:statusBarColor">@color/color_00000000</item>
+    </style>
+
+    <style name="AppTheme" parent="AppTheme_V23" >
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>

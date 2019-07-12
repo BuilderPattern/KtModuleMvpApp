@@ -1,0 +1,72 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner rootProject.ext.android.testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootProject.ext.dependencies.junit
+    androidTestImplementation rootProject.ext.dependencies.runner
+    androidTestImplementation rootProject.ext.dependencies.espresso_core
+
+    api rootProject.ext.dependencies.kotlin
+    api rootProject.ext.dependencies.appcompat_v7
+    api rootProject.ext.dependencies.recycle_view
+    api rootProject.ext.dependencies.constraint_layout
+
+    //muilt_dex
+    api rootProject.ext.dependencies.muilt_dex
+
+    //Retrofit
+    api rootProject.ext.dependencies.retrofit2
+    api rootProject.ext.dependencies.retrofit2_gson
+    api rootProject.ext.dependencies.retrofit2_adapter
+    api rootProject.ext.dependencies.retrofit2_logger
+
+    //RxJava
+    api rootProject.ext.dependencies.rxjava2
+    api rootProject.ext.dependencies.rxjava2_android
+
+    //RxlifeCycle
+    api rootProject.ext.dependencies.rxlifecycle2
+    api rootProject.ext.dependencies.rxlifecycle2_android
+    api rootProject.ext.dependencies.rxlifecycle2_components
+    api rootProject.ext.dependencies.rxlifecycle2_lifecycle_kotlin
+
+    //Arouter
+    api rootProject.ext.dependencies.arouter_api
+
+    //tab
+    api rootProject.ext.dependencies.FlycoTabLayout_Lib
+
+    api rootProject.ext.dependencies.autosize
+
+    api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
+    api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.logger
+}

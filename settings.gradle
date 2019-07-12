@@ -1,0 +1,1 @@
+include ':app', ':base_module', ':common_module', ':first_module', ':second_module', ':main_module', ':home_module', ':message_module', ':further_module', ':mine_module'
