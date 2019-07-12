@@ -1,37 +1,57 @@
-package kt.module.main_module
+package kt.module.main_module.mvp
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.util.Log
+import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseActivity
 import kt.module.base_module.base.view.BaseFragment
+import kt.module.base_module.data.RvData
 import kt.module.base_module.utils.RouteUtils
+import kt.module.common_module.base.presenter.BasePresenter
+import kt.module.common_module.base.view.IBaseView
+import kt.module.main_module.BottomTabEntity
+import kt.module.main_module.R
+import java.util.*
 
 @Route(path = RouteUtils.RouterMap.Main.MainAc)
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<IBasePresenter>(),MainContract.IMainView {
+
+    override val presenter: MainPresenter?
+        get() = MainPresenter(this)
+
+    override fun getConfigSuccessed(data: Objects) {
+        Log.e("--------data：", data.toString())
+    }
+
+    override fun getConfigFailed(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
 
     override val contentLayoutId: Int
         get() = R.layout.activity_main
 
-    var index: Int = 0
+    private var index: Int = 0
 
-    var fragmentList = ArrayList<Fragment>()
+    private var fragmentList = ArrayList<Fragment>()
 
-    var mHomeFragment = RouteUtils.go(RouteUtils.RouterMap.HomePage.Home).navigation() as BaseFragment
-    var mMessageFragment = RouteUtils.go(RouteUtils.RouterMap.MessagePage.Message).navigation() as BaseFragment
-    var mFurtherFragment = RouteUtils.go(RouteUtils.RouterMap.FurtherPage.Further).navigation() as BaseFragment
-    var mMineFragment = RouteUtils.go(RouteUtils.RouterMap.MinePage.Mine).navigation() as BaseFragment
+    private var mHomeFragment = RouteUtils.go(RouteUtils.RouterMap.HomePage.Home).navigation() as BaseFragment
+    private var mMessageFragment = RouteUtils.go(RouteUtils.RouterMap.MessagePage.Message).navigation() as BaseFragment
+    private var mFurtherFragment = RouteUtils.go(RouteUtils.RouterMap.FurtherPage.Further).navigation() as BaseFragment
+    private var mMineFragment = RouteUtils.go(RouteUtils.RouterMap.MinePage.Mine).navigation() as BaseFragment
 
     //底部文字数组
-    private val mTitles = arrayOf("Home", "Message", "Further", "Mine")
+    private val mTabTexts = arrayOf("Home", "Message", "Further", "Mine")
 
     //未选中图标数组
-    private val mIconDefaultIds = intArrayOf(
+    private val mUncheckIcons = intArrayOf(
         R.mipmap.icon_tab_home_unselect,
         R.mipmap.icon_tab_message_unselect,
         R.mipmap.icon_tab_more_unselect,
@@ -39,7 +59,7 @@ class MainActivity : BaseActivity() {
     )
 
     //选中图标数组
-    private val mIconSelectIds = intArrayOf(
+    private val mCheckIcons = intArrayOf(
         R.mipmap.icon_tab_home_select,
         R.mipmap.icon_tab_message_select,
         R.mipmap.icon_tab_more_select,
@@ -55,12 +75,19 @@ class MainActivity : BaseActivity() {
         fragmentList.add(mFurtherFragment)
         fragmentList.add(mMineFragment)
 
-        for (index in mTitles.indices) {
-            mTabEntityList.add(BottomTabEntity(mTitles[index], mIconSelectIds[index], mIconDefaultIds[index]))
+        for (index in mTabTexts.indices) {
+            mTabEntityList.add(
+                BottomTabEntity(
+                    mTabTexts[index],
+                    mCheckIcons[index],
+                    mUncheckIcons[index]
+                )
+            )
         }
 
         activity_main_viewpager.setCurrentItem(index, false)
-        activity_main_viewpager.adapter = MyPagerAdapter(fragmentList, mTabEntityList, supportFragmentManager)
+        activity_main_viewpager.adapter =
+            MyPagerAdapter(fragmentList, mTabEntityList, supportFragmentManager)
     }
 
     override fun initEvents() {
@@ -91,9 +118,11 @@ class MainActivity : BaseActivity() {
         activity_main_tabLayout.setTabData(mTabEntityList)
 
         switch(index)
+
+        presenter?.getConfig(this)
     }
 
-    fun switch(index: Int) {
+    private fun switch(index: Int) {
         activity_main_viewpager.setCurrentItem(index, false)
     }
 

@@ -49,6 +49,9 @@ class ParamsBuilder {
         return this
     }
 
+    /**
+     * GET请求参数
+     */
     fun build(): IdentityHashMap<String, Any> {
         val map = IdentityHashMap<String, Any>()
         for ((key, value) in params) {
@@ -56,7 +59,6 @@ class ParamsBuilder {
                 for (valueItem in value) {
                     map.put(String(key.toByteArray()), valueItem)
                 }
-
             } else {
                 map[key] = value
             }
@@ -64,6 +66,10 @@ class ParamsBuilder {
         return map
     }
 
+    /**
+     * POST请求的时候
+     * 把请求参数转成：RequestBody
+     */
     fun getRequestBody(): RequestBody {
         val jsonString = Gson().toJson(build())
         return RequestBody.create(MediaType.parse("application/json"), jsonString)
