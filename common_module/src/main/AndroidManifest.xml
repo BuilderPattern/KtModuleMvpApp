@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="kt.module.common_module">
 
-    !--dangerous permissions-->
+    <!--这些权限都是直接复制过来的，不用的自行删除-->
     <!--group-PHONE-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -70,17 +70,6 @@
             android:name="android.permission.READ_LOGS"
             tools:ignore="ProtectedPermissions" />
 
-    <permission
-            android:name="getui.permission.GetuiService.${applicationId}"
-            android:protectionLevel="normal" />
-    <uses-permission android:name="getui.permission.GetuiService.${applicationId}" />
-
-    <permission
-            android:name="dopool.player.permission.MIPUSH_RECEIVE"
-            android:protectionLevel="signature" />
-    <uses-permission android:name="dopool.player.permission.MIPUSH_RECEIVE" />
-
-    <uses-feature android:name="android.hardware.wifi" />
 
     <application></application>
 

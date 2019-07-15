@@ -22,18 +22,26 @@ import kt.module.main_module.R
 import java.util.*
 
 @Route(path = RouteUtils.RouterMap.Main.MainAc)
-class MainActivity : BaseActivity<IBasePresenter>(),MainContract.IMainView {
+class MainActivity : BaseActivity<IBasePresenter>(), MainContract.IMainView {
+
+    override fun getGetTestSuccessed(data: Any) {
+
+    }
+
+    override fun getGetTestCatFailed(msg: Any) {
+
+    }
+
+    override fun getPostTestSuccessed(data: Any) {
+
+    }
+
+    override fun getPostTestFailed(msg: Any) {
+
+    }
 
     override val presenter: MainPresenter?
-        get() = MainPresenter(this)
-
-    override fun getConfigSuccessed(data: Objects) {
-        Log.e("--------data：", data.toString())
-    }
-
-    override fun getConfigFailed(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
+        get() = MainPresenter(this, MainModel())
 
     override val contentLayoutId: Int
         get() = R.layout.activity_main
@@ -119,14 +127,19 @@ class MainActivity : BaseActivity<IBasePresenter>(),MainContract.IMainView {
 
         switch(index)
 
-        presenter?.getConfig(this)
+        presenter?.getPostTest(this)
+        presenter?.getGetTest(this)
     }
 
     private fun switch(index: Int) {
         activity_main_viewpager.setCurrentItem(index, false)
     }
 
-    class MyPagerAdapter(var fragments: ArrayList<Fragment>, var tabList: ArrayList<CustomTabEntity>, supportManager: FragmentManager ) : FragmentPagerAdapter(supportManager) {
+    class MyPagerAdapter(
+        var fragments: ArrayList<Fragment>,
+        var tabList: ArrayList<CustomTabEntity>,
+        supportManager: FragmentManager
+    ) : FragmentPagerAdapter(supportManager) {
 
         override fun getPageTitle(position: Int): CharSequence? {
             var bottomTabEntity = tabList[position] as BottomTabEntity

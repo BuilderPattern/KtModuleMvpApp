@@ -1,15 +1,16 @@
 package kt.module.main_module.mvp
 
 import io.reactivex.Observable
-import kt.module.base_module.data.BaseResponseData
-import kt.module.base_module.data.RvData
 import kt.module.base_module.http.ApiService
-import kt.module.base_module.http.BaseRetrofit
-import okhttp3.RequestBody
-import java.util.*
+import kt.module.base_module.http.ParamsBuilder
+import kt.module.base_module.utils.BaseRetrofitUtil
 
 class MainModel :MainContract.IMainModel {
-    override fun getConfig(requestBody: RequestBody): Observable<BaseResponseData<Objects>> {
-        return BaseRetrofit().get().create(ApiService::class.java).getConfig(requestBody)
+    override fun getGetTest(paramsBuilder: ParamsBuilder): Observable<Any>? {
+        return BaseRetrofitUtil.get()?.create(ApiService::class.java)?.getGetTest(paramsBuilder.build())
+    }
+
+    override fun getPostTest(paramsBuilder: ParamsBuilder): Observable<Any>? {
+        return BaseRetrofitUtil.get()?.create(ApiService::class.java)?.getPostTest(paramsBuilder.getRequestBody())
     }
 }

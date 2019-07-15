@@ -2,7 +2,6 @@ package kt.module.base_module.config
 
 object BuildConfig {
 
-    const val BASE_URL: String = "https://api.now.unexplainablestore.cn/"
-    const val DEBUG: Boolean = true
-
+    const val DEBUG: Boolean = true//是否测试环境
+    const val BASE_URL: String = "https://api.dev.test.cn/"//你们自己接口的baseUrl
 }

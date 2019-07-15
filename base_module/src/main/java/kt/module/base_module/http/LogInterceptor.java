@@ -2,6 +2,7 @@ package kt.module.base_module.http;
 
 import java.io.IOException;
 
+import android.util.Log;
 import com.orhanobut.logger.Logger;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -10,17 +11,18 @@ import okio.Buffer;
 
 public class LogInterceptor implements Interceptor {
 
-    private static final String F_BREAK = " %n";
-    private static final String F_URL = " %s";
-    private static final String F_TIME = " in %.1fms";
-    private static final String F_HEADERS = "%s";
-    private static final String F_RESPONSE = F_BREAK + "KtApp: %d";
-    private static final String F_BODY = "body: %s";
+    private static final String REQUEST_NEW_LINE = " %n";
+    private static final String REQUEST_URL = " %s";
+    private static final String REQUEST_TIME = " in %.1fms";
+    private static final String REQUEST_HEADERS = "%s";
+    private static final String REQUEST_BODY = "body：%s";
 
-    private static final String F_BREAKER = F_BREAK + "-------------------------------------------" + F_BREAK;
-    private static final String F_REQUEST_WITHOUT_BODY = F_URL + F_TIME + F_BREAK + F_HEADERS;
-    private static final String F_REQUEST_WITH_BODY = F_URL + F_TIME + F_BREAK + F_HEADERS + F_BODY + F_BREAK;
-    private static final String F_RESPONSE_WITH_BODY = F_RESPONSE + F_BREAK + F_HEADERS + F_BODY + F_BREAK + F_BREAKER;
+    private static final String RESPONSE_RESPONSE = "KtApp: %d";
+    private static final String RESPONSE_DATA = "data: %s";
+
+    private static final String REQUEST_WITHOUT_BODY = REQUEST_URL + REQUEST_TIME + REQUEST_NEW_LINE + REQUEST_HEADERS;
+    private static final String REQUEST_WITH_BODY = REQUEST_URL + REQUEST_TIME + REQUEST_NEW_LINE + REQUEST_HEADERS + REQUEST_BODY + REQUEST_NEW_LINE;
+    private static final String RESPONSE_WITH_BODY = RESPONSE_RESPONSE + REQUEST_NEW_LINE + REQUEST_HEADERS + RESPONSE_DATA + REQUEST_NEW_LINE;
 
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -32,25 +34,26 @@ public class LogInterceptor implements Interceptor {
 
         String bodyString = null;
         if (response.body() != null) {
-            bodyString = response.peekBody(1024*1024).string();//此处用peekbody获得body的复制，参数为内存占用限制
+            bodyString = response.peekBody(1024 * 1024 * 2).string();//此处用peekbody获得body的复制，参数为内存占用限制
         }
+
         double time = (t2 - t1) / 1e6d;
+        Logger.e("-------------------------------------------");
         if (request.method().equals("GET")) {
-            Logger.e(String.format("GET " + F_REQUEST_WITHOUT_BODY + F_RESPONSE_WITH_BODY, request.url(), time, request.headers(), response.code(), response.headers(), bodyString));
+            Log.e("Log：", String.format("GET " + REQUEST_WITHOUT_BODY + RESPONSE_WITH_BODY, request.url(), time, request.headers(), response.code(), response.headers(), bodyString));
         } else if (request.method().equals("POST")) {
-            Logger.e(String.format("POST " + F_REQUEST_WITH_BODY + F_RESPONSE_WITH_BODY, request.url()
-                    , time, request.headers(), stringifyRequestBody(request), response.code(), response.headers(), bodyString));
+            Log.e("Log：", String.format("POST " + REQUEST_WITH_BODY + RESPONSE_WITH_BODY, request.url(), time, request.headers(), stringifyRequestBody(request), response.code(), response.headers(), bodyString));
         }
         return response;
     }
 
-    private String stringifyRequestBody(Request request1) {
+    private String stringifyRequestBody(Request request) {
         try {
-            final Request request = request1.newBuilder().build();
+            final Request copy = request.newBuilder().build();
             final Buffer buffer = new Buffer();
-            request.body().writeTo(buffer);
+            copy.body().writeTo(buffer);
             return buffer.readUtf8();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             return "did not work";
         }

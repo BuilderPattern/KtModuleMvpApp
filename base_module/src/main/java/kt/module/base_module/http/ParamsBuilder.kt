@@ -1,6 +1,7 @@
 package kt.module.base_module.http
 
 import com.google.gson.Gson
+import kt.module.base_module.constant.Constant
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import java.util.*
@@ -8,6 +9,12 @@ import kotlin.collections.ArrayList
 
 class ParamsBuilder {
     private val params = LinkedHashMap<String, Any>()
+
+    //构造方法放公共参数
+    constructor(){
+        params[Constant.Key.OS_VERSION] = "1"
+        params[Constant.Key.DEVICE_ID] = "adTaac2632dxzb"
+    }
 
     fun add(key: String, value: String): ParamsBuilder {
         params[key] = value

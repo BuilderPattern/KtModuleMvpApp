@@ -10,11 +10,14 @@ import java.util.*
 
 class MainContract {
     interface IMainView : IBaseView {
-        fun getConfigSuccessed(data: Objects)
-        fun getConfigFailed(msg: String)
+        fun getPostTestSuccessed(data: Any)
+        fun getPostTestFailed(msg: Any)
+        fun getGetTestSuccessed(data: Any)
+        fun getGetTestCatFailed(msg: Any)
     }
 
     interface IMainModel {
-        fun getConfig(requestBody: RequestBody): Observable<BaseResponseData<Objects>>
+        fun getPostTest(paramsBuilder: ParamsBuilder): Observable<Any>?
+        fun getGetTest(paramsBuilder: ParamsBuilder): Observable<Any>?
     }
 }
