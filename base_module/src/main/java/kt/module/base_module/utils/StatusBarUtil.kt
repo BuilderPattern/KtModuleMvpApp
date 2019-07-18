@@ -1,11 +1,13 @@
 package kt.module.base_module.utils
 
+import android.content.Context
 import android.os.Build
 import android.os.Build.VERSION_CODES.KITKAT
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import kt.module.base_module.R
+
 
 object StatusBarUtil {
 
@@ -43,5 +45,14 @@ object StatusBarUtil {
                 window.attributes = attributes
             }
         }
+    }
+
+    /**
+     * 获取状态栏高度
+     */
+    fun getStatusBarHeight(context: Context): Int? {
+        val resources = context.resources
+        var resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        return resources?.getDimensionPixelSize(resourceId!!)
     }
 }

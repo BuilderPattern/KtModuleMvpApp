@@ -15,7 +15,7 @@ import kt.module.base_module.data.ChildEntity
 class BaseHorItemProvider<T> : BaseItemProvider<FurtherMultiItemEntity<T>, BaseRvViewHolder>() {
 
     override fun layout(): Int {
-        return R.layout.further_vertical_layout
+        return R.layout.further_horizontal_layout
     }
 
     override fun viewType(): Int {
@@ -23,18 +23,18 @@ class BaseHorItemProvider<T> : BaseItemProvider<FurtherMultiItemEntity<T>, BaseR
     }
 
     override fun convert(holder: BaseRvViewHolder?, data: FurtherMultiItemEntity<T>?, position: Int) {
-        var titleTv = holder?.itemView?.findViewById<TextView>(R.id.further_ver_titleTv)
+        var titleTv = holder?.itemView?.findViewById<TextView>(R.id.further_hor_titleTv)
         titleTv?.text = data?.title
 
-        var recyclerView = holder?.itemView?.findViewById<RecyclerView>(R.id.further_ver_recyclerView)
+        var recyclerView = holder?.itemView?.findViewById<RecyclerView>(R.id.further_hor_recyclerView)
         var mutableList = data?.data as MutableList<ChildEntity>
 
         recyclerView?.layoutManager = LinearLayoutManager(mContext, LinearLayout.HORIZONTAL, false)//水平方向
         var adapter: BaseRvQuickAdapter<ChildEntity>? = null
         if (adapter == null) {
-            adapter = object : BaseRvQuickAdapter<ChildEntity>(R.layout.item_further_vertical, mutableList) {
+            adapter = object : BaseRvQuickAdapter<ChildEntity>(R.layout.item_further_horizontal, mutableList) {
                 override fun convert(holder: BaseRvViewHolder?, item: ChildEntity) {
-                    holder?.itemView?.findViewById<TextView>(R.id.item_snap_hor_nameTv)?.text = item.title
+                    holder?.itemView?.findViewById<TextView>(R.id.item_snap_hor_nameTv)?.text = item.title_img_new
                     holder?.itemView?.findViewById<TextView>(R.id.item_snap_hor_ratingTv)?.text = item.id.toString()
                 }
             }

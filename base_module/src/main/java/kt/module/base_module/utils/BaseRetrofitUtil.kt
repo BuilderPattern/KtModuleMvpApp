@@ -58,6 +58,9 @@ object BaseRetrofitUtil {
             var sslSocketFactory = sslContext?.socketFactory
             builder.sslSocketFactory(sslSocketFactory, trustManager)
 
+            if (BuildConfig.DEBUG) {
+                builder.addInterceptor(LogInterceptor())
+            }
 
             retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

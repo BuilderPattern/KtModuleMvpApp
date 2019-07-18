@@ -15,12 +15,12 @@ class FurtherAdapter<T>: MultipleItemRvAdapter<FurtherMultiItemEntity<T>, BaseRv
         finishInitialize()
     }
     companion object{
-        const val TYPE_HOR_FIRST:Int  = 1
-        const val TYPE_VER_FIRST:Int  = 2
+        const val TYPE_VER_FIRST:Int  = 1
+        const val TYPE_HOR_FIRST:Int  = 2
     }
     override fun registerItemProvider() {
-        mProviderDelegate.registerProvider(BaseVerItemProvider<MutableList<ChildEntity>>())
         mProviderDelegate.registerProvider(BaseHorItemProvider<MutableList<ChildEntity>>())
+        mProviderDelegate.registerProvider(BaseVerItemProvider<MutableList<ChildEntity>>())
 
     }
 }

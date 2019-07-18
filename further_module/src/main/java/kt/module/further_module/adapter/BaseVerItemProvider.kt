@@ -23,10 +23,10 @@ class BaseVerItemProvider<T> : BaseItemProvider<FurtherMultiItemEntity<T>, BaseR
     }
 
     override fun convert(holder: BaseRvViewHolder?, data: FurtherMultiItemEntity<T>?, position: Int) {
-        var titleTv = holder?.itemView?.findViewById<TextView>(R.id.further_hor_ver_titleTv)
+        var titleTv = holder?.itemView?.findViewById<TextView>(R.id.further_ver_titleTv)
         titleTv?.text = data?.title
 
-        var recyclerView = holder?.itemView?.findViewById<RecyclerView>(R.id.further_hor_ver_recyclerView)
+        var recyclerView = holder?.itemView?.findViewById<RecyclerView>(R.id.further_ver_recyclerView)
         var mutableList = data?.data as MutableList<ChildEntity>
 
         recyclerView?.layoutManager = LinearLayoutManager(mContext, LinearLayout.VERTICAL, false)//垂直方向
@@ -35,7 +35,11 @@ class BaseVerItemProvider<T> : BaseItemProvider<FurtherMultiItemEntity<T>, BaseR
         if (adapter == null) {
             adapter = object : BaseRvQuickAdapter<ChildEntity>(R.layout.item_further_vertical, mutableList) {
                 override fun convert(holder: BaseRvViewHolder?, item: ChildEntity) {
-                    holder?.itemView?.findViewById<TextView>(R.id.item_snap_ver_nameTv)?.text = item.title
+                    if (item.title.length > 3){
+                        holder?.itemView?.findViewById<TextView>(R.id.item_snap_ver_nameTv)?.text = item.title.substring(item.title.length-3, item.title.length-1)
+                    }else{
+                        holder?.itemView?.findViewById<TextView>(R.id.item_snap_ver_nameTv)?.text = item.title
+                    }
                     holder?.itemView?.findViewById<TextView>(R.id.item_snap_ver_ratingTv)?.text = item.id.toString()
                 }
             }
