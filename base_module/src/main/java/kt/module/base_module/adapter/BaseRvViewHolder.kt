@@ -12,34 +12,45 @@ import java.io.File
 class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
 
     fun setDrawableLeft(viewId: Int, drawable: Drawable): BaseViewHolder {
-        val view = this.getView<TextView>(viewId)
+        var view = this.getView<TextView>(viewId)
         view.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
         return this
     }
 
     fun setDrawblePadding(viewId: Int, size: Int): BaseViewHolder {
-        val view = this.getView<TextView>(viewId)
+        var view = this.getView<TextView>(viewId)
         view.compoundDrawablePadding = 4
         return this
     }
 
     fun setImageFile(id: Int, file: File): BaseViewHolder {
-        val imageView = getView<ImageView>(id)
+        var imageView = getView<ImageView>(id)
         Glide.with(imageView.context).load(file)
             .into(imageView)
         return this
     }
 
-    fun setImageUri(id: Int, uri: Uri): BaseViewHolder {
-        val imageView = getView<ImageView>(id)
-        Glide.with(imageView.context).load(uri)
+    fun setImageRes(id: Int, resId: Int): BaseViewHolder {
+        var imageView = getView<ImageView>(id)
+        Glide.with(imageView.context).load(resId)
             .into(imageView)
         return this
     }
 
-    fun setImageRes(id: Int, resId: Int): BaseViewHolder {
-        val imageView = getView<ImageView>(id)
-        Glide.with(imageView.context).load(resId)
+    fun setImageUrl(id: Int, url: String): BaseViewHolder {
+        var imageView = getView<ImageView>(id)
+        Glide.with(imageView.context).load(url)
+            .into(imageView)
+        return this
+    }
+
+    /**
+     * 如果要加其他，比如显示图片的控件，
+     * 直接类似这种再写一个方法就行
+     */
+    fun setImageUri(id: Int, uri: Uri): BaseViewHolder {
+        var imageView = getView<ImageView>(id)
+        Glide.with(imageView.context).load(uri)
             .into(imageView)
         return this
     }

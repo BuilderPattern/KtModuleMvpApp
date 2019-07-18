@@ -69,4 +69,6 @@ dependencies {
     api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
     api rootProject.ext.dependencies.glide
     api rootProject.ext.dependencies.logger
+    api rootProject.ext.dependencies.cardview_v7
+//    api rootProject.ext.dependencies.topsnackbar
 }

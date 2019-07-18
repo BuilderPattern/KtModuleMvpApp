@@ -8,5 +8,6 @@ object Constant {
         const val ID = "id"
         const val OS_VERSION = "os_version"
         const val DEVICE_ID = "device_id"
+        const val KEY_WORD = "keyword"
     }
 }

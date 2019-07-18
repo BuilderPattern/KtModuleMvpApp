@@ -1,6 +1,8 @@
 package kt.module.main_module.mvp
 
 import io.reactivex.Observable
+import kt.module.base_module.data.BaseResponseData
+import kt.module.base_module.data.ObjectEntity
 import kt.module.base_module.http.ApiService
 import kt.module.base_module.http.ParamsBuilder
 import kt.module.base_module.utils.BaseRetrofitUtil
@@ -10,7 +12,7 @@ class MainModel :MainContract.IMainModel {
         return BaseRetrofitUtil.get()?.create(ApiService::class.java)?.getGetTest(paramsBuilder.build())
     }
 
-    override fun getPostTest(paramsBuilder: ParamsBuilder): Observable<Any>? {
+    override fun getPostTest(paramsBuilder: ParamsBuilder): Observable<BaseResponseData<MutableList<ObjectEntity>>>? {
         return BaseRetrofitUtil.get()?.create(ApiService::class.java)?.getPostTest(paramsBuilder.getRequestBody())
     }
 }

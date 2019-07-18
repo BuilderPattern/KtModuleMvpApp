@@ -3,6 +3,7 @@ package kt.module.base_module.utils
 import android.os.Build
 import android.webkit.WebSettings
 import kt.module.BaseApp
+import kt.module.base_module.R
 import kt.module.base_module.config.BuildConfig
 import kt.module.base_module.http.LogInterceptor
 import okhttp3.Interceptor
@@ -57,14 +58,11 @@ object BaseRetrofitUtil {
             var sslSocketFactory = sslContext?.socketFactory
             builder.sslSocketFactory(sslSocketFactory, trustManager)
 
-            if (BuildConfig.DEBUG) {
-                builder.addInterceptor(LogInterceptor())
-            }
 
             retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(BaseApp.application.getString(R.string.base_url))
                 .client(builder.build())
                 .build()
         }

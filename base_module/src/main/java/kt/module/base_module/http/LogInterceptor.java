@@ -40,9 +40,9 @@ public class LogInterceptor implements Interceptor {
         double time = (t2 - t1) / 1e6d;
         Logger.e("-------------------------------------------");
         if (request.method().equals("GET")) {
-            Log.e("Log：", String.format("GET " + REQUEST_WITHOUT_BODY + RESPONSE_WITH_BODY, request.url(), time, request.headers(), response.code(), response.headers(), bodyString));
+            Log.e("Log", String.format("GET " + REQUEST_WITHOUT_BODY + RESPONSE_WITH_BODY, request.url(), time, request.headers(), response.code(), response.headers(), bodyString));
         } else if (request.method().equals("POST")) {
-            Log.e("Log：", String.format("POST " + REQUEST_WITH_BODY + RESPONSE_WITH_BODY, request.url(), time, request.headers(), stringifyRequestBody(request), response.code(), response.headers(), bodyString));
+            Log.e("Log", String.format("POST " + REQUEST_WITH_BODY + RESPONSE_WITH_BODY, request.url(), time, request.headers(), stringifyRequestBody(request), response.code(), response.headers(), bodyString));
         }
         return response;
     }

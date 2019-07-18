@@ -71,7 +71,6 @@ ext {
             //刷新动画
             smartrefreshlayout                  : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14",
             smartrefreshheader                  : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14",
-            //recycleview状态绑定
             multitype                           : "me.drakeet.multitype:multitype-kotlin:3.4.4",
             //gson
             gson                                : 'com.google.code.gson:gson:2.8.5',
@@ -100,7 +99,7 @@ ext {
             shimmer                             : 'com.facebook.shimmer:shimmer:0.4.0',
             //autosize
             autosize                            : 'me.jessyan:autosize:1.1.2',
-
+            topsnackbar                         : 'com.androidadvance:topsnackbar:0.0.8',
             BaseRecyclerViewAdapterHelper       : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     ]
 }

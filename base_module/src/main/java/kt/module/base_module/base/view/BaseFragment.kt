@@ -1,19 +1,29 @@
 package kt.module.base_module.base.view
 
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.alibaba.android.arouter.launcher.ARouter
+import com.trello.rxlifecycle2.LifecycleProvider
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxFragment
+import kt.module.base_module.base.presenter.IBasePresenter
+import me.jessyan.autosize.internal.CustomAdapt
 
-abstract class BaseFragment : RxFragment() {
+open abstract class BaseFragment<T : IBasePresenter> : RxFragment(),CustomAdapt,
+    LifecycleProvider<FragmentEvent> {
     private var mRoot: View? = null
 
     protected abstract val contentLayoutId: Int
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    open val presenter: T? = null
+    private var mPresenter: T? = null
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mPresenter = presenter
         ARouter.getInstance().inject(this)
         if (mRoot == null) {
             mRoot = inflater.inflate(contentLayoutId, container, false)
@@ -31,11 +41,24 @@ abstract class BaseFragment : RxFragment() {
         initEvents()
     }
 
+    override fun onDestroy() {
+        mPresenter?.destroy()
+        super.onDestroy()
+    }
+
     open fun initViews() {
 
     }
 
     open fun initEvents() {
 
+    }
+
+    override fun isBaseOnWidth(): Boolean {
+        return true
+    }
+
+    override fun getSizeInDp(): Float {
+        return 667f
     }
 }

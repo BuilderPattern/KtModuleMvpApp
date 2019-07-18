@@ -2,9 +2,9 @@ package kt.module.base_module.data
 
 object DataUtils {
 
-    fun createData(num: Int): ArrayList<RvData> {
+    fun createData(num: Int): MutableList<RvData> {
 
-        var list = ArrayList<RvData>()
+        var list :MutableList<RvData> = mutableListOf()
 
         for (index in 0..num) {
             list.add(RvData("张三", 22))
@@ -13,14 +13,22 @@ object DataUtils {
         return list
     }
 
-    fun createSectionData(num: Int): ArrayList<RvDataSection> {
+    fun createSectionData(num: Int): MutableList<RvDataSection> {
 
-        var list = ArrayList<RvDataSection>()
+        var list:MutableList<RvDataSection> = mutableListOf()
 
         for (index in 0..num) {
             list.add(RvDataSection(true, index.toString()))
             list.add(RvDataSection(RvData("张三", 22)))
             list.add(RvDataSection(RvData("李四", 90)))
+        }
+        return list
+    }
+    fun createSnapData(num: Int): MutableList<SnapRvData> {
+        var list :MutableList<SnapRvData> = mutableListOf()
+        for (index in 0..num) {
+            list.add(SnapRvData(1, "竖直方向", createData(3)))
+            list.add(SnapRvData(0, "水平方向", createData(3)))
         }
         return list
     }

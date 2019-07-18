@@ -4,25 +4,20 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
-import android.util.Log
-import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import kotlinx.android.synthetic.main.activity_main.*
-import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseActivity
 import kt.module.base_module.base.view.BaseFragment
-import kt.module.base_module.data.RvData
+import kt.module.base_module.data.ObjectEntity
 import kt.module.base_module.utils.RouteUtils
-import kt.module.common_module.base.presenter.BasePresenter
-import kt.module.common_module.base.view.IBaseView
 import kt.module.main_module.BottomTabEntity
 import kt.module.main_module.R
 import java.util.*
 
 @Route(path = RouteUtils.RouterMap.Main.MainAc)
-class MainActivity : BaseActivity<IBasePresenter>(), MainContract.IMainView {
+class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
 
     override fun getGetTestSuccessed(data: Any) {
 
@@ -31,11 +26,9 @@ class MainActivity : BaseActivity<IBasePresenter>(), MainContract.IMainView {
     override fun getGetTestCatFailed(msg: Any) {
 
     }
-
-    override fun getPostTestSuccessed(data: Any) {
+    override fun getPostTestSuccessed(data: MutableList<ObjectEntity>?) {
 
     }
-
     override fun getPostTestFailed(msg: Any) {
 
     }
@@ -50,10 +43,10 @@ class MainActivity : BaseActivity<IBasePresenter>(), MainContract.IMainView {
 
     private var fragmentList = ArrayList<Fragment>()
 
-    private var mHomeFragment = RouteUtils.go(RouteUtils.RouterMap.HomePage.Home).navigation() as BaseFragment
-    private var mMessageFragment = RouteUtils.go(RouteUtils.RouterMap.MessagePage.Message).navigation() as BaseFragment
-    private var mFurtherFragment = RouteUtils.go(RouteUtils.RouterMap.FurtherPage.Further).navigation() as BaseFragment
-    private var mMineFragment = RouteUtils.go(RouteUtils.RouterMap.MinePage.Mine).navigation() as BaseFragment
+    private var mHomeFragment = RouteUtils.go(RouteUtils.RouterMap.HomePage.Home).navigation() as BaseFragment<*>
+    private var mMessageFragment = RouteUtils.go(RouteUtils.RouterMap.MessagePage.Message).navigation() as BaseFragment<*>
+    private var mFurtherFragment = RouteUtils.go(RouteUtils.RouterMap.FurtherPage.Further).navigation() as BaseFragment<*>
+    private var mMineFragment = RouteUtils.go(RouteUtils.RouterMap.MinePage.Mine).navigation() as BaseFragment<*>
 
     //底部文字数组
     private val mTabTexts = arrayOf("Home", "Message", "Further", "Mine")

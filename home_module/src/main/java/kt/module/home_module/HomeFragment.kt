@@ -5,13 +5,14 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.fragment_home.*
 import kt.module.base_module.adapter.BaseRvQuickAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
+import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseFragment
 import kt.module.base_module.data.DataUtils
 import kt.module.base_module.data.RvData
 import kt.module.base_module.utils.RouteUtils
 
 @Route(path = RouteUtils.RouterMap.HomePage.Home)
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment<IBasePresenter>() {
     override val contentLayoutId: Int
         get() = R.layout.fragment_home
 

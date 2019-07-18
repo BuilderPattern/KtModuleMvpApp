@@ -11,14 +11,17 @@ class MainPresenter(view: MainContract.IMainView, var model: MainModel) : BasePr
 
     fun getPostTest(activity: MainActivity) {
         var paramsBuilder = ParamsBuilder()
-        paramsBuilder.add(Constant.Key.ID, "2")
+        paramsBuilder.add(Constant.Key.KEY_WORD, "b")
 
         model?.getPostTest(paramsBuilder)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.compose(activity?.bindToLifecycle())
             ?.subscribe({
-                mView?.getPostTestSuccessed(it)
+                if (it.code == 200){
+                    mView?.getPostTestSuccessed(it.result)
+                }else{
+                    mView?.getPostTestFailed("发生错误！")                }
             },{
                 mView?.getPostTestFailed("发生错误！")
                 it.printStackTrace()
