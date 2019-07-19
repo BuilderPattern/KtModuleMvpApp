@@ -24,10 +24,10 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
             var item = FurtherMultiItemEntity<MutableList<ChildEntity>>()
             if (it.show_template == 1) {
                 item.type = 1
-                item.title = "这个方向啊"
+                item.title = "竖直方向"
             } else {
                 item.type = 2
-                item.title = "那个方向啊"
+                item.title = "水平方向"
             }
             childList.clear()
             childList.addAll(it.child)

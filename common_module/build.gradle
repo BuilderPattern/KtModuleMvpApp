@@ -36,6 +36,9 @@ dependencies {
 
     //以下这些依赖统一放在一起，但是这样会严重延长编译时间。所以建议在平时项目使用的时候，除非某个依赖库在所有被依赖的子module下都要用，才采用api；其他情况都建议采用implementation
 
+    api rootProject.ext.dependencies.design
+
+
     api rootProject.ext.dependencies.kotlin
     api rootProject.ext.dependencies.appcompat_v7
     api rootProject.ext.dependencies.recycle_view

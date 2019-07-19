@@ -5,6 +5,7 @@ import android.support.design.widget.CoordinatorLayout
 import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
+import kt.module.base_module.utils.AnimationUtil
 
 class BottomBarBehavior(context: Context, attrs: AttributeSet) : CoordinatorLayout.Behavior<View>(context, attrs) {
 
@@ -38,11 +39,11 @@ class BottomBarBehavior(context: Context, attrs: AttributeSet) : CoordinatorLayo
 
     //隐藏时的动画
     private fun hide(view: View) {
-        AnimaUtils.hideAnim(view)
+        AnimationUtil.hideAnim(view)
     }
 
     //显示时的动画
     private fun show(view: View) {
-        AnimaUtils.showAnim(view)
+        AnimationUtil.showAnim(view)
     }
 }
