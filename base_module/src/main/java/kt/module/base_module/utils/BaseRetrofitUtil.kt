@@ -39,8 +39,8 @@ object BaseRetrofitUtil {
                 return@Interceptor it.proceed(request)
             })
                 .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
                 .hostnameVerifier(HostnameVerifier { hostname, session ->
                     return@HostnameVerifier true
                 })

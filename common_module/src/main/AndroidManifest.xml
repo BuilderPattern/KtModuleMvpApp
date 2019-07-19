@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="kt.module.common_module">
 
-    <!--这些权限都是直接复制过来的，不用的自行删除-->
+    <!--这些权限不用的自行删除-->
     <!--group-PHONE-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />

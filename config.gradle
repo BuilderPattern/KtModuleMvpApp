@@ -12,7 +12,6 @@ ext {
 
     dependencies = [
             FlycoTabLayout_Lib                  : 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar',
-            anko                                : "org.jetbrains.anko:anko:0.10.8",
             kotlin                              : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.11",
             appcompat_v7                        : "com.android.support:appcompat-v7:28.0.0",
             recycle_view                        : "com.android.support:recyclerview-v7:28.0.0",
@@ -50,9 +49,7 @@ ext {
             rxlifecycle2_lifecycle_kotlin       : "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:2.2.2",
             //多渠道打包
             channel_helper                      : "com.leon.channel:helper:2.0.1",
-            //loading
-            android_spinkit                     : "com.github.ybq:Android-SpinKit:1.1.0",
-            //65535
+
             muilt_dex                           : "com.android.support:multidex:1.0.3",
             //数据库
             greendao                            : "org.greenrobot:greendao:3.2.2",
@@ -79,11 +76,6 @@ ext {
             animated_gif                        : 'com.facebook.fresco:animated-gif:1.11.0',
             animated_webp                       : 'com.facebook.fresco:animated-webp:1.11.0',
             webpsupport                         : 'com.facebook.fresco:webpsupport:1.11.0',
-            //ijk
-            ijkplayer_java                      : 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8',
-            ijkplayer_armv7a                    : 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8',
-            //inmobi广告
-            inmobi_ads                          : 'com.inmobi.monetization:inmobi-ads:7.0.4',
             //picasso
             picasso                             : 'com.squareup.picasso:picasso:2.71828',
             //日志库
@@ -99,7 +91,6 @@ ext {
             shimmer                             : 'com.facebook.shimmer:shimmer:0.4.0',
             //autosize
             autosize                            : 'me.jessyan:autosize:1.1.2',
-            topsnackbar                         : 'com.androidadvance:topsnackbar:0.0.8',
             BaseRecyclerViewAdapterHelper       : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     ]
 }
