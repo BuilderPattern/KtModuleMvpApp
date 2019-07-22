@@ -7,10 +7,11 @@ import android.widget.TextView
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.fragment_further.*
-import kt.module.BaseApp
 import kt.module.base_module.adapter.FurtherAdapter
+import kt.module.base_module.base.entity.FurtherMultiItemEntity
 import kt.module.base_module.base.view.BaseFragment
-import kt.module.base_module.data.*
+import kt.module.base_module.data.db.table.ChildEntity
+import kt.module.base_module.data.db.table.ObjectEntity
 import kt.module.base_module.utils.RouteUtils
 import kt.module.base_module.utils.StatusBarUtil
 import kt.module.further_module.R
@@ -21,7 +22,8 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
     override fun getODSuccessed(data: MutableList<ObjectEntity>?) {
         mDatas.clear()
         data?.forEach {
-            var item = FurtherMultiItemEntity<MutableList<ChildEntity>>()
+            var item =
+                FurtherMultiItemEntity<MutableList<ChildEntity>>()
             if (it.show_template == 1) {
                 item.type = 1
                 item.title = "竖直方向"

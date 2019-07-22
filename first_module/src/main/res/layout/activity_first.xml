@@ -15,7 +15,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/activity_first_collapsing_toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 app:titleEnabled="false"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -30,14 +30,14 @@
                         android:id="@+id/activity_first_bg_img"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/color_66000000"/>
+                        android:background="@mipmap/icon_culture_human_img"/>
 
-                <Space
-                        android:id="@+id/course_title_rrl"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
-                        android:paddingRight="10dp"
-                        app:layout_scrollFlags="exitUntilCollapsed"/>
+                <!--<Space-->
+                        <!--android:id="@+id/course_title_rrl"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/dp_40"-->
+                        <!--android:paddingRight="10dp"-->
+                        <!--app:layout_scrollFlags="exitUntilCollapsed"/>-->
 
 
             </RelativeLayout>
@@ -45,47 +45,37 @@
             <android.support.v7.widget.Toolbar
                     android:id="@+id/activity_first_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:paddingTop="20dp"
+                    android:layout_height="100dp"
+                    android:paddingTop="30dp"
                     app:layout_collapseMode="pin"
                     app:contentInsetStart="0dp">
 
                 <TextView
-                        android:id="@+id/toolbar_center_title_tv"
+                        android:id="@+id/activity_first_toolbar_titleTv"
                         android:layout_width="wrap_content"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:maxWidth="160dp"
-                        style="@style/style_333333_20"/>
+                        android:textSize="26sp"
+                        android:textStyle="bold"/>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 
-        <RelativeLayout
-                android:id="@+id/activity_first_tab_rrl"
+
+        <android.support.design.widget.TabLayout
+                android:id="@+id/activity_first_tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_top_circle_bg"
-                android:layout_marginTop="-10dp"
-                android:paddingTop="10dp"
-                app:layout_scrollFlags="scroll">
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@color/color_ffffff"
+                app:tabIndicatorColor="@color/color_ffffff"
+                app:tabMode="fixed"
+                app:layout_scrollFlags="scroll"
+                app:tabSelectedTextColor="@color/color_f04a4a"
+                app:tabTextColor="@color/color_333333"/>
 
-            <android.support.design.widget.TabLayout
-                    android:id="@+id/activity_first_tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    app:tabIndicatorColor="@color/white"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/main_color"
-                    app:tabTextColor="@color/black"/>
 
-        </RelativeLayout>
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/login_gray_color"/>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager

@@ -1,4 +1,4 @@
-package kt.module.base_module.data
+package kt.module.base_module.base.entity
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 

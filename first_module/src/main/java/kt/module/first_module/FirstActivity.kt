@@ -59,7 +59,7 @@ open class FirstActivity : BaseActivity<IBasePresenter>() {
                 if (offset > range!! / 3) {
                     if (canChangeToolBarColor) {
                         activity_first_toolbar.setNavigationIcon(R.mipmap.icon_back_black_img)
-                        activity_first_toolbar.title = "测试标题"
+                        activity_first_toolbar_titleTv.text = "任🛁"
                         activity_first_toolbar.setBackgroundColor(resources.getColor(R.color.color_ffffff))
                         canChangeToolBarColor = false
                         nearByToolBar = true
@@ -72,7 +72,7 @@ open class FirstActivity : BaseActivity<IBasePresenter>() {
                 } else {
                     if (canChangeToolBarColor) {
                         activity_first_toolbar.setNavigationIcon(R.mipmap.icon_back_white_img)
-                        activity_first_toolbar.title = ""
+                        activity_first_toolbar_titleTv.text = ""
                         activity_first_toolbar.setBackgroundColor(resources.getColor(R.color.color_00000000))
                         canChangeToolBarColor = false
                         nearByToolBar = false

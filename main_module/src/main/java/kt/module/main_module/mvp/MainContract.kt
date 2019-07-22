@@ -1,8 +1,8 @@
 package kt.module.main_module.mvp
 
 import io.reactivex.Observable
-import kt.module.base_module.data.BaseResponseData
-import kt.module.base_module.data.ObjectEntity
+import kt.module.base_module.base.entity.BaseResponseData
+import kt.module.base_module.data.db.table.ObjectEntity
 import kt.module.base_module.http.ParamsBuilder
 import kt.module.common_module.base.view.IBaseView
 

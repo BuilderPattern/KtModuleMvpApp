@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -35,6 +36,16 @@ android {
     }
 }
 
+greendao {
+    //数据库schema版本，也可以理解为数据库版本号
+    schemaVersion 1
+    //设置DaoMaster 、DaoSession、Dao包名
+    daoPackage 'kt.module.base_module.data.db.dao'
+    //设置DaoMaster 、DaoSession、Dao目录
+    targetGenDir 'src/main/java'
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -46,4 +57,5 @@ dependencies {
     kapt rootProject.ext.dependencies.arouter_compiler
 
     api project(path: ':common_module')
+    implementation rootProject.ext.dependencies.greendao
 }

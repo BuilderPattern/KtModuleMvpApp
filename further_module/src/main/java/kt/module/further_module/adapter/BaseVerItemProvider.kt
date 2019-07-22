@@ -9,8 +9,8 @@ import kt.module.base_module.R
 import kt.module.base_module.adapter.BaseRvQuickAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
 import kt.module.base_module.adapter.FurtherAdapter
-import kt.module.base_module.data.ChildEntity
-import kt.module.base_module.data.FurtherMultiItemEntity
+import kt.module.base_module.base.entity.FurtherMultiItemEntity
+import kt.module.base_module.data.db.table.ChildEntity
 
 class BaseVerItemProvider<T> : BaseItemProvider<FurtherMultiItemEntity<T>, BaseRvViewHolder>() {
 

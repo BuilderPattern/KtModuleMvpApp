@@ -1,4 +1,4 @@
-package kt.module.base_module.data
+package kt.module.base_module.base.entity
 
 class BaseResponseData<T> {
     var code: Int = 0

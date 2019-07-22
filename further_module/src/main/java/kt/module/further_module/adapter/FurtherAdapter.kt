@@ -1,8 +1,8 @@
 package kt.module.base_module.adapter
 
 import com.chad.library.adapter.base.MultipleItemRvAdapter
-import kt.module.base_module.data.ChildEntity
-import kt.module.base_module.data.FurtherMultiItemEntity
+import kt.module.base_module.base.entity.FurtherMultiItemEntity
+import kt.module.base_module.data.db.table.ChildEntity
 import kt.module.further_module.adapter.BaseHorItemProvider
 import kt.module.further_module.adapter.BaseVerItemProvider
 

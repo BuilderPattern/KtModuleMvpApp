@@ -1,8 +1,10 @@
-package kt.module.base_module.data;
+package kt.module.base_module.data.db.table;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.ToMany;
 
 import java.util.List;
 

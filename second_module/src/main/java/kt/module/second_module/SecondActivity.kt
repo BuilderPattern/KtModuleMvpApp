@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.activity_second.*
 import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseActivity
-import kt.module.base_module.data.RvData
+import kt.module.base_module.data.db.table.RvData
 import kt.module.base_module.utils.RouteUtils
 
 @Route(path = RouteUtils.RouterMap.Second.SecondAc)

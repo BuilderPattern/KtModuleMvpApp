@@ -1,36 +1,15 @@
-package kt.module.base_module.data;
+package kt.module.base_module.data.db.table;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 public class ChildEntity implements Parcelable {
-
-    /**
-     * id : 124
-     * title : 巫帕迪
-     * uname : 巫帕迪
-     * avatar : http://rscdn.17mingxiang.com/Now/teacher/20190111163248-5c3854b0a36bb.jpg
-     * type_description : now专业认证
-     * url : http：//www.baidu.com11
-     * status : 1
-     * bgavatar : http://rscdn.17mingxiang.com/Now/banner/20190306181518-5c7f9db6552d4.jpg
-     * tcount : 2
-     * count : 5597
-     * scount : 33
-     * type : course
-     * subtitle :
-     * subtitle_new : 意大利静心冥想代表导师
-     * title_img_new : http://rs.17mingxiang.com/Now/picture/new/wupadi.png
-     * type_new : free
-     * thumb_img :
-     * ppp : 9262
-     * splay_count : 20
-     * play_count : 9282
-     * small_num : 4
-     */
 
     private int id;
     private String title;
@@ -569,17 +548,52 @@ public class ChildEntity implements Parcelable {
         this.avatar = avatar;
     }
 
-//    public String getListerCount(){
-//        String countStr;
-//        if (Integer.valueOf(count) >= 10000){
-//            double countF = (Integer.valueOf(count)/10000.0);
-//            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
-//            countStr=decimalFormat.format(countF)+"万";
-//        }else {
-//            countStr=count+"";
-//        }
-//        return countStr;
-//    }
+    public ChildEntity(int id, String title, String uname, Object avatar, List<String> avatars, String type_description, String url, String img, int status, String bgavatar, int tcount, String count, String scount, String type, String subtitle, String subtitle_new, String title_img_new, String type_new, String thumb_img, int ppp, int splay_count, int play_count, int small_num, String content, String start_time, String end_time, String bm_start_time, String bm_end_time, int num, int day_num, String created_at, String updated_at, int ka_num, String can_created_at, int buy_count, int course_num, String listen_users_count, String img_new, String tex, int sequence, int baoming, String type_course, String body_img_new) {
+        this.id = id;
+        this.title = title;
+        this.uname = uname;
+        this.avatar = avatar;
+        this.avatars = avatars;
+        this.type_description = type_description;
+        this.url = url;
+        this.img = img;
+        this.status = status;
+        this.bgavatar = bgavatar;
+        this.tcount = tcount;
+        this.count = count;
+        this.scount = scount;
+        this.type = type;
+        this.subtitle = subtitle;
+        this.subtitle_new = subtitle_new;
+        this.title_img_new = title_img_new;
+        this.type_new = type_new;
+        this.thumb_img = thumb_img;
+        this.ppp = ppp;
+        this.splay_count = splay_count;
+        this.play_count = play_count;
+        this.small_num = small_num;
+        this.content = content;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.bm_start_time = bm_start_time;
+        this.bm_end_time = bm_end_time;
+        this.num = num;
+        this.day_num = day_num;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.ka_num = ka_num;
+        this.can_created_at = can_created_at;
+        this.buy_count = buy_count;
+        this.course_num = course_num;
+        this.listen_users_count = listen_users_count;
+        this.img_new = img_new;
+        this.tex = tex;
+        this.sequence = sequence;
+        this.baoming = baoming;
+        this.type_course = type_course;
+        this.body_img_new = body_img_new;
+    }
 
-
+    public ChildEntity() {
+    }
 }

@@ -4,16 +4,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
-import android.view.MotionEvent
-import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kt.module.base_module.base.view.BaseActivity
 import kt.module.base_module.base.view.BaseFragment
-import kt.module.base_module.data.ObjectEntity
+import kt.module.base_module.data.db.table.ObjectEntity
 import kt.module.base_module.utils.RouteUtils
 import kt.module.main_module.BottomTabEntity
 import kt.module.main_module.R
