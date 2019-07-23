@@ -1,21 +1,18 @@
 package kt.module.base_module.data.db.table;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.*;
 
-import java.text.DecimalFormat;
-import java.util.List;
+@Entity
+public class ChildEntity{
 
-public class ChildEntity implements Parcelable {
-
+    private Long objectId;
+    @Id
     private int id;
     private String title;
     private String uname;
-    private Object avatar;
-    private List<String> avatars;
+    private String avatar;
+
+    private String avatars;
     private String type_description;
     private String url;
     private String img;
@@ -57,12 +54,12 @@ public class ChildEntity implements Parcelable {
     private String type_course;
     private String body_img_new;
 
-    public String getBody_img_new() {
-        return body_img_new;
+    public Long getObjectId() {
+        return objectId;
     }
 
-    public void setBody_img_new(String body_img_new) {
-        this.body_img_new = body_img_new;
+    public void setObjectId(Long objectId) {
+        this.objectId = objectId;
     }
 
     public int getId() {
@@ -89,7 +86,7 @@ public class ChildEntity implements Parcelable {
         this.uname = uname;
     }
 
-    public Object getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
@@ -97,11 +94,11 @@ public class ChildEntity implements Parcelable {
         this.avatar = avatar;
     }
 
-    public List<String> getAvatars() {
+    public String getAvatars() {
         return avatars;
     }
 
-    public void setAvatars(List<String> avatars) {
+    public void setAvatars(String avatars) {
         this.avatars = avatars;
     }
 
@@ -269,54 +266,6 @@ public class ChildEntity implements Parcelable {
         return end_time;
     }
 
-    @Override
-    public String toString() {
-        return "ChildEntity{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", uname='" + uname + '\'' +
-                ", avatar=" + avatar +
-                ", avatars=" + avatars +
-                ", type_description='" + type_description + '\'' +
-                ", url='" + url + '\'' +
-                ", img='" + img + '\'' +
-                ", status=" + status +
-                ", bgavatar='" + bgavatar + '\'' +
-                ", tcount=" + tcount +
-                ", count='" + count + '\'' +
-                ", scount='" + scount + '\'' +
-                ", type='" + type + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", subtitle_new='" + subtitle_new + '\'' +
-                ", title_img_new='" + title_img_new + '\'' +
-                ", type_new='" + type_new + '\'' +
-                ", thumb_img='" + thumb_img + '\'' +
-                ", ppp=" + ppp +
-                ", splay_count=" + splay_count +
-                ", play_count=" + play_count +
-                ", small_num=" + small_num +
-                ", content='" + content + '\'' +
-                ", start_time='" + start_time + '\'' +
-                ", end_time='" + end_time + '\'' +
-                ", bm_start_time='" + bm_start_time + '\'' +
-                ", bm_end_time='" + bm_end_time + '\'' +
-                ", num=" + num +
-                ", day_num=" + day_num +
-                ", created_at='" + created_at + '\'' +
-                ", updated_at='" + updated_at + '\'' +
-                ", ka_num=" + ka_num +
-                ", can_created_at='" + can_created_at + '\'' +
-                ", buy_count=" + buy_count +
-                ", course_num=" + course_num +
-                ", listen_users_count='" + listen_users_count + '\'' +
-                ", img_new='" + img_new + '\'' +
-                ", tex='" + tex + '\'' +
-                ", sequence=" + sequence +
-                ", baoming=" + baoming +
-                ", type_course='" + type_course + '\'' +
-                '}';
-    }
-
     public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
@@ -385,6 +334,30 @@ public class ChildEntity implements Parcelable {
         this.can_created_at = can_created_at;
     }
 
+    public int getBuy_count() {
+        return buy_count;
+    }
+
+    public void setBuy_count(int buy_count) {
+        this.buy_count = buy_count;
+    }
+
+    public int getCourse_num() {
+        return course_num;
+    }
+
+    public void setCourse_num(int course_num) {
+        this.course_num = course_num;
+    }
+
+    public String getListen_users_count() {
+        return listen_users_count;
+    }
+
+    public void setListen_users_count(String listen_users_count) {
+        this.listen_users_count = listen_users_count;
+    }
+
     public String getImg_new() {
         return img_new;
     }
@@ -425,130 +398,17 @@ public class ChildEntity implements Parcelable {
         this.type_course = type_course;
     }
 
-    public static Creator<ChildEntity> getCREATOR() {
-        return CREATOR;
+    public String getBody_img_new() {
+        return body_img_new;
     }
 
-    protected ChildEntity(Parcel in) {
-        id = in.readInt();
-        title = in.readString();
-        uname = in.readString();
-        avatar = in.readString();
-        avatars = in.createStringArrayList();
-        type_description = in.readString();
-        url = in.readString();
-        img = in.readString();
-        status = in.readInt();
-        bgavatar = in.readString();
-        tcount = in.readInt();
-        count = in.readString();
-        scount = in.readString();
-        type = in.readString();
-        subtitle = in.readString();
-        subtitle_new = in.readString();
-        title_img_new = in.readString();
-        type_new = in.readString();
-        thumb_img = in.readString();
-        ppp = in.readInt();
-        splay_count = in.readInt();
-        play_count = in.readInt();
-        small_num = in.readInt();
-        content = in.readString();
-        start_time = in.readString();
-        end_time = in.readString();
-        bm_start_time = in.readString();
-        bm_end_time = in.readString();
-        num = in.readInt();
-        day_num = in.readInt();
-        created_at = in.readString();
-        updated_at = in.readString();
-        ka_num = in.readInt();
-        can_created_at = in.readString();
-        buy_count = in.readInt();
-        course_num = in.readInt();
-        listen_users_count = in.readString();
-        img_new = in.readString();
-        tex = in.readString();
-        sequence = in.readInt();
-        baoming = in.readInt();
-        type_course = in.readString();
+    public void setBody_img_new(String body_img_new) {
+        this.body_img_new = body_img_new;
     }
 
-    public static final Creator<ChildEntity> CREATOR = new Creator<ChildEntity>() {
-        @Override
-        public ChildEntity createFromParcel(Parcel in) {
-            return new ChildEntity(in);
-        }
-
-        @Override
-        public ChildEntity[] newArray(int size) {
-            return new ChildEntity[size];
-        }
-    };
-
-    public int getCourse_num() {
-        return course_num;
-    }
-
-    public void setCourse_num(int course_num) {
-        this.course_num = course_num;
-    }
-
-    public String getListen_users_count() {
-        return listen_users_count;
-    }
-
-    public void setListen_users_count(String listen_users_count) {
-        this.listen_users_count = listen_users_count;
-    }
-
-    public String getListerCount(){
-        String countStr;
-        if (play_count>=10000){
-            double countF=(play_count/10000.0);
-            DecimalFormat decimalFormat=new DecimalFormat(".0");//构造方法的字符格式这里如果小数不足2位,会以0补足.
-            countStr=decimalFormat.format(countF)+"万";
-        }else {
-            countStr=play_count+"";
-        }
-        return countStr;
-    }
-
-
-    public int getBuy_count() {
-        return buy_count;
-    }
-    public String getBuyCountFormat(){
-        String countStr;
-        if (buy_count>=10000){
-            double countF=(buy_count/10000.0);
-            DecimalFormat decimalFormat=new DecimalFormat(".0");//构造方法的字符格式这里如果小数不足2位,会以0补足.
-            countStr=decimalFormat.format(countF)+"万";
-        }else {
-            countStr=buy_count+"";
-        }
-        return countStr;
-    }
-
-    public void setBuy_count(int buy_count) {
-        this.buy_count = buy_count;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
-
-    public void setAvatar(Object avatar) {
-        this.avatar = avatar;
-    }
-
-    public ChildEntity(int id, String title, String uname, Object avatar, List<String> avatars, String type_description, String url, String img, int status, String bgavatar, int tcount, String count, String scount, String type, String subtitle, String subtitle_new, String title_img_new, String type_new, String thumb_img, int ppp, int splay_count, int play_count, int small_num, String content, String start_time, String end_time, String bm_start_time, String bm_end_time, int num, int day_num, String created_at, String updated_at, int ka_num, String can_created_at, int buy_count, int course_num, String listen_users_count, String img_new, String tex, int sequence, int baoming, String type_course, String body_img_new) {
+    @Generated(hash = 1076316592)
+    public ChildEntity(Long objectId, int id, String title, String uname, String avatar, String avatars, String type_description, String url, String img, int status, String bgavatar, int tcount, String count, String scount, String type, String subtitle, String subtitle_new, String title_img_new, String type_new, String thumb_img, int ppp, int splay_count, int play_count, int small_num, String content, String start_time, String end_time, String bm_start_time, String bm_end_time, int num, int day_num, String created_at, String updated_at, int ka_num, String can_created_at, int buy_count, int course_num, String listen_users_count, String img_new, String tex, int sequence, int baoming, String type_course, String body_img_new) {
+        this.objectId = objectId;
         this.id = id;
         this.title = title;
         this.uname = uname;
@@ -594,6 +454,57 @@ public class ChildEntity implements Parcelable {
         this.body_img_new = body_img_new;
     }
 
+    @Generated(hash = 1879970608)
     public ChildEntity() {
+    }
+
+    @Override
+    public String toString() {
+        return "ChildEntity{" +
+                "objectId=" + objectId +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", uname='" + uname + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", avatars='" + avatars + '\'' +
+                ", type_description='" + type_description + '\'' +
+                ", url='" + url + '\'' +
+                ", img='" + img + '\'' +
+                ", status=" + status +
+                ", bgavatar='" + bgavatar + '\'' +
+                ", tcount=" + tcount +
+                ", count='" + count + '\'' +
+                ", scount='" + scount + '\'' +
+                ", type='" + type + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", subtitle_new='" + subtitle_new + '\'' +
+                ", title_img_new='" + title_img_new + '\'' +
+                ", type_new='" + type_new + '\'' +
+                ", thumb_img='" + thumb_img + '\'' +
+                ", ppp=" + ppp +
+                ", splay_count=" + splay_count +
+                ", play_count=" + play_count +
+                ", small_num=" + small_num +
+                ", content='" + content + '\'' +
+                ", start_time='" + start_time + '\'' +
+                ", end_time='" + end_time + '\'' +
+                ", bm_start_time='" + bm_start_time + '\'' +
+                ", bm_end_time='" + bm_end_time + '\'' +
+                ", num=" + num +
+                ", day_num=" + day_num +
+                ", created_at='" + created_at + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                ", ka_num=" + ka_num +
+                ", can_created_at='" + can_created_at + '\'' +
+                ", buy_count=" + buy_count +
+                ", course_num=" + course_num +
+                ", listen_users_count='" + listen_users_count + '\'' +
+                ", img_new='" + img_new + '\'' +
+                ", tex='" + tex + '\'' +
+                ", sequence=" + sequence +
+                ", baoming=" + baoming +
+                ", type_course='" + type_course + '\'' +
+                ", body_img_new='" + body_img_new + '\'' +
+                '}';
     }
 }

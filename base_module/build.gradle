@@ -38,7 +38,7 @@ android {
 
 greendao {
     //数据库schema版本，也可以理解为数据库版本号
-    schemaVersion 1
+    schemaVersion 3
     //设置DaoMaster 、DaoSession、Dao包名
     daoPackage 'kt.module.base_module.data.db.dao'
     //设置DaoMaster 、DaoSession、Dao目录
