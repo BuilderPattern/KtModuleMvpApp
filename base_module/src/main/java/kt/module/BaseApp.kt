@@ -1,7 +1,9 @@
 package kt.module
 
+import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
+import android.os.Process
 import android.support.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.dopool.common.util.AppUtil
@@ -20,7 +22,6 @@ open class BaseApp : Application() {
 
         /**
          * 取得DaoSession
-         * @param context
          * @return
          */
         fun getDaoSession(): DaoSession {
@@ -39,7 +40,9 @@ open class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         application = this
-        initARouter()
+        if (isMainProcess()){
+            initARouter()
+        }
     }
 
     private fun initARouter() {
@@ -50,6 +53,24 @@ open class BaseApp : Application() {
         }
         ARouter.init(this)
     }
+
+    /**
+     * 避免因为多个进程，重复初始化，
+     * 导致启动速度减慢
+     */
+    fun isMainProcess(): Boolean {
+        val myPid = Process.myPid()
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val appProcesses = manager.runningAppProcesses
+        for (appProcess in appProcesses) {
+            if (myPid == appProcess.pid && appProcess.processName == packageName) {
+                return true
+            }
+        }
+        return false
+    }
+
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(base)
