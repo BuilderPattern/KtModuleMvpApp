@@ -24,7 +24,7 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property ObjectId = new Property(0, Long.class, "objectId", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Show_template = new Property(2, int.class, "show_template", false, "SHOW_TEMPLATE");
         public final static Property Type = new Property(3, int.class, "type", false, "TYPE");
@@ -46,7 +46,7 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"OBJECT_ENTITY\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: objectId
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TITLE\" TEXT," + // 1: title
                 "\"SHOW_TEMPLATE\" INTEGER NOT NULL ," + // 2: show_template
                 "\"TYPE\" INTEGER NOT NULL );"); // 3: type
@@ -62,9 +62,9 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
     protected final void bindValues(DatabaseStatement stmt, ObjectEntity entity) {
         stmt.clearBindings();
  
-        Long objectId = entity.getObjectId();
-        if (objectId != null) {
-            stmt.bindLong(1, objectId);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
  
         String title = entity.getTitle();
@@ -79,9 +79,9 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
     protected final void bindValues(SQLiteStatement stmt, ObjectEntity entity) {
         stmt.clearBindings();
  
-        Long objectId = entity.getObjectId();
-        if (objectId != null) {
-            stmt.bindLong(1, objectId);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
         }
  
         String title = entity.getTitle();
@@ -106,7 +106,7 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
     @Override
     public ObjectEntity readEntity(Cursor cursor, int offset) {
         ObjectEntity entity = new ObjectEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // objectId
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
             cursor.getInt(offset + 2), // show_template
             cursor.getInt(offset + 3) // type
@@ -116,7 +116,7 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
      
     @Override
     public void readEntity(Cursor cursor, ObjectEntity entity, int offset) {
-        entity.setObjectId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setShow_template(cursor.getInt(offset + 2));
         entity.setType(cursor.getInt(offset + 3));
@@ -124,14 +124,14 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
     
     @Override
     protected final Long updateKeyAfterInsert(ObjectEntity entity, long rowId) {
-        entity.setObjectId(rowId);
+        entity.setId(rowId);
         return rowId;
     }
     
     @Override
     public Long getKey(ObjectEntity entity) {
         if(entity != null) {
-            return entity.getObjectId();
+            return entity.getId();
         } else {
             return null;
         }
@@ -139,7 +139,7 @@ public class ObjectEntityDao extends AbstractDao<ObjectEntity, Long> {
 
     @Override
     public boolean hasKey(ObjectEntity entity) {
-        return entity.getObjectId() != null;
+        return entity.getId() != null;
     }
 
     @Override

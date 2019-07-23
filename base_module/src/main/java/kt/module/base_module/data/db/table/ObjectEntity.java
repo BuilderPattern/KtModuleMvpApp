@@ -13,8 +13,8 @@ import kt.module.base_module.data.db.dao.ObjectEntityDao;
 @Entity
 public class ObjectEntity implements MultiItemEntity {
 
-    @Id
-    private Long objectId;
+    @Id(autoincrement = true)
+    private Long id;
 
     private String title;
     private int show_template;
@@ -30,15 +30,6 @@ public class ObjectEntity implements MultiItemEntity {
     /** Used for active entity operations. */
     @Generated(hash = 1262937627)
     private transient ObjectEntityDao myDao;
-
-
-    public Long getId() {
-        return objectId;
-    }
-
-    public void setId(Long id) {
-        this.objectId = id;
-    }
 
     public int getType() {
         return type;
@@ -83,9 +74,9 @@ public class ObjectEntity implements MultiItemEntity {
         show_template = in.readInt();
     }
 
-    @Generated(hash = 1473062710)
-    public ObjectEntity(Long objectId, String title, int show_template, int type) {
-        this.objectId = objectId;
+    @Generated(hash = 1182604287)
+    public ObjectEntity(Long id, String title, int show_template, int type) {
+        this.id = id;
         this.title = title;
         this.show_template = show_template;
         this.type = type;
@@ -96,19 +87,19 @@ public class ObjectEntity implements MultiItemEntity {
         return type;
     }
 
-    public Long getObjectId() {
-        return this.objectId;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setObjectId(Long objectId) {
-        this.objectId = objectId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
      */
-    @Generated(hash = 421354534)
+    @Generated(hash = 400262510)
     public List<ChildEntity> getChild() {
         if (child == null) {
             final DaoSession daoSession = this.daoSession;
@@ -116,8 +107,7 @@ public class ObjectEntity implements MultiItemEntity {
                 throw new DaoException("Entity is detached from DAO context");
             }
             ChildEntityDao targetDao = daoSession.getChildEntityDao();
-            List<ChildEntity> childNew = targetDao
-                    ._queryObjectEntity_Child(objectId);
+            List<ChildEntity> childNew = targetDao._queryObjectEntity_Child(id);
             synchronized (this) {
                 if (child == null) {
                     child = childNew;

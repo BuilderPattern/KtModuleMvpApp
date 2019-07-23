@@ -18,7 +18,7 @@ import kt.module.base_module.data.db.table.ChildEntity;
 /** 
  * DAO for table "CHILD_ENTITY".
 */
-public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
+public class ChildEntityDao extends AbstractDao<ChildEntity, Long> {
 
     public static final String TABLENAME = "CHILD_ENTITY";
 
@@ -28,7 +28,7 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
      */
     public static class Properties {
         public final static Property ObjectId = new Property(0, Long.class, "objectId", false, "OBJECT_ID");
-        public final static Property Id = new Property(1, int.class, "id", true, "ID");
+        public final static Property Id = new Property(1, Long.class, "id", true, "_id");
         public final static Property Title = new Property(2, String.class, "title", false, "TITLE");
         public final static Property Uname = new Property(3, String.class, "uname", false, "UNAME");
         public final static Property Avatar = new Property(4, String.class, "avatar", false, "AVATAR");
@@ -88,7 +88,7 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CHILD_ENTITY\" (" + //
                 "\"OBJECT_ID\" INTEGER," + // 0: objectId
-                "\"ID\" INTEGER PRIMARY KEY NOT NULL ," + // 1: id
+                "\"_id\" INTEGER PRIMARY KEY ," + // 1: id
                 "\"TITLE\" TEXT," + // 2: title
                 "\"UNAME\" TEXT," + // 3: uname
                 "\"AVATAR\" TEXT," + // 4: avatar
@@ -147,7 +147,11 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
         if (objectId != null) {
             stmt.bindLong(1, objectId);
         }
-        stmt.bindLong(2, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(2, id);
+        }
  
         String title = entity.getTitle();
         if (title != null) {
@@ -316,7 +320,11 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
         if (objectId != null) {
             stmt.bindLong(1, objectId);
         }
-        stmt.bindLong(2, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(2, id);
+        }
  
         String title = entity.getTitle();
         if (title != null) {
@@ -478,15 +486,15 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
     }
 
     @Override
-    public Integer readKey(Cursor cursor, int offset) {
-        return cursor.getInt(offset + 1);
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1);
     }    
 
     @Override
     public ChildEntity readEntity(Cursor cursor, int offset) {
         ChildEntity entity = new ChildEntity( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // objectId
-            cursor.getInt(offset + 1), // id
+            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // id
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // uname
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // avatar
@@ -536,7 +544,7 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
     @Override
     public void readEntity(Cursor cursor, ChildEntity entity, int offset) {
         entity.setObjectId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setId(cursor.getInt(offset + 1));
+        entity.setId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
         entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUname(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setAvatar(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
@@ -582,12 +590,13 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
      }
     
     @Override
-    protected final Integer updateKeyAfterInsert(ChildEntity entity, long rowId) {
-        return entity.getId();
+    protected final Long updateKeyAfterInsert(ChildEntity entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     @Override
-    public Integer getKey(ChildEntity entity) {
+    public Long getKey(ChildEntity entity) {
         if(entity != null) {
             return entity.getId();
         } else {
@@ -597,7 +606,7 @@ public class ChildEntityDao extends AbstractDao<ChildEntity, Integer> {
 
     @Override
     public boolean hasKey(ChildEntity entity) {
-        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
+        return entity.getId() != null;
     }
 
     @Override

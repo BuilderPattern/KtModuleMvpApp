@@ -1,6 +1,7 @@
 package kt.module.further_module.mvp
 
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -44,31 +45,34 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
         }
         mAdapter?.setNewData(mDatas)
 
-//        DbUtils.getInstance().insertOrReplaceList(data, ObjectEntity::class.java)
-//        data.let {
-//            it?.forEach {
-//                DbUtils.getInstance().insertOrReplaceList(it.child, ChildEntity::class.java)
-//            }
-//        }
-//
-//
-//        var objectEntityDao = DbUtils.getInstance().getAnyDao(ObjectEntityDao::class.java) as ObjectEntityDao
-//        var objList = objectEntityDao.queryBuilder().let {
-//            it.orderDesc(ObjectEntityDao.Properties.ObjectId)
-////            it.build().list()
-////            it.where(ObjectEntityDao.Properties.Show_template.eq(1))
+        data?.forEach { objEntity ->
+            objEntity.child.forEach { childEntity ->
+                if (objEntity.show_template == 1) {
+                    childEntity.objectId = 1
+                } else {
+                    childEntity.objectId = 2
+                }
+            }
+            DbUtils.getInstance().deleteAllNote(ObjectEntity::class.java)
+            DbUtils.getInstance().insertOrReplaceList(objEntity.child, ChildEntity::class.java)
+        }
+        DbUtils.getInstance().insertOrReplaceList(data, ObjectEntity::class.java)
+
+        var objList = DbUtils.getInstance().getAnyDaoByTable(ObjectEntity::class.java).queryBuilder().let {
+            it?.orderDesc(ObjectEntityDao.Properties.Id)
 //            it.build().list()
-//        }
-//
-//        objList.forEach {
-//            var childEntityDao = DbUtils.getInstance().getAnyDao(ChildEntity::class.java) as ChildEntityDao
-//            var childList = childEntityDao.queryBuilder().let { inner ->
-//                inner.orderDesc(ChildEntityDao.Properties.Id)
-//                inner.build().list()
-//                inner.where(ChildEntityDao.Properties.ObjectId.eq(it.id))
-//                inner.build().list()
-//            }
-//        }
+            it.where(ObjectEntityDao.Properties.Show_template.eq(1))
+            it?.build()?.list()
+        }
+        Log.e("--------objList：", objList?.size.toString() + "\n" + objList.toString())
+
+        var childList = DbUtils.getInstance().getAnyDaoByTable(ChildEntity::class.java).queryBuilder().let {
+//            it?.orderDesc(ChildEntityDao.Properties.Id)
+//            it.build().list()
+//            it.where(ChildEntityDao.Properties.ObjectId.eq(1))
+            it?.build()?.list()
+        }
+        Log.e("--------childList：", childList?.size.toString() + "\n" + childList.toString())
     }
 
     override fun getODFailed(msg: Any) {

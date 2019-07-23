@@ -7,7 +7,7 @@ public class ChildEntity{
 
     private Long objectId;
     @Id
-    private int id;
+    private Long id;
     private String title;
     private String uname;
     private String avatar;
@@ -62,11 +62,11 @@ public class ChildEntity{
         this.objectId = objectId;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -406,8 +406,8 @@ public class ChildEntity{
         this.body_img_new = body_img_new;
     }
 
-    @Generated(hash = 1076316592)
-    public ChildEntity(Long objectId, int id, String title, String uname, String avatar, String avatars, String type_description, String url, String img, int status, String bgavatar, int tcount, String count, String scount, String type, String subtitle, String subtitle_new, String title_img_new, String type_new, String thumb_img, int ppp, int splay_count, int play_count, int small_num, String content, String start_time, String end_time, String bm_start_time, String bm_end_time, int num, int day_num, String created_at, String updated_at, int ka_num, String can_created_at, int buy_count, int course_num, String listen_users_count, String img_new, String tex, int sequence, int baoming, String type_course, String body_img_new) {
+    @Generated(hash = 846249299)
+    public ChildEntity(Long objectId, Long id, String title, String uname, String avatar, String avatars, String type_description, String url, String img, int status, String bgavatar, int tcount, String count, String scount, String type, String subtitle, String subtitle_new, String title_img_new, String type_new, String thumb_img, int ppp, int splay_count, int play_count, int small_num, String content, String start_time, String end_time, String bm_start_time, String bm_end_time, int num, int day_num, String created_at, String updated_at, int ka_num, String can_created_at, int buy_count, int course_num, String listen_users_count, String img_new, String tex, int sequence, int baoming, String type_course, String body_img_new) {
         this.objectId = objectId;
         this.id = id;
         this.title = title;

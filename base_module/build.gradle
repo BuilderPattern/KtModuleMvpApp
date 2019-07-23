@@ -47,7 +47,7 @@ greendao {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation rootProject.ext.dependencies.junit
     androidTestImplementation rootProject.ext.dependencies.runner
@@ -57,5 +57,5 @@ dependencies {
     kapt rootProject.ext.dependencies.arouter_compiler
 
     api project(path: ':common_module')
-    implementation rootProject.ext.dependencies.greendao
+    api rootProject.ext.dependencies.greendao
 }

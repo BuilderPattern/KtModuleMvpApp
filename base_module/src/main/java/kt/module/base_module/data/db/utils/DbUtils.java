@@ -28,7 +28,7 @@ public class DbUtils {
     }
 
 
-    public <T> AbstractDao getAnyDao(Class<T> c) {
+    public <T> AbstractDao getAnyDaoByTable(Class<T> c) {
         if (c == ObjectEntity.class) {
             return instance.mDaoSession.getObjectEntityDao();
         } else if (c == ChildEntity.class) {
@@ -48,7 +48,7 @@ public class DbUtils {
      * @return
      */
     public <T, K> T queryById(K id, Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         return abstractDao != null ? (T) abstractDao.load(id) : null;
     }
 
@@ -60,7 +60,7 @@ public class DbUtils {
      * @return
      */
     public <T> List<T> queryAllData(Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         return abstractDao != null ? (List<T>) abstractDao.loadAll() : null;
     }
 
@@ -75,26 +75,27 @@ public class DbUtils {
      * @return
      */
     public <T> List<T> queryByParams(Class<T> c, String where, String... params) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         return abstractDao != null ? (List<T>) abstractDao.queryRaw(where, params) : null;
     }
 
 
     /**
      * 新增一条数据
+     *
      * @param note
      * @param c
      * @param <T>
      * @return
      */
     public <T> long insert(T note, Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         return abstractDao != null ? abstractDao.insert(note) : -1;
     }
 
-
     /**
      * 新增数据集
+     *
      * @param list
      * @param c
      * @param <T>
@@ -104,7 +105,7 @@ public class DbUtils {
             return;
         }
 
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         if (abstractDao != null) {
             abstractDao.insertInTx(list);
         }
@@ -119,7 +120,7 @@ public class DbUtils {
      * @return
      */
     public <T> long insertOrReplace(T note, Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         return abstractDao != null ? abstractDao.insertOrReplace(note) : -1;
     }
 
@@ -136,7 +137,7 @@ public class DbUtils {
             return;
         }
 
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         if (abstractDao != null) {
             abstractDao.insertOrReplaceInTx(list);
         }
@@ -150,9 +151,9 @@ public class DbUtils {
      * @param <T>
      */
     public <T> void delete(T note, Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         if (abstractDao != null) {
-            abstractDao.delete(note);
+            abstractDao.deleteInTx(note);
         }
     }
 
@@ -164,7 +165,7 @@ public class DbUtils {
      * @param <T>
      */
     public <T> void deleteById(long id, Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         if (abstractDao != null) {
             abstractDao.deleteByKey(id);
         }
@@ -177,8 +178,8 @@ public class DbUtils {
      * @param c
      * @param <T>
      */
-    public <T> void deleteNoteByIdList(List<Long> ids, Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+    public <T> void deleteByIdList(List<Long> ids, Class<T> c) {
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         if (abstractDao != null) {
             abstractDao.deleteByKeyInTx(ids);
         }
@@ -191,12 +192,12 @@ public class DbUtils {
      * @param <T>
      */
     public <T> void deleteAllNote(Class<T> c) {
-        AbstractDao abstractDao = getAnyDao(c);
+        AbstractDao abstractDao = getAnyDaoByTable(c);
         if (abstractDao != null) {
             try {
                 abstractDao.deleteAll();
             } catch (SQLiteDatabaseLockedException e) {
-                Log.e(TAG, "deleteAllNote error " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }

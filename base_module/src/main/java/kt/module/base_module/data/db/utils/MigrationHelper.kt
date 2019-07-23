@@ -9,7 +9,6 @@ import org.greenrobot.greendao.database.Database
 import org.greenrobot.greendao.internal.DaoConfig
 import java.util.*
 
-
 class MigrationHelper {
 
     fun migrate(db: Database, vararg daoClasses: Class<out AbstractDao<*, *>>) {
