@@ -8,18 +8,18 @@ import com.chad.library.adapter.base.provider.BaseItemProvider
 import kt.module.base_module.R
 import kt.module.base_module.adapter.BaseRvQuickAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
-import kt.module.base_module.adapter.FurtherAdapter
+import kt.module.base_module.adapter.SecondDBAdapter
 import kt.module.base_module.base.entity.BaseMultiItemEntity
 import kt.module.base_module.data.db.table.ChildEntity
 
-class BaseVerItemProvider<T> : BaseItemProvider<BaseMultiItemEntity<T>, BaseRvViewHolder>() {
+class SecondVerItemProvider<T> : BaseItemProvider<BaseMultiItemEntity<T>, BaseRvViewHolder>() {
 
     override fun layout(): Int {
         return R.layout.further_vertical_layout
     }
 
     override fun viewType(): Int {
-        return FurtherAdapter.TYPE_VER_FIRST
+        return SecondDBAdapter.TYPE_VER_FIRST
     }
 
     override fun convert(holder: BaseRvViewHolder?, data: BaseMultiItemEntity<T>?, position: Int) {

@@ -16,8 +16,11 @@ class MineFragment : BaseFragment<IBasePresenter>() {
     }
 
     override fun initEvents() {
-        fragment_mine_clickTv.setOnClickListener {
+        fragment_mine_firstTv.setOnClickListener {
             RouteUtils.go(RouteUtils.RouterMap.First.FirstAc).navigation()
+        }
+        fragment_mine_secondTv.setOnClickListener {
+            RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).navigation()
         }
     }
 }

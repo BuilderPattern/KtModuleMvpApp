@@ -8,9 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.fragment_further.*
-import kt.module.BaseApp
 import kt.module.base_module.adapter.FurtherAdapter
-import kt.module.base_module.base.entity.FurtherMultiItemEntity
+import kt.module.base_module.base.entity.BaseMultiItemEntity
 import kt.module.base_module.base.view.BaseFragment
 import kt.module.base_module.data.db.dao.ChildEntityDao
 import kt.module.base_module.data.db.dao.ObjectEntityDao
@@ -29,7 +28,7 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
         mDatas.clear()
         data?.forEach {
             var item =
-                FurtherMultiItemEntity<MutableList<ChildEntity>>()
+                BaseMultiItemEntity<MutableList<ChildEntity>>()
             if (it.show_template == 1) {
                 item.type = 1
                 item.title = "竖直方向"
@@ -37,9 +36,7 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
                 item.type = 2
                 item.title = "水平方向"
             }
-            childList.clear()
-            childList.addAll(it.child)
-            item.data = childList
+            item.data = it.child
 
             mDatas.add(item)
         }
@@ -47,39 +44,43 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
 
         data?.forEach { objEntity ->
             objEntity.child.forEach { childEntity ->
-                if (objEntity.show_template == 1) {
-                    childEntity.objectId = 1
-                } else {
-                    childEntity.objectId = 2
-                }
+
+                childEntity.objectId = objEntity.show_template.toLong()
+//                if (objEntity.show_template == 1) {
+//                    childEntity.objectId = 1
+//                } else {
+//                    childEntity.objectId = 2
+//                }
             }
-            DbUtils.getInstance().deleteAllNote(ObjectEntity::class.java)
+
             DbUtils.getInstance().insertOrReplaceList(objEntity.child, ChildEntity::class.java)
         }
+        DbUtils.getInstance().deleteAll(ObjectEntity::class.java)
         DbUtils.getInstance().insertOrReplaceList(data, ObjectEntity::class.java)
 
+        /**
+         * 以下为查询示例
+          */
         var objList = DbUtils.getInstance().getAnyDaoByTable(ObjectEntity::class.java).queryBuilder().let {
             it?.orderDesc(ObjectEntityDao.Properties.Id)
-//            it.build().list()
-            it.where(ObjectEntityDao.Properties.Show_template.eq(1))
             it?.build()?.list()
         }
         Log.e("--------objList：", objList?.size.toString() + "\n" + objList.toString())
 
-        var childList = DbUtils.getInstance().getAnyDaoByTable(ChildEntity::class.java).queryBuilder().let {
-//            it?.orderDesc(ChildEntityDao.Properties.Id)
-//            it.build().list()
-//            it.where(ChildEntityDao.Properties.ObjectId.eq(1))
+        var childList = (DbUtils.getInstance().getAnyDaoByTable(ChildEntity::class.java) as ChildEntityDao).queryBuilder().let {
+            it?.orderDesc(ChildEntityDao.Properties.Id)
+            it.where(ChildEntityDao.Properties.ObjectId.eq((objList?.get(0) as ObjectEntity).show_template),
+                it.or(ChildEntityDao.Properties.Id.gt(50),
+                    it.and(ChildEntityDao.Properties.Id.eq(30), ChildEntityDao.Properties.Id.ge(25))))
             it?.build()?.list()
-        }
+
+        } as MutableList<ChildEntity>
         Log.e("--------childList：", childList?.size.toString() + "\n" + childList.toString())
     }
 
     override fun getODFailed(msg: Any) {
         Toast.makeText(context, msg.toString(), Toast.LENGTH_SHORT).show()
     }
-
-    var childList: MutableList<ChildEntity> = mutableListOf()
 
     override val contentLayoutId: Int
         get() = R.layout.fragment_further
@@ -89,7 +90,7 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
 
     private var mAdapter: FurtherAdapter<MutableList<ChildEntity>>? = null
 
-    var mDatas: MutableList<FurtherMultiItemEntity<MutableList<ChildEntity>>> = mutableListOf()
+    var mDatas: MutableList<BaseMultiItemEntity<MutableList<ChildEntity>>> = mutableListOf()
 
     override fun initViews() {
         fragment_details_recyclerView.layoutManager = LinearLayoutManager(context)

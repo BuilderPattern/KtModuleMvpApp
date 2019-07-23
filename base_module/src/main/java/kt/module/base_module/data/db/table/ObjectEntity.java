@@ -23,6 +23,10 @@ public class ObjectEntity implements MultiItemEntity {
     @ToMany(referencedJoinProperty = "objectId")
     private List<ChildEntity> child;
 
+    public void setChild(List<ChildEntity> child) {
+        this.child = child;
+    }
+
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;

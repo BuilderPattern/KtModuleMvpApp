@@ -9,10 +9,10 @@ import kt.module.base_module.R
 import kt.module.base_module.adapter.BaseRvQuickAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
 import kt.module.base_module.adapter.FurtherAdapter
-import kt.module.base_module.base.entity.FurtherMultiItemEntity
+import kt.module.base_module.base.entity.BaseMultiItemEntity
 import kt.module.base_module.data.db.table.ChildEntity
 
-class BaseHorItemProvider<T> : BaseItemProvider<FurtherMultiItemEntity<T>, BaseRvViewHolder>() {
+class BaseHorItemProvider<T> : BaseItemProvider<BaseMultiItemEntity<T>, BaseRvViewHolder>() {
 
     override fun layout(): Int {
         return R.layout.further_horizontal_layout
@@ -22,7 +22,7 @@ class BaseHorItemProvider<T> : BaseItemProvider<FurtherMultiItemEntity<T>, BaseR
         return FurtherAdapter.TYPE_HOR_FIRST
     }
 
-    override fun convert(holder: BaseRvViewHolder?, data: FurtherMultiItemEntity<T>?, position: Int) {
+    override fun convert(holder: BaseRvViewHolder?, data: BaseMultiItemEntity<T>?, position: Int) {
         var titleTv = holder?.itemView?.findViewById<TextView>(R.id.further_hor_titleTv)
         titleTv?.text = data?.title
 

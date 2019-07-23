@@ -191,7 +191,7 @@ public class DbUtils {
      * @param c
      * @param <T>
      */
-    public <T> void deleteAllNote(Class<T> c) {
+    public <T> void deleteAll(Class<T> c) {
         AbstractDao abstractDao = getAnyDaoByTable(c);
         if (abstractDao != null) {
             try {

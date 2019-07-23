@@ -18,14 +18,12 @@ class FurtherPresenter(mView: FurtherContract.IFurtherView, var model: FurtherMo
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.compose(furtherFragment.bindToLifecycle())
             ?.subscribe({
-                if (it.code == 200){
+                if (it.code == 200) {
                     mView?.getODSuccessed(it.result)
                 }
-            },{
+            }, {
                 it.printStackTrace()
                 mView?.getODFailed("发生错误！")
             })
-
-
     }
 }

@@ -2,7 +2,7 @@ package kt.module.base_module.base.entity
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 
-open class FurtherMultiItemEntity<T> : MultiItemEntity {
+open class BaseMultiItemEntity<T> : MultiItemEntity {
 
     var data: T? = null
     var title: String? = null
