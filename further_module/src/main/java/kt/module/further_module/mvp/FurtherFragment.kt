@@ -44,13 +44,7 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
 
         data?.forEach { objEntity ->
             objEntity.child.forEach { childEntity ->
-
                 childEntity.objectId = objEntity.show_template.toLong()
-//                if (objEntity.show_template == 1) {
-//                    childEntity.objectId = 1
-//                } else {
-//                    childEntity.objectId = 2
-//                }
             }
 
             DbUtils.getInstance().insertOrReplaceList(objEntity.child, ChildEntity::class.java)
@@ -60,21 +54,26 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
 
         /**
          * 以下为查询示例
-          */
+         */
         var objList = DbUtils.getInstance().getAnyDaoByTable(ObjectEntity::class.java).queryBuilder().let {
-            it?.orderDesc(ObjectEntityDao.Properties.Id)
-            it?.build()?.list()
-        }
+            it.orderDesc(ObjectEntityDao.Properties.Id)
+            it.build().list()
+        } as MutableList<ObjectEntity>
         Log.e("--------objList：", objList?.size.toString() + "\n" + objList.toString())
 
-        var childList = (DbUtils.getInstance().getAnyDaoByTable(ChildEntity::class.java) as ChildEntityDao).queryBuilder().let {
-            it?.orderDesc(ChildEntityDao.Properties.Id)
-            it.where(ChildEntityDao.Properties.ObjectId.eq((objList?.get(0) as ObjectEntity).show_template),
-                it.or(ChildEntityDao.Properties.Id.gt(50),
-                    it.and(ChildEntityDao.Properties.Id.eq(30), ChildEntityDao.Properties.Id.ge(25))))
-            it?.build()?.list()
+        var childList =
+            (DbUtils.getInstance().getAnyDaoByTable(ChildEntity::class.java) as ChildEntityDao).queryBuilder().let {
+                it.orderDesc(ChildEntityDao.Properties.Id)
+                it.where(
+                    ChildEntityDao.Properties.ObjectId.eq(objList[0].show_template),
+                    it.or(
+                        ChildEntityDao.Properties.Id.gt(50),
+                        it.and(ChildEntityDao.Properties.Id.eq(30), ChildEntityDao.Properties.Id.ge(25))
+                    )
+                )
+                it.build().list()
 
-        } as MutableList<ChildEntity>
+            } as MutableList<ChildEntity>
         Log.e("--------childList：", childList?.size.toString() + "\n" + childList.toString())
     }
 
@@ -93,24 +92,30 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
     var mDatas: MutableList<BaseMultiItemEntity<MutableList<ChildEntity>>> = mutableListOf()
 
     override fun initViews() {
-        fragment_details_recyclerView.layoutManager = LinearLayoutManager(context)
-
-        mAdapter = FurtherAdapter()
-        fragment_details_recyclerView.adapter = mAdapter
+        fragment_details_recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            mAdapter = FurtherAdapter()
+            fragment_details_recyclerView.adapter = mAdapter
+        }
         addHeader()
     }
 
     private fun addHeader() {
 
-        var view =
-            LayoutInflater.from(context).inflate(R.layout.status_bar_height_layout, null, false) as LinearLayout
+        var view = layoutInflater.inflate(R.layout.status_bar_height_layout, null, false) as LinearLayout
         var textView = view.findViewById<TextView>(R.id.status_bar_heightTv)
-        val layoutParams = textView.layoutParams
-        layoutParams.height = (StatusBarUtil.getStatusBarHeight(context!!)!! * 1.5).toInt()
+        textView.layoutParams.apply {
+            height = StatusBarUtil.getStatusBarHeight(context!!).run {
+                (this!! * 1.8).toInt()
+            }
+        }
+
         mAdapter?.addHeaderView(view)
     }
 
     override fun initEvents() {
-        presenter?.getPostTest(this)
+        presenter?.apply {
+            getPostTest(this@FurtherFragment)
+        }
     }
 }

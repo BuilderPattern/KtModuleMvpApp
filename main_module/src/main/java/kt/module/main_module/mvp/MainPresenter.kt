@@ -13,35 +13,40 @@ class MainPresenter(view: MainContract.IMainView, var model: MainModel) : BasePr
         var paramsBuilder = ParamsBuilder()
         paramsBuilder.add(Constant.Key.KEY_WORD, "b")
 
-        model?.getPostTest(paramsBuilder)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.compose(activity?.bindToLifecycle())
-            ?.subscribe({
-                if (it.code == 200){
-                    mView?.getPostTestSuccessed(it.result)
-                }else{
-                    mView?.getPostTestFailed("发生错误！")                }
-            },{
-                mView?.getPostTestFailed("发生错误！")
-                it.printStackTrace()
-            })
+        model.let { model ->
+            model.getPostTest(paramsBuilder)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(activity.bindToLifecycle())
+                .subscribe({
+                    if (it.code == 200) {
+                        mView?.getPostTestSuccessed(it.result)
+                    } else {
+                        mView?.getPostTestFailed("发生错误！")
+                    }
+                }, {
+                    mView?.getPostTestFailed("发生错误！")
+                    it.printStackTrace()
+                })
+        }
     }
 
-    fun getGetTest(activity: MainActivity){
+    fun getGetTest(activity: MainActivity) {
         var paramsBuilder = ParamsBuilder()
         paramsBuilder.add(Constant.Key.OS_TYPE, "get")
 
-        model?.getGetTest(paramsBuilder)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.compose(activity?.bindToLifecycle())
-            ?.subscribe({
-                mView?.getGetTestSuccessed(it)
-            },{
-                mView?.getGetTestCatFailed("发生错误！")
-                it.printStackTrace()
-            })
+        model.let { model ->
+            model.getGetTest(paramsBuilder)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(activity.bindToLifecycle())
+                .subscribe({
+                    mView?.getGetTestSuccessed(it)
+                }, {
+                    mView?.getGetTestCatFailed("发生错误！")
+                    it.printStackTrace()
+                })
+        }
     }
 
 }

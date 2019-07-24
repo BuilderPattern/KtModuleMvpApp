@@ -17,40 +17,21 @@ import kt.module.main_module.R
 import java.util.*
 
 @Route(path = RouteUtils.RouterMap.Main.MainAc)
-class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
-
-    override fun getGetTestSuccessed(data: Any) {
-
-    }
-
-    override fun getGetTestCatFailed(msg: Any) {
-
-    }
-
-    override fun getPostTestSuccessed(data: MutableList<ObjectEntity>?) {
-
-    }
-
-    override fun getPostTestFailed(msg: Any) {
-
-    }
-
-    override val presenter: MainPresenter?
-        get() = MainPresenter(this, MainModel())
+class MainActivity : BaseActivity<MainPresenter>() {
 
     override val contentLayoutId: Int
         get() = R.layout.activity_main
 
     private var index: Int = 0
 
-    private var fragmentList = ArrayList<Fragment>()
+    private val fragmentList = ArrayList<Fragment>()
 
     private var mHomeFragment = RouteUtils.go(RouteUtils.RouterMap.HomePage.Home).navigation() as BaseFragment<*>
-    private var mMessageFragment =
+    private val mMessageFragment =
         RouteUtils.go(RouteUtils.RouterMap.MessagePage.Message).navigation() as BaseFragment<*>
-    private var mFurtherFragment =
+    private val mFurtherFragment =
         RouteUtils.go(RouteUtils.RouterMap.FurtherPage.Further).navigation() as BaseFragment<*>
-    private var mMineFragment = RouteUtils.go(RouteUtils.RouterMap.MinePage.Mine).navigation() as BaseFragment<*>
+    private val mMineFragment = RouteUtils.go(RouteUtils.RouterMap.MinePage.Mine).navigation() as BaseFragment<*>
 
     //底部文字数组
     private val mTabTexts = arrayOf("Home", "Message", "Further", "Mine")
@@ -90,9 +71,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
             )
         }
 
-        activity_main_viewpager.setCurrentItem(index, false)
-        activity_main_viewpager.adapter =
-            MyPagerAdapter(fragmentList, mTabEntityList, supportFragmentManager)
+        activity_main_viewpager.apply {
+            offscreenPageLimit = fragmentList.size
+            currentItem = index
+            adapter = MyPagerAdapter(fragmentList, mTabEntityList, supportFragmentManager)
+        }
     }
 
     override fun initEvents() {
@@ -113,7 +96,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
 
         activity_main_tabLayout.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
-                activity_main_viewpager.setCurrentItem(position, false)
+                activity_main_viewpager.currentItem = position
             }
 
             override fun onTabReselect(position: Int) {
@@ -124,17 +107,19 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
 
         switch(index)
 
-        presenter?.getPostTest(this)
-        presenter?.getGetTest(this)
+        presenter?.apply {
+            getPostTest(this@MainActivity)
+            getGetTest(this@MainActivity)
+        }
     }
 
     private fun switch(index: Int) {
-        activity_main_viewpager.setCurrentItem(index, false)
+        activity_main_viewpager.currentItem = index
     }
 
     class MyPagerAdapter(
-        var fragments: ArrayList<Fragment>,
-        var tabList: ArrayList<CustomTabEntity>,
+        private var fragments: ArrayList<Fragment>,
+        private var tabList: ArrayList<CustomTabEntity>,
         supportManager: FragmentManager
     ) : FragmentPagerAdapter(supportManager) {
 
