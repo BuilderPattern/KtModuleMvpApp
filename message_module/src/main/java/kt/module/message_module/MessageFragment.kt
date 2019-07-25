@@ -17,14 +17,18 @@ class MessageFragment : BaseFragment<IBasePresenter>() {
     override val contentLayoutId: Int
         get() = R.layout.fragment_message
 
-    private var mDatas: MutableList<RvDataSection> = mutableListOf()
+    private val mDatas: MutableList<RvDataSection> = mutableListOf()
 
     private var mAdapter: BaseRvSectionAdapter<RvDataSection>? = null
 
     override fun initViews() {
         fragment_message_recyclerView.layoutManager = LinearLayoutManager(context)
         mAdapter = object :
-            BaseRvSectionAdapter<RvDataSection>(R.layout.item_message_section_layout, R.layout.head_message_section_layout, mDatas) {
+            BaseRvSectionAdapter<RvDataSection>(
+                R.layout.item_message_section_layout,
+                R.layout.head_message_section_layout,
+                mDatas
+            ) {
             override fun convertHead(holder: BaseRvViewHolder?, item: RvDataSection) {
                 if (item.isHeader) {
                     holder?.setText(R.id.head_message_titleTv, item.header)
@@ -32,11 +36,14 @@ class MessageFragment : BaseFragment<IBasePresenter>() {
             }
 
             override fun convert(holder: BaseRvViewHolder?, item: RvDataSection) {
-                if (item.t != null && !item.isHeader){
-                    holder?.setText(R.id.item_message_section_nameTv, item.t.name)
-                        ?.setText(R.id.item_message_section_ageTv, item.t.age.toString())
-                        ?.addOnClickListener(R.id.item_message_section_nameTv)
-                        ?.addOnClickListener(R.id.item_message_section_ageTv)
+                if (item.t != null && !item.isHeader) {
+                    holder?.apply {
+                        item.run {
+                            setText(R.id.item_message_section_nameTv, t.name)
+                            setText(R.id.item_message_section_ageTv, t.age.toString())
+                        }.addOnClickListener(R.id.item_message_section_nameTv)
+                            .addOnClickListener(R.id.item_message_section_ageTv)
+                    }
                 }
             }
         }
@@ -50,19 +57,23 @@ class MessageFragment : BaseFragment<IBasePresenter>() {
     override fun initEvents() {
         mAdapter?.setOnItemChildClickListener { adapter, view, position ->
             val dataSection = mDatas[position]
-            if (dataSection.isHeader){
-                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withString("content", dataSection.header).navigation()
-            }else{
-                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withString("content", (view as TextView).text.toString()).navigation()
+            if (dataSection.isHeader) {
+                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withString("content", dataSection.header)
+                    .navigation()
+            } else {
+                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc)
+                    .withString("content", (view as TextView).text.toString()).navigation()
             }
         }
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
             val dataSection = mDatas[position]
-            if (dataSection.isHeader){
-                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withString("header", mDatas[position].header).navigation()
-            }else{
-                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withParcelable("item", mDatas[position].t).navigation()
+            if (dataSection.isHeader) {
+                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withString("header", mDatas[position].header)
+                    .navigation()
+            } else {
+                RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withParcelable("item", mDatas[position].t)
+                    .navigation()
             }
         }
     }

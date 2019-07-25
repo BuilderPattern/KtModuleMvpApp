@@ -2,6 +2,7 @@ package kt.module.first_module
 
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -29,71 +30,81 @@ open class FirstActivity : BaseActivity<IBasePresenter>() {
     private var canChangeToolBarColor: Boolean = false
     private var nearByToolBar: Boolean = false
 
+    var currOffset: Int = 0
+    var lastOffset: Int = 0
+
     override fun initViews() {
-        fragmentList.add(homeFragment)
-        fragmentList.add(messageFragment)
-        fragmentList.add(furtherFragment)
+        fragmentList.run {
+            add(homeFragment)
+            add(messageFragment)
+            add(furtherFragment)
+        }
+
         mAdapter = MineViewPagerAdapter(supportFragmentManager, fragmentList)
-        activity_first_viewpager.adapter = mAdapter
+        activity_first_viewpager.run {
+            adapter = mAdapter
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {
+                }
 
-        activity_first_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                }
 
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-            }
-
-            override fun onPageSelected(position: Int) {
-            }
-
-        })
-        activity_first_tabLayout.setupWithViewPager(activity_first_viewpager)
+                override fun onPageSelected(position: Int) {
+                }
+            })
+            activity_first_tabLayout.setupWithViewPager(this)
+        }
 
         activity_first_app_bar_layout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
             override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
-                val range = appBarLayout?.totalScrollRange
-                var offset = abs(verticalOffset)
+                currOffset = abs(verticalOffset)
 
-                if (offset > range!! / 3) {
-                    if (canChangeToolBarColor) {
-                        activity_first_toolbar.setNavigationIcon(R.mipmap.icon_back_black_img)
-                        activity_first_toolbar_titleTv.text = "任🛁"
-                        activity_first_toolbar.setBackgroundColor(resources.getColor(R.color.color_ffffff))
-                        canChangeToolBarColor = false
-                        nearByToolBar = true
-                        invalidateOptionsMenu()
-                    } else {
-                        canChangeToolBarColor = true
+                takeIf { currOffset != lastOffset }
+                    ?.let {
+                        val range = appBarLayout?.totalScrollRange
+
+                        if (currOffset > range!! * 5 / 8) {
+                            if (canChangeToolBarColor) {
+                                activity_first_toolbar.run {
+                                    setNavigationIcon(R.mipmap.icon_back_black_img)
+                                    activity_first_toolbar_titleTv.text = "任🛁"
+                                    setBackgroundColor(resources.getColor(R.color.color_ffffff))
+                                    canChangeToolBarColor = false
+                                    nearByToolBar = true
+                                    invalidateOptionsMenu()
+                                }
+                            }
+                        } else if (currOffset >= range!! / 8 && currOffset < range!! * 5 / 8) {
+                            canChangeToolBarColor = true
+                        } else {
+                            if (canChangeToolBarColor) {
+                                activity_first_toolbar.run {
+                                    setNavigationIcon(R.mipmap.icon_back_white_img)
+                                    activity_first_toolbar_titleTv.text = ""
+                                    setBackgroundColor(resources.getColor(R.color.color_00000000))
+                                    canChangeToolBarColor = false
+                                    nearByToolBar = false
+                                    invalidateOptionsMenu()
+                                }
+                            }
+                        }
                     }
-                } else if (offset > range!! / 3 && offset <= range!! * 2 / 3) {
-                    canChangeToolBarColor = true
-                } else {
-                    if (canChangeToolBarColor) {
-                        activity_first_toolbar.setNavigationIcon(R.mipmap.icon_back_white_img)
-                        activity_first_toolbar_titleTv.text = ""
-                        activity_first_toolbar.setBackgroundColor(resources.getColor(R.color.color_00000000))
-                        canChangeToolBarColor = false
-                        nearByToolBar = false
-                        invalidateOptionsMenu()
-                    } else {
-                        canChangeToolBarColor = true
-                    }
-                }
+
+                lastOffset = abs(verticalOffset)
             }
         })
     }
 
     override fun initEvents() {
-        activity_first_toolbar.title = ""
-        setSupportActionBar(activity_first_toolbar)
-        activity_first_toolbar.setNavigationIcon(R.mipmap.icon_back_white_img)
-        activity_first_toolbar.setNavigationOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
+        activity_first_toolbar?.run {
+            title = ""
+            setSupportActionBar(this)
+            setNavigationIcon(R.mipmap.icon_back_white_img)
+            setNavigationOnClickListener {
                 finish()
             }
-        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -102,12 +113,21 @@ open class FirstActivity : BaseActivity<IBasePresenter>() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        if (nearByToolBar) {
-            menu.findItem(R.id.action_share).setIcon(R.mipmap.icon_share_black_img)
-            menu.findItem(R.id.action_collect).setIcon(R.mipmap.icon_collect_black)
-        } else {
-            menu.findItem(R.id.action_share).setIcon(R.mipmap.icon_share_white_img)
-            menu.findItem(R.id.action_collect).setIcon(R.mipmap.icon_collect_default)
+        menu.run {
+            findItem(R.id.action_share).apply {
+                setIcon(R.mipmap.icon_share_black_img)
+                    .takeIf { !nearByToolBar }
+                    ?.let {
+                        setIcon(R.mipmap.icon_share_white_img)
+                    }
+            }
+            findItem(R.id.action_collect).apply {
+                setIcon(R.mipmap.icon_collect_black)
+                    .takeIf { !nearByToolBar }
+                    ?.let {
+                        setIcon(R.mipmap.icon_collect_default)
+                    }
+            }
         }
         return super.onPrepareOptionsMenu(menu)
     }
