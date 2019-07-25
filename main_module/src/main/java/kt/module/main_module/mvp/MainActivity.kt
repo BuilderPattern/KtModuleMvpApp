@@ -1,9 +1,9 @@
 package kt.module.main_module.mvp
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.core.app.Fragment
+import androidx.core.app.FragmentManager
+import androidx.core.app.FragmentPagerAdapter
+import androidx.core.view.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener

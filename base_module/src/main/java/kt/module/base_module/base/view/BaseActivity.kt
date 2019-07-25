@@ -1,16 +1,14 @@
 package kt.module.base_module.base.view
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.view.View
+import androidx.annotation.LayoutRes
 import com.alibaba.android.arouter.launcher.ARouter
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.utils.StatusBarUtil
-import kt.module.common_module.base.presenter.BasePresenter
-import kt.module.common_module.base.view.IBaseView
 import me.jessyan.autosize.internal.CustomAdapt
 import java.lang.Exception
 

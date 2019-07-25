@@ -6,7 +6,7 @@
                                                  android:layout_height="match_parent"
                                                  android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/activity_first_app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -42,7 +42,7 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                     android:id="@+id/activity_first_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
@@ -59,11 +59,11 @@
                         android:maxWidth="160dp"
                         android:textSize="26sp"
                         android:textStyle="bold"/>
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
                 android:id="@+id/activity_first_tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -76,7 +76,7 @@
                 app:tabTextColor="@color/color_333333"/>
 
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <kt.module.base_module.view.NoScrollViewPager
             android:id="@+id/activity_first_viewpager"

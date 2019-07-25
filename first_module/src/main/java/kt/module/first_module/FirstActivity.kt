@@ -1,11 +1,9 @@
 package kt.module.first_module
 
-import android.support.design.widget.AppBarLayout
-import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.Menu
-import android.view.View
+import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_first.*
 import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseActivity

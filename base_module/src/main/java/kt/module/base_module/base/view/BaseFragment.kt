@@ -1,13 +1,12 @@
 package kt.module.base_module.base.view
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import com.alibaba.android.arouter.launcher.ARouter
 import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.components.support.RxFragment
 import kt.module.base_module.base.presenter.IBasePresenter

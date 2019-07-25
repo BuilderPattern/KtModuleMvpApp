@@ -3,9 +3,9 @@ package kt.module.base_module.utils
 import android.content.Context
 import android.os.Build
 import android.os.Build.VERSION_CODES.KITKAT
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import kt.module.base_module.R
 
 

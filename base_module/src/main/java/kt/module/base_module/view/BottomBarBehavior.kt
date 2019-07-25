@@ -1,10 +1,10 @@
 package kt.module.base_module.view
 
 import android.content.Context
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.view.ViewCompat
+import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import kt.module.base_module.utils.AnimationUtil
 
 class BottomBarBehavior(context: Context, attrs: AttributeSet) : CoordinatorLayout.Behavior<View>(context, attrs) {
