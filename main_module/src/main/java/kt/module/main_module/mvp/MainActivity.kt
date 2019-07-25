@@ -17,10 +17,25 @@ import kt.module.main_module.R
 import java.util.*
 
 @Route(path = RouteUtils.RouterMap.Main.MainAc)
-class MainActivity : BaseActivity<MainPresenter>() {
+class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
+    override fun getPostTestSuccessed(data: MutableList<ObjectEntity>) {
+
+    }
+
+    override fun getPostTestFailed(msg: Any) {
+    }
+
+    override fun getGetTestSuccessed(data: Any) {
+    }
+
+    override fun getGetTestCatFailed(msg: Any) {
+    }
 
     override val contentLayoutId: Int
         get() = R.layout.activity_main
+
+    override val presenter: MainPresenter?
+        get() = MainPresenter(this, MainModel())
 
     private var index: Int = 0
 
@@ -40,7 +55,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
     private val mUncheckIcons = intArrayOf(
         R.mipmap.icon_tab_home_unselect,
         R.mipmap.icon_tab_message_unselect,
-        R.mipmap.icon_tab_more_unselect,
+        R.mipmap.icon_tab_further_unselect,
         R.mipmap.icon_tab_mine_unselect
     )
 
@@ -48,7 +63,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
     private val mCheckIcons = intArrayOf(
         R.mipmap.icon_tab_home_select,
         R.mipmap.icon_tab_message_select,
-        R.mipmap.icon_tab_more_select,
+        R.mipmap.icon_tab_further_select,
         R.mipmap.icon_tab_mine_select
     )
 

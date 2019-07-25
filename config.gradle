@@ -62,10 +62,10 @@ ext {
             //gson
             gson                                : 'com.google.code.gson:gson:2.8.5',
             //fresco
-            fresco                              : 'com.facebook.fresco:fresco:1.11.0',
-            animated_gif                        : 'com.facebook.fresco:animated-gif:1.11.0',
-            animated_webp                       : 'com.facebook.fresco:animated-webp:1.11.0',
-            webpsupport                         : 'com.facebook.fresco:webpsupport:1.11.0',
+            fresco                              : 'com.facebook.fresco:fresco:2.0.0',
+            animated_gif                        : 'com.facebook.fresco:animated-gif:2.0.0',
+            animated_webp                       : 'com.facebook.fresco:animated-webp:2.0.0',
+            webpsupport                         : 'com.facebook.fresco:webpsupport:2.0.0',
             //picasso
             picasso                             : 'com.squareup.picasso:picasso:2.71828',
             //日志库

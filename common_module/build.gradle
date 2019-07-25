@@ -7,6 +7,7 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
+        multiDexEnabled true
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -75,4 +76,11 @@ dependencies {
     api rootProject.ext.dependencies.glide
     api rootProject.ext.dependencies.logger
     api rootProject.ext.dependencies.cardview_v7
+
+    api rootProject.ext.dependencies.greendao
+
+//    api rootProject.ext.dependencies. fresco
+//    api rootProject.ext.dependencies. animated_gif
+//    api rootProject.ext.dependencies. animated_webp
+//    api rootProject.ext.dependencies. webpsupport
 }

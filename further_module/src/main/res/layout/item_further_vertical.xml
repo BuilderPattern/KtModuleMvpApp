@@ -12,7 +12,7 @@
         android:padding="4dp">
 
         <ImageView
-            android:id="@+id/item_snap_ver_img"
+            android:id="@+id/item_further_ver_img"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:scaleY="1.25"
@@ -27,12 +27,12 @@
             android:layout_marginTop="2dp"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
-            android:layout_toEndOf="@id/item_snap_ver_img"
-            android:layout_toRightOf="@id/item_snap_ver_img"
+            android:layout_toEndOf="@id/item_further_ver_img"
+            android:layout_toRightOf="@id/item_further_ver_img"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/item_snap_ver_nameTv"
+                android:id="@+id/item_further_ver_nameTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -40,7 +40,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <TextView
-                android:id="@+id/item_snap_ver_devTv"
+                android:id="@+id/item_further_ver_devTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -48,7 +48,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView
-                android:id="@+id/item_snap_ver_ratingTv"
+                android:id="@+id/item_further_ver_ratingTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_rate"

@@ -24,19 +24,19 @@ class MessageFragment : BaseFragment<IBasePresenter>() {
     override fun initViews() {
         fragment_message_recyclerView.layoutManager = LinearLayoutManager(context)
         mAdapter = object :
-            BaseRvSectionAdapter<RvDataSection>(R.layout.item_base_rv_layout, R.layout.head_base_rv_section_layout, mDatas) {
+            BaseRvSectionAdapter<RvDataSection>(R.layout.item_message_section_layout, R.layout.head_message_section_layout, mDatas) {
             override fun convertHead(holder: BaseRvViewHolder?, item: RvDataSection) {
                 if (item.isHeader) {
-                    holder?.setText(R.id.head_base_ver_titleTv, item.header)
+                    holder?.setText(R.id.head_message_titleTv, item.header)
                 }
             }
 
             override fun convert(holder: BaseRvViewHolder?, item: RvDataSection) {
                 if (item.t != null && !item.isHeader){
-                    holder?.setText(R.id.item_base_ver_nameTv, item.t.name)
-                        ?.setText(R.id.item_base_ver_ageTv, item.t.age.toString())
-                        ?.addOnClickListener(R.id.item_base_ver_nameTv)
-                        ?.addOnClickListener(R.id.item_base_ver_ageTv)
+                    holder?.setText(R.id.item_message_section_nameTv, item.t.name)
+                        ?.setText(R.id.item_message_section_ageTv, item.t.age.toString())
+                        ?.addOnClickListener(R.id.item_message_section_nameTv)
+                        ?.addOnClickListener(R.id.item_message_section_ageTv)
                 }
             }
         }

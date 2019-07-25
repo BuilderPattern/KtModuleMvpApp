@@ -6,7 +6,7 @@
               android:orientation="horizontal" tools:ignore="MissingDefaultResource">
 
     <TextView
-            android:id="@+id/head_base_ver_titleTv"
+            android:id="@+id/head_message_titleTv"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:textSize="30sp"

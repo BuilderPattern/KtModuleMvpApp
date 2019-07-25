@@ -3,8 +3,8 @@ package kt.module.base_module.adapter
 import com.chad.library.adapter.base.MultipleItemRvAdapter
 import kt.module.base_module.base.entity.BaseMultiItemEntity
 import kt.module.base_module.data.db.table.ChildEntity
-import kt.module.further_module.adapter.SecondHorItemProvider
-import kt.module.further_module.adapter.SecondVerItemProvider
+import kt.module.second_module.adapter.SecondHorItemProvider
+import kt.module.second_module.adapter.SecondVerItemProvider
 
 class SecondDBAdapter<T>: MultipleItemRvAdapter<BaseMultiItemEntity<T>, BaseRvViewHolder>{
     override fun getViewType(t: BaseMultiItemEntity<T>?): Int {

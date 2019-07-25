@@ -9,12 +9,12 @@ import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.provider.BaseItemProvider
-import kt.module.base_module.R
 import kt.module.base_module.adapter.BaseRvQuickAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
 import kt.module.base_module.adapter.FurtherAdapter
 import kt.module.base_module.base.entity.BaseMultiItemEntity
 import kt.module.base_module.data.db.table.ChildEntity
+import kt.module.further_module.R
 
 class FurtherHorItemProvider<T> : BaseItemProvider<BaseMultiItemEntity<T>, BaseRvViewHolder>() {
 
@@ -45,8 +45,8 @@ class FurtherHorItemProvider<T> : BaseItemProvider<BaseMultiItemEntity<T>, BaseR
 //                        }
                         holder?.itemView.let {
                             item.run {
-                                findViewById<TextView>(R.id.item_snap_hor_nameTv)?.text = title_img_new
-                                findViewById<TextView>(R.id.item_snap_hor_ratingTv)?.text = id.toString()
+                                findViewById<TextView>(R.id.item_further_hor_nameTv)?.text = title_img_new
+                                findViewById<TextView>(R.id.item_further_hor_ratingTv)?.text = id.toString()
                             }
                         }
                     }

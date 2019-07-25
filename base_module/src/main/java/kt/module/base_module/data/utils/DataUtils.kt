@@ -11,8 +11,8 @@ object DataUtils {
         var list :MutableList<RvData> = mutableListOf()
 
         for (index in 0..num) {
-            list.add(RvData("张三", 22))
-            list.add(RvData("李四", 90))
+            list.add(RvData("张三", 22, "http://rscdn.17mingxiang.com/Now/picture/courseImg/20190322205909-5c94dc1df2f1f.jpg"))
+            list.add(RvData("李四", 90, "http://rscdn.17mingxiang.com/Now/picture/courseImg/20190329141821-5c9db8ad6020b.jpg"))
         }
         return list
     }
@@ -27,7 +27,8 @@ object DataUtils {
                 RvDataSection(
                     RvData(
                         "张三",
-                        22
+                        22,
+                        "http://rscdn.17mingxiang.com/Now/picture/courseImg/20190322205909-5c94dc1df2f1f.jpg"
                     )
                 )
             )
@@ -35,7 +36,8 @@ object DataUtils {
                 RvDataSection(
                     RvData(
                         "李四",
-                        90
+                        90,
+                        "http://rscdn.17mingxiang.com/Now/picture/courseImg/20190329141821-5c9db8ad6020b.jpg"
                     )
                 )
             )

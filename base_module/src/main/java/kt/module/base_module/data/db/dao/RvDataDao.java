@@ -27,6 +27,7 @@ public class RvDataDao extends AbstractDao<RvData, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Age = new Property(2, int.class, "age", false, "AGE");
+        public final static Property Url = new Property(3, String.class, "url", false, "URL");
     }
 
 
@@ -44,7 +45,8 @@ public class RvDataDao extends AbstractDao<RvData, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"RV_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"AGE\" INTEGER NOT NULL );"); // 2: age
+                "\"AGE\" INTEGER NOT NULL ," + // 2: age
+                "\"URL\" TEXT);"); // 3: url
     }
 
     /** Drops the underlying database table. */
@@ -67,6 +69,11 @@ public class RvDataDao extends AbstractDao<RvData, Long> {
             stmt.bindString(2, name);
         }
         stmt.bindLong(3, entity.getAge());
+ 
+        String url = entity.getUrl();
+        if (url != null) {
+            stmt.bindString(4, url);
+        }
     }
 
     @Override
@@ -83,6 +90,11 @@ public class RvDataDao extends AbstractDao<RvData, Long> {
             stmt.bindString(2, name);
         }
         stmt.bindLong(3, entity.getAge());
+ 
+        String url = entity.getUrl();
+        if (url != null) {
+            stmt.bindString(4, url);
+        }
     }
 
     @Override
@@ -95,7 +107,8 @@ public class RvDataDao extends AbstractDao<RvData, Long> {
         RvData entity = new RvData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.getInt(offset + 2) // age
+            cursor.getInt(offset + 2), // age
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // url
         );
         return entity;
     }
@@ -105,6 +118,7 @@ public class RvDataDao extends AbstractDao<RvData, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setAge(cursor.getInt(offset + 2));
+        entity.setUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

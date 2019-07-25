@@ -12,6 +12,7 @@ public class RvData implements Parcelable {
     private Long id;
     private String name;
     private int age;
+    private String url;
 
     protected RvData(Parcel in) {
         if (in.readByte() == 0) {
@@ -21,6 +22,7 @@ public class RvData implements Parcelable {
         }
         name = in.readString();
         age = in.readInt();
+        url = in.readString();
     }
 
     public static final Creator<RvData> CREATOR = new Creator<RvData>() {
@@ -59,16 +61,26 @@ public class RvData implements Parcelable {
         this.age = age;
     }
 
-    @Generated(hash = 287697888)
-    public RvData(Long id, String name, int age) {
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Generated(hash = 1588347869)
+    public RvData(Long id, String name, int age, String url) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.url = url;
     }
 
-    public RvData(String name, int age) {
+    public RvData(String name, int age, String url) {
         this.name = name;
         this.age = age;
+        this.url = url;
     }
 
     @Generated(hash = 1506817874)
@@ -90,5 +102,6 @@ public class RvData implements Parcelable {
         }
         dest.writeString(name);
         dest.writeInt(age);
+        dest.writeString(url);
     }
 }

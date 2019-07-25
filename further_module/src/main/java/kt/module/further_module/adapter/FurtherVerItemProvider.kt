@@ -9,12 +9,12 @@ import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.provider.BaseItemProvider
-import kt.module.base_module.R
 import kt.module.base_module.adapter.BaseRvQuickAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
 import kt.module.base_module.adapter.FurtherAdapter
 import kt.module.base_module.base.entity.BaseMultiItemEntity
 import kt.module.base_module.data.db.table.ChildEntity
+import kt.module.further_module.R
 
 class FurtherVerItemProvider<T> : BaseItemProvider<BaseMultiItemEntity<T>, BaseRvViewHolder>() {
 
@@ -53,12 +53,12 @@ class FurtherVerItemProvider<T> : BaseItemProvider<BaseMultiItemEntity<T>, BaseR
 
                         holder?.itemView?.run {
                             if (item.title.length > 3) {
-                                findViewById<TextView>(R.id.item_snap_ver_nameTv).text =
+                                findViewById<TextView>(R.id.item_further_ver_nameTv).text =
                                     item.title.substring(item.title.length - 3, item.title.length - 1)
                             } else {
-                                findViewById<TextView>(R.id.item_snap_ver_nameTv).text = item.title
+                                findViewById<TextView>(R.id.item_further_ver_nameTv).text = item.title
                             }
-                            findViewById<TextView>(R.id.item_snap_ver_ratingTv).text = item.id.toString()
+                            findViewById<TextView>(R.id.item_further_ver_ratingTv).text = item.id.toString()
                         }
                     }
                 }
