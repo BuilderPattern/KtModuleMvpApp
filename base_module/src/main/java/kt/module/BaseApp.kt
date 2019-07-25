@@ -7,6 +7,7 @@ import android.os.Process
 import android.support.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.dopool.common.util.AppUtil
+import com.facebook.drawee.backends.pipeline.Fresco
 import kt.module.base_module.data.db.dao.DaoMaster
 import kt.module.base_module.data.db.dao.DaoSession
 import kt.module.base_module.data.db.dao.utils.CustomOpenHelper
@@ -42,6 +43,7 @@ open class BaseApp : Application() {
         application = this
         if (isMainProcess()){
             initARouter()
+            Fresco.initialize(this)
         }
     }
 

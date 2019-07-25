@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment<IBasePresenter>() {
                 override fun convert(holder: BaseRvViewHolder?, item: RvData) {
                     item.run {
                         holder?.apply {
-//                            setSimpleDraweeViewUrl(R.id.item_home_simpleDraweeView, url)
+                            setImageUri(R.id.item_home_simpleDraweeView, url)
                             setText(R.id.item_home_nameTv, name)
                             setText(R.id.item_home_ageTv, age.toString())
                         }

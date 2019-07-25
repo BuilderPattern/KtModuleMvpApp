@@ -8,6 +8,10 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseViewHolder
 import java.io.File
+import android.R
+import com.facebook.drawee.view.SimpleDraweeView
+
+
 
 class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
 
@@ -48,10 +52,9 @@ class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
      * 如果要加其他，比如显示图片的控件，
      * 直接类似这种再写一个方法就行
      */
-    fun setImageUri(id: Int, uri: Uri): BaseViewHolder {
-        var imageView = getView<ImageView>(id)
-        Glide.with(imageView.context).load(uri)
-            .into(imageView)
+    fun setImageUri(id: Int, url: String): BaseViewHolder {
+        val draweeView = getView<SimpleDraweeView>(id)
+        draweeView.setImageURI(Uri.parse(url))
         return this
     }
 }
