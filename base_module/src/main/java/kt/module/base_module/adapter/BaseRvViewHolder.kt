@@ -69,22 +69,4 @@ class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
         }
         return this
     }
-
-    fun setSimpleDraweeViewUrl(viewId: Int, url: String?, width: Int, height: Int): BaseViewHolder {
-        val draweeView = this.getView<SimpleDraweeView>(viewId)
-        url?.let {
-            val request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(it))
-                .apply {
-                    resizeOptions = ResizeOptions(width, height)
-                    rotationOptions = RotationOptions.autoRotate()
-                    isProgressiveRenderingEnabled = true
-                }.build()
-            draweeView.controller = Fresco.newDraweeControllerBuilder().apply {
-                oldController = draweeView.controller
-                imageRequest = request
-                autoPlayAnimations = true
-            }.build()
-        }
-        return this
-    }
 }

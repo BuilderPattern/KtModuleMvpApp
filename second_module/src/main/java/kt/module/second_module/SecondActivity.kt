@@ -53,20 +53,24 @@ class SecondActivity : BaseActivity<IBasePresenter>() {
             it.build().list()
         } as MutableList<ObjectEntity>
 
-        objList?.let {
+        objList?.run {
             mDatas.clear()
-            objList?.forEach {
-                var item = BaseMultiItemEntity<MutableList<ChildEntity>>()
-                if (it.show_template == 1) {
-                    item.type = 1
-                    item.title = "竖直方向"
-                } else {
-                    item.type = 2
-                    item.title = "水平方向"
-                }
-                item.data = it.child
+            forEach { objEntity ->
+                objEntity?.takeIf {
+                    objEntity.child?.size != 0
+                }?.let {
+                    var item = BaseMultiItemEntity<MutableList<ChildEntity>>()
+                    if (it.show_template == 1) {
+                        item.type = 1
+                        item.title = "竖直方向"
+                    } else {
+                        item.type = 2
+                        item.title = "水平方向"
+                    }
+                    item.data = it.child
 
-                mDatas.add(item)
+                    mDatas.add(item)
+                }
             }
         }
 

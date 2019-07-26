@@ -58,7 +58,7 @@ open class FirstActivity : BaseActivity<IBasePresenter>() {
             override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
                 currOffset = abs(verticalOffset)
 
-                takeIf { currOffset != lastOffset }
+                takeIf { currOffset != lastOffset }//true的时候才执行下面的代码块，false的时候，该行代码会返回null
                     ?.let {
                         val range = appBarLayout?.totalScrollRange
 
