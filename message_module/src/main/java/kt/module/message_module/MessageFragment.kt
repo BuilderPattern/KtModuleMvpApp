@@ -1,7 +1,7 @@
 package kt.module.message_module
 
-import android.support.v7.widget.LinearLayoutManager
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.fragment_message.*
 import kt.module.base_module.adapter.BaseRvSectionAdapter

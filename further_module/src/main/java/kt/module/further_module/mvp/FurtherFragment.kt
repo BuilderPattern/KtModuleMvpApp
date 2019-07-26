@@ -1,11 +1,10 @@
 package kt.module.further_module.mvp
 
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.fragment_further.*
 import kt.module.base_module.adapter.FurtherAdapter
@@ -93,7 +92,7 @@ class FurtherFragment : BaseFragment<FurtherPresenter>(), FurtherContract.IFurth
 
     override fun initViews() {
         fragment_details_recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
+            fragment_details_recyclerView.layoutManager = LinearLayoutManager(context)
             mAdapter = FurtherAdapter()
             fragment_details_recyclerView.adapter = mAdapter
         }

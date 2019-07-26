@@ -21,20 +21,12 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/item_home_simpleDraweeView"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            fresco:placeholderImage="@mipmap/ic_gmail_48dp"
-    />
-    <!--<com.facebook.drawee.view.SimpleDraweeView-->
-            <!--android:id="@+id/item_home_simpleDraweeView"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="150dp"-->
-            <!--fresco:actualImageScaleType="fitXY"-->
-            <!--fresco:failureImage="@mipmap/ic_keep_48dp"-->
-            <!--fresco:failureImageScaleType="centerCrop"-->
-            <!--fresco:overlayImage="@mipmap/ic_gmail_48dp"-->
-            <!--fresco:placeholderImage="@mipmap/ic_drive_48dp"-->
-            <!--fresco:placeholderImageScaleType="centerCrop"/>-->
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            fresco:failureImage="@mipmap/ic_keep_48dp"
+            fresco:failureImageScaleType="centerCrop"
+            fresco:placeholderImage="@mipmap/ic_drive_48dp"
+            fresco:placeholderImageScaleType="centerCrop"/>
 
 
 </LinearLayout>

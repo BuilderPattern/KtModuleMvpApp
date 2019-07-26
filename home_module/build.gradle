@@ -60,4 +60,5 @@ dependencies {
     //arouter
     kapt rootProject.ext.dependencies.arouter_compiler
     api project(':base_module')
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

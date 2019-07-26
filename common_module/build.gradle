@@ -42,7 +42,7 @@ dependencies {
 
     api rootProject.ext.dependencies.kotlin
     api rootProject.ext.dependencies.appcompat_v7
-    api rootProject.ext.dependencies.recycle_view
+//    api rootProject.ext.dependencies.recycle_view
     api rootProject.ext.dependencies.constraint_layout
 
     //muilt_dex
@@ -72,7 +72,7 @@ dependencies {
 
     api rootProject.ext.dependencies.autosize
 
-    api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
+//    api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
     api rootProject.ext.dependencies.glide
     api rootProject.ext.dependencies.logger
     api rootProject.ext.dependencies.cardview_v7
@@ -86,4 +86,5 @@ dependencies {
     api rootProject.ext.dependencies. animated_gif
     api rootProject.ext.dependencies. animated_webp
     api rootProject.ext.dependencies. webpsupport
+    api project(path: ':adapter_library')
 }

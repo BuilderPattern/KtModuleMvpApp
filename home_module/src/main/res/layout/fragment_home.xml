@@ -9,7 +9,7 @@
         tools:context=".HomeFragment">
 
 
-    <androidx.appcompat.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_home_recyclerView"
             android:padding="10dp"
             android:layout_width="match_parent"

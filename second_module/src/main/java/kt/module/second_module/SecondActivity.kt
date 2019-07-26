@@ -1,11 +1,8 @@
 package kt.module.second_module
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.activity_second.*
 import kt.module.base_module.adapter.SecondDBAdapter
@@ -30,12 +27,13 @@ class SecondActivity : BaseActivity<IBasePresenter>() {
 
     override fun initViews() {
         fragment_second_recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@SecondActivity)
+            layoutManager = LinearLayoutManager(context)
             mAdapter = SecondDBAdapter()
             adapter = mAdapter
         }
         addHeader()
     }
+
     private fun addHeader() {
 
         var view = layoutInflater.inflate(R.layout.status_bar_height_layout, null, false) as LinearLayout
@@ -55,19 +53,21 @@ class SecondActivity : BaseActivity<IBasePresenter>() {
             it.build().list()
         } as MutableList<ObjectEntity>
 
-        mDatas.clear()
-        objList?.forEach {
-            var item = BaseMultiItemEntity<MutableList<ChildEntity>>()
-            if (it.show_template == 1) {
-                item.type = 1
-                item.title = "竖直方向"
-            } else {
-                item.type = 2
-                item.title = "水平方向"
-            }
-            item.data = it.child
+        objList?.let {
+            mDatas.clear()
+            objList?.forEach {
+                var item = BaseMultiItemEntity<MutableList<ChildEntity>>()
+                if (it.show_template == 1) {
+                    item.type = 1
+                    item.title = "竖直方向"
+                } else {
+                    item.type = 2
+                    item.title = "水平方向"
+                }
+                item.data = it.child
 
-            mDatas.add(item)
+                mDatas.add(item)
+            }
         }
 
         mAdapter?.setNewData(mDatas)

@@ -9,8 +9,11 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseViewHolder
 import java.io.File
 import android.R
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
-
+import com.facebook.imagepipeline.common.ResizeOptions
+import com.facebook.imagepipeline.common.RotationOptions
+import com.facebook.imagepipeline.request.ImageRequestBuilder
 
 
 class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
@@ -48,13 +51,40 @@ class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
         return this
     }
 
-    /**
-     * 如果要加其他，比如显示图片的控件，
-     * 直接类似这种再写一个方法就行
-     */
-    fun setImageUri(id: Int, url: String): BaseViewHolder {
-        val draweeView = getView<SimpleDraweeView>(id)
-        draweeView.setImageURI(Uri.parse(url))
+    fun setSimpleDraweeViewUrl(viewId: Int, url: String?): BaseViewHolder {
+        val draweeView = this.getView<View>(viewId) as SimpleDraweeView
+        url?.let {
+            val request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(it))
+                .apply {
+                    rotationOptions = RotationOptions.autoRotate()
+                    isProgressiveRenderingEnabled = true
+                }.build()
+
+            draweeView.controller = Fresco.newDraweeControllerBuilder()
+                .apply {
+                    oldController = draweeView.controller
+                    imageRequest = request
+                    autoPlayAnimations = true
+                }.build()
+        }
+        return this
+    }
+
+    fun setSimpleDraweeViewUrl(viewId: Int, url: String?, width: Int, height: Int): BaseViewHolder {
+        val draweeView = this.getView<SimpleDraweeView>(viewId)
+        url?.let {
+            val request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(it))
+                .apply {
+                    resizeOptions = ResizeOptions(width, height)
+                    rotationOptions = RotationOptions.autoRotate()
+                    isProgressiveRenderingEnabled = true
+                }.build()
+            draweeView.controller = Fresco.newDraweeControllerBuilder().apply {
+                oldController = draweeView.controller
+                imageRequest = request
+                autoPlayAnimations = true
+            }.build()
+        }
         return this
     }
 }

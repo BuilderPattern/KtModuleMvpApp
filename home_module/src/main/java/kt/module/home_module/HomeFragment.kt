@@ -1,8 +1,9 @@
 package kt.module.home_module
 
-import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.fragment_home.*
 import kt.module.base_module.adapter.BaseRvQuickAdapter
@@ -25,13 +26,13 @@ class HomeFragment : BaseFragment<IBasePresenter>() {
 
     override fun initViews() {
 
-        fragment_home_recyclerView.apply {
+        (fragment_home_recyclerView as RecyclerView).apply {
             layoutManager = LinearLayoutManager(context)
             mAdapter = object : BaseRvQuickAdapter<RvData>(R.layout.item_home_layout, mDatas) {
                 override fun convert(holder: BaseRvViewHolder?, item: RvData) {
                     item.run {
                         holder?.apply {
-                            setImageUri(R.id.item_home_simpleDraweeView, url)
+                            setSimpleDraweeViewUrl(R.id.item_home_simpleDraweeView, url)
                             setText(R.id.item_home_nameTv, name)
                             setText(R.id.item_home_ageTv, age.toString())
                         }
