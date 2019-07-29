@@ -80,7 +80,7 @@ dependencies {
     api rootProject.ext.dependencies.greendao
 
     //noinspection GradleCompatible
-    api 'androidx.legacy:legacy-support-core-utils:1.0.0'
+    api rootProject.ext.dependencies.support_core_utils
 
     api rootProject.ext.dependencies.fresco
     api rootProject.ext.dependencies.animated_gif

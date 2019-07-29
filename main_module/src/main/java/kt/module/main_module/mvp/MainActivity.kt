@@ -1,5 +1,6 @@
 package kt.module.main_module.mvp
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -7,6 +8,7 @@ import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
+import com.leon.channel.helper.ChannelReaderUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kt.module.base_module.base.view.BaseActivity
 import kt.module.base_module.base.view.BaseFragment
@@ -130,6 +132,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
 
     private fun switch(index: Int) {
         activity_main_viewpager.currentItem = index
+        val channel = ChannelReaderUtil.getChannel(this)
+        Toast.makeText(this, channel, Toast.LENGTH_SHORT).show()
     }
 
     class MyPagerAdapter(
