@@ -86,6 +86,11 @@ dependencies {
     api rootProject.ext.dependencies.animated_gif
     api rootProject.ext.dependencies.animated_webp
     api rootProject.ext.dependencies.webpsupport
+
     api rootProject.ext.dependencies.channel_helper
+
+    api rootProject.ext.dependencies.bugly_crashreport
+    api rootProject.ext.dependencies.bugly_nativecrashreport
+
     api project(path: ':adapter_library')
 }

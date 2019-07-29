@@ -66,7 +66,7 @@ class MessageFragment : BaseFragment<IBasePresenter>() {
             }
         }
 
-        mAdapter?.setOnItemClickListener { adapter, view, position ->
+        mAdapter?.setOnItemClickListener { _, view, position ->
             val dataSection = mDatas[position]
             if (dataSection.isHeader) {
                 RouteUtils.go(RouteUtils.RouterMap.Second.SecondAc).withString("header", mDatas[position].header)

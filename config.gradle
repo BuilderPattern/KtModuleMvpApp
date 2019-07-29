@@ -47,7 +47,11 @@ ext {
             rxlifecycle2_lifecycle_kotlin       : 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:2.2.2',
             //多渠道打包
             channel_helper                      : 'com.leon.channel:helper:2.0.3',
+
             support_core_utils                  : 'androidx.legacy:legacy-support-core-utils:1.0.0',
+
+            bugly_crashreport                   : 'com.tencent.bugly:crashreport:latest.release',
+            bugly_nativecrashreport             : 'com.tencent.bugly:nativecrashreport:latest.release',
 
             muilt_dex                           : 'androidx.multidex:multidex:2.0.0',
             //数据库

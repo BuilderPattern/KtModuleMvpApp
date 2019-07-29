@@ -10,6 +10,7 @@ import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.leon.channel.helper.ChannelReaderUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import kt.module.BaseApp
 import kt.module.base_module.base.view.BaseActivity
 import kt.module.base_module.base.view.BaseFragment
 import kt.module.base_module.data.db.table.ObjectEntity
@@ -132,7 +133,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.IMainView {
 
     private fun switch(index: Int) {
         activity_main_viewpager.currentItem = index
-        val channel = ChannelReaderUtil.getChannel(this)
+        val channel = ChannelReaderUtil.getChannel(BaseApp.application.applicationContext)
         Toast.makeText(this, channel, Toast.LENGTH_SHORT).show()
     }
 

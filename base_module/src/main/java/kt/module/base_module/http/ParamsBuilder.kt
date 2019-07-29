@@ -1,7 +1,7 @@
 package kt.module.base_module.http
 
 import com.google.gson.Gson
-import kt.module.base_module.constant.Constant
+import kt.module.common_module.constant.Constant
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import java.util.*

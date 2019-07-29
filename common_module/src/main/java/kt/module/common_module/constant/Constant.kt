@@ -1,4 +1,4 @@
-package kt.module.base_module.constant
+package kt.module.common_module.constant
 
 object Constant {
 
@@ -10,4 +10,6 @@ object Constant {
         const val DEVICE_ID = "device_id"
         const val KEY_WORD = "keyword"
     }
+
+    const val Bugly_AppId = "5b4adcc6c9"
 }

@@ -8,9 +8,12 @@ import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.dopool.common.util.AppUtil
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.tencent.bugly.crashreport.CrashReport
 import kt.module.base_module.data.db.dao.DaoMaster
 import kt.module.base_module.data.db.dao.DaoSession
 import kt.module.base_module.data.db.dao.utils.CustomOpenHelper
+import kt.module.common_module.config.BuildConfig.IS_DEBUG
+import kt.module.common_module.constant.Constant.Bugly_AppId
 
 open class BaseApp : Application() {
 
@@ -43,8 +46,13 @@ open class BaseApp : Application() {
         application = this
         if (isMainProcess()){
             initARouter()
+            initBugly()
             Fresco.initialize(this)
         }
+    }
+
+    private fun initBugly() {
+        CrashReport.initCrashReport(applicationContext, Bugly_AppId, IS_DEBUG)
     }
 
     private fun initARouter() {

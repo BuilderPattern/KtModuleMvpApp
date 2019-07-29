@@ -4,7 +4,7 @@ import android.os.Build
 import android.webkit.WebSettings
 import kt.module.BaseApp
 import kt.module.base_module.R
-import kt.module.base_module.config.BuildConfig
+import kt.module.common_module.config.BuildConfig
 import kt.module.base_module.http.LogInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -58,7 +58,7 @@ object BaseRetrofitUtil {
             var sslSocketFactory = sslContext?.socketFactory
             builder.sslSocketFactory(sslSocketFactory, trustManager)
 
-            if (BuildConfig.DEBUG) {
+            if (BuildConfig.IS_DEBUG) {
                 builder.addInterceptor(LogInterceptor())
             }
 

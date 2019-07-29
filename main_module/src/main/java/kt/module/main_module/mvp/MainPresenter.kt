@@ -2,8 +2,7 @@ package kt.module.main_module.mvp
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kt.module.base_module.BuildConfig
-import kt.module.base_module.constant.Constant
+import kt.module.common_module.constant.Constant
 import kt.module.base_module.http.ParamsBuilder
 import kt.module.common_module.base.presenter.BasePresenter
 
