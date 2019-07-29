@@ -46,7 +46,7 @@ ext {
             rxlifecycle2_components             : 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2',
             rxlifecycle2_lifecycle_kotlin       : 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:2.2.2',
             //多渠道打包
-            channel_helper                      : 'com.leon.channel:helper:2.0.1',
+            channel_helper                      : 'com.leon.channel:helper:2.0.3',
 
             muilt_dex                           : 'androidx.multidex:multidex:2.0.0',
             //数据库

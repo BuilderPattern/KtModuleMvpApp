@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'channel'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -28,16 +30,62 @@ android {
         }
 
     }
+
+    signingConfigs {
+        release {
+            storeFile file("../kt_module.keystore")
+            storePassword "123456789"
+            keyAlias "module"
+            keyPassword "123456789"
+            v1SigningEnabled true
+            v2SigningEnabled true//gradle2.2以上默认开始v2签名
+        }
+        debug {
+            storeFile file("../kt_module.keystore")
+            storePassword "123456789"
+            keyAlias "module"
+            keyPassword "123456789"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
     buildTypes {
         release {
+            buildConfigField "boolean", "LEO_DEBUG", "false"
+//            zipAlignEnabled true
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+//            zipAlignEnabled false
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+channel {
+    //指定渠道文件
+    channelFile = file("/channel.txt")
+    //多渠道包的输出目录，默认为new File(project.buildDir,"channel")
+    baseOutputDir = new File(project.buildDir, "channelRelease")
+    //多渠道包的命名规则，默认为：${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}
+    buildTimeDateFormat = 'yyyyMMdd'
+    apkNameFormat = 'KtModule_V${versionName}_${buildTime}_${flavorName}_${buildType}'
+    isFastMode = true
 }
 
 dependencies {
