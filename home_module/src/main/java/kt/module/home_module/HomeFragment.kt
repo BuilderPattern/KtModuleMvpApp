@@ -11,7 +11,7 @@ import kt.module.base_module.adapter.BaseRvViewHolder
 import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseFragment
 import kt.module.base_module.data.db.table.RvData
-import kt.module.base_module.data.utils.DataUtils
+import kt.module.base_module.utils.DataUtils
 import kt.module.base_module.utils.RouteUtils
 import kt.module.base_module.utils.StatusBarUtil
 

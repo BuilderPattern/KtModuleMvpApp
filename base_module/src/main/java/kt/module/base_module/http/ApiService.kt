@@ -1,7 +1,7 @@
 package kt.module.base_module.http
 
 import io.reactivex.Observable
-import kt.module.base_module.base.entity.BaseResponseData
+import kt.module.base_module.data.bean.BaseResponseData
 import kt.module.base_module.data.db.table.ObjectEntity
 import okhttp3.RequestBody
 import retrofit2.http.*

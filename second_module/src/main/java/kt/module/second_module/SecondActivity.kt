@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.activity_second.*
 import kt.module.base_module.adapter.SecondDBAdapter
-import kt.module.base_module.base.entity.BaseMultiItemEntity
+import kt.module.base_module.data.bean.BaseMultiItemEntity
 import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseActivity
 import kt.module.base_module.data.db.dao.ObjectEntityDao

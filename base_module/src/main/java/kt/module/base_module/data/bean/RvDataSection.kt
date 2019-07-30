@@ -1,4 +1,4 @@
-package kt.module.base_module.base.entity
+package kt.module.base_module.data.bean
 
 import com.chad.library.adapter.base.entity.SectionEntity
 import kt.module.base_module.data.db.table.RvData

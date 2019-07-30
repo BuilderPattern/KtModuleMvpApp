@@ -57,7 +57,8 @@ android {
     buildTypes {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"//不打印Log
-//            zipAlignEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             minifyEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -65,9 +66,11 @@ android {
 
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"//打印Log
-//            zipAlignEnabled false
-            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            minifyEnabled true
             signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -85,8 +88,8 @@ channel {
     //指定渠道文件
     channelFile = file("/channel.txt")
     //多渠道包的输出目录，默认为new File(project.buildDir,"channel")
-//    baseOutputDir = new File(project.buildDir, "channelDebug")
-    baseOutputDir = new File(project.buildDir, "channelRelease")
+//    baseOutputDir = new File(project.projectDir, "channelDebug")
+    baseOutputDir = new File(project.projectDir, "channelRelease")
 
     buildTimeDateFormat = 'yyyyMMdd'
     //多渠道包的命名规则，默认为：${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}

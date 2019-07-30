@@ -1,4 +1,4 @@
-package kt.module.base_module.base.entity
+package kt.module.base_module.data.bean
 
 import android.annotation.SuppressLint
 import android.os.Parcel

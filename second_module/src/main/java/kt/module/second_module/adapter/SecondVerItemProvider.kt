@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.provider.BaseItemProvider
 import kt.module.base_module.adapter.BaseRvQuickAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
 import kt.module.base_module.adapter.SecondDBAdapter
-import kt.module.base_module.base.entity.BaseMultiItemEntity
+import kt.module.base_module.data.bean.BaseMultiItemEntity
 import kt.module.base_module.data.db.table.ChildEntity
 import kt.module.second_module.R
 

@@ -1,8 +1,8 @@
-package kt.module.base_module.data.utils
+package kt.module.base_module.utils
 
 import kt.module.base_module.data.db.table.RvData
-import kt.module.base_module.base.entity.RvDataSection
-import kt.module.base_module.base.entity.SnapRvData
+import kt.module.base_module.data.bean.RvDataSection
+import kt.module.base_module.data.bean.SnapRvData
 
 object DataUtils {
 

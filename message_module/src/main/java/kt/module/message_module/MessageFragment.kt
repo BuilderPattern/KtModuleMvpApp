@@ -8,8 +8,8 @@ import kt.module.base_module.adapter.BaseRvSectionAdapter
 import kt.module.base_module.adapter.BaseRvViewHolder
 import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.base.view.BaseFragment
-import kt.module.base_module.data.utils.DataUtils
-import kt.module.base_module.base.entity.RvDataSection
+import kt.module.base_module.utils.DataUtils
+import kt.module.base_module.data.bean.RvDataSection
 import kt.module.base_module.utils.RouteUtils
 
 @Route(path = RouteUtils.RouterMap.MessagePage.Message)
