@@ -40,6 +40,7 @@ open class FirstActivity : BaseActivity<IBasePresenter>() {
 
         mAdapter = MineViewPagerAdapter(supportFragmentManager, fragmentList)
         activity_first_viewpager.run {
+            offscreenPageLimit = fragmentList.size
             adapter = mAdapter
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
