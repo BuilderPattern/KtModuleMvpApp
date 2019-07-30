@@ -12,8 +12,8 @@ class MainPresenter(view: MainContract.IMainView, var model: MainModel) : BasePr
         var paramsBuilder = ParamsBuilder()
         paramsBuilder.add(Constant.Key.KEY_WORD, "b")
 
-        model.let { model ->
-            model.getPostTest(paramsBuilder)
+        model.run {
+            getPostTest(paramsBuilder)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(activity.bindToLifecycle())

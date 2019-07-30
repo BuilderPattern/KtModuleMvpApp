@@ -1,4 +1,6 @@
 /build
+/channelRelease
+/channelDebug
 *.iml
 *.class
 *.apk #optional

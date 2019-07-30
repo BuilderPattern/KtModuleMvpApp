@@ -8,7 +8,7 @@ import kt.module.base_module.http.ParamsBuilder
 import kt.module.base_module.utils.BaseRetrofitUtil
 
 class FurtherModel:FurtherContract.IFurtherModel {
-    override fun getOD(paramsBuilder: ParamsBuilder): Observable<BaseResponseData<MutableList<ObjectEntity>>>? {
-        return BaseRetrofitUtil.get()?.create(ApiService::class.java)?.getPostTest(paramsBuilder.getRequestBody())
+    override fun getOD(paramsBuilder: ParamsBuilder): Observable<BaseResponseData<MutableList<ObjectEntity>>> {
+        return BaseRetrofitUtil.get()!!.create(ApiService::class.java).getPostTest(paramsBuilder.getRequestBody())
     }
 }

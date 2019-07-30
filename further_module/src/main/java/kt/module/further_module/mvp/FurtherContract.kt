@@ -8,10 +8,10 @@ import kt.module.common_module.base.view.IBaseView
 
 class FurtherContract {
     interface IFurtherView :IBaseView{
-        fun getODSuccessed(data: MutableList<ObjectEntity>?)
+        fun getODSuccessed(data: MutableList<ObjectEntity>)
         fun getODFailed(msg: Any)
     }
     interface IFurtherModel{
-        fun getOD(paramsBuilder: ParamsBuilder) :Observable<BaseResponseData<MutableList<ObjectEntity>>>?
+        fun getOD(paramsBuilder: ParamsBuilder) :Observable<BaseResponseData<MutableList<ObjectEntity>>>
     }
 }

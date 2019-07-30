@@ -48,8 +48,6 @@ ext {
             //多渠道打包
             channel_helper                      : 'com.leon.channel:helper:2.0.3',
 
-            support_core_utils                  : 'androidx.legacy:legacy-support-core-utils:1.0.0',
-
             bugly_crashreport                   : 'com.tencent.bugly:crashreport:latest.release',
             bugly_nativecrashreport             : 'com.tencent.bugly:nativecrashreport:latest.release',
 
@@ -71,6 +69,8 @@ ext {
             animated_gif                        : 'com.facebook.fresco:animated-gif:2.0.0',
             animated_webp                       : 'com.facebook.fresco:animated-webp:2.0.0',
             webpsupport                         : 'com.facebook.fresco:webpsupport:2.0.0',
+            support_core_utils                  : 'androidx.legacy:legacy-support-core-utils:1.0.0',
+
             //picasso
             picasso                             : 'com.squareup.picasso:picasso:2.71828',
             //日志库

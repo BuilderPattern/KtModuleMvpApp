@@ -13,17 +13,19 @@ class FurtherPresenter(mView: FurtherContract.IFurtherView, var model: FurtherMo
         var paramsBuilder = ParamsBuilder()
         paramsBuilder.add(KEY_WORD, "天")
 
-        model?.getOD(paramsBuilder)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.compose(furtherFragment.bindToLifecycle())
-            ?.subscribe({
-                if (it.code == 200) {
-                    mView?.getODSuccessed(it.result)
-                }
-            }, {
-                it.printStackTrace()
-                mView?.getODFailed("发生错误！")
-            })
+        model?.let { model ->
+            model.getOD(paramsBuilder)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(furtherFragment.bindToLifecycle())
+                .subscribe({
+                    if (it.code == 200) {
+                        mView?.getODSuccessed(it.result)
+                    }
+                }, {
+                    it.printStackTrace()
+                    mView?.getODFailed("发生错误！")
+                })
+        }
     }
 }
