@@ -14,6 +14,12 @@ android {
         versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner rootProject.ext.android.testInstrumentationRunner
+
+        sourceSets {
+            main {
+                jni.srcDirs = []
+            }
+        }
     }
 
     buildTypes {
@@ -22,6 +28,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -90,6 +97,11 @@ dependencies {
 
     api rootProject.ext.dependencies.bugly_crashreport
     api rootProject.ext.dependencies.bugly_nativecrashreport
+
+    api rootProject.ext.dependencies.ijkplayer_java
+    api rootProject.ext.dependencies.ijkplayer_armv7a
+
+    api rootProject.ext.dependencies.eventbus
 
     api project(path: ':adapter_library')
 }

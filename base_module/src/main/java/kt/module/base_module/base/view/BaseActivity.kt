@@ -10,7 +10,6 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kt.module.base_module.base.presenter.IBasePresenter
 import kt.module.base_module.utils.StatusBarUtil
 import me.jessyan.autosize.internal.CustomAdapt
-import java.lang.Exception
 
 open abstract class BaseActivity<T : IBasePresenter> : RxAppCompatActivity(), CustomAdapt,
     LifecycleProvider<ActivityEvent> {
@@ -28,10 +27,13 @@ open abstract class BaseActivity<T : IBasePresenter> : RxAppCompatActivity(), Cu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter = presenter
-        if (isDarkStatus) {
-            StatusBarUtil.setDarkImmersion(this)
+        if (!"PlayVideoActivity".equals(this.javaClass.simpleName)) {
+            if (isDarkStatus) {
+                StatusBarUtil.setDarkImmersion(this)
+            } else {
+                StatusBarUtil.setBrightImmersion(this)
+            }
         } else {
-            StatusBarUtil.setBrightImmersion(this)
         }
 
         try {
@@ -48,6 +50,7 @@ open abstract class BaseActivity<T : IBasePresenter> : RxAppCompatActivity(), Cu
         initViews()
         initEvents()
         ARouter.getInstance().inject(this)
+
     }
 
     open fun initViews() {}
@@ -55,6 +58,7 @@ open abstract class BaseActivity<T : IBasePresenter> : RxAppCompatActivity(), Cu
 
     override fun onDestroy() {
         mPresenter?.destroy()
+
         super.onDestroy()
     }
 
