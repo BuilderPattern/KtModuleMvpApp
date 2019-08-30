@@ -11,13 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
+import org.greenrobot.eventbus.EventBus;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 import java.io.IOException;
 import java.util.Map;
 
-public class IjkSurfacePlayerView extends AbsractPlayerView {
+public class IjkSurfacePlayerView extends AbstractPlayerView {
 
     private final static String TAG = "IjkPlayerView";
 
@@ -108,6 +109,8 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
         SurfaceRenderView renderView = new SurfaceRenderView(getContext());
         setRenderView(renderView);
 
+        EventBus.getDefault().register(this);
+
         //AudioManager am = (AudioManager) mAppContext.getSystemService(Context.AUDIO_SERVICE);
         //am.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
     }
@@ -151,7 +154,7 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
 
     }
     @Override
-    public void setVolun(float a, float b) {
+    public void setVolume(float a, float b) {
         if (isInPlaybackState()){
             mMediaPlayer.setVolume(a,b);
         }
@@ -174,6 +177,11 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
         }else {
             mSeekWhenPrepared = msec;
         }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
@@ -238,6 +246,13 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
     @Override
     public void removeSurface() {
 
+    }
+
+    @Override
+    public void reset() {
+        if (mMediaPlayer != null){
+            mMediaPlayer.reset();
+        }
     }
 
     @Override
@@ -390,6 +405,7 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
             mMediaPlayer.setOnPreparedListener(mPreparedListener);
             mMediaPlayer.setOnVideoSizeChangedListener(mSizeChangedListener);
             mMediaPlayer.setOnCompletionListener(mCompletionListener);
+//            mMediaPlayer.setOnSeekCompleteListener(mSeekCompletionListener);
             mMediaPlayer.setOnErrorListener(mErrorListener);
             mMediaPlayer.setOnInfoListener(mInfoListener);
             mMediaPlayer.setOnBufferingUpdateListener(mBufferingUpdateListener);
@@ -480,6 +496,7 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
             AudioManager am = (AudioManager) mAppContext.getSystemService(Context.AUDIO_SERVICE);
             am.abandonAudioFocus(null);
         }
+        EventBus.getDefault().unregister(this);
     }
 
     private boolean isInPlaybackState() {
@@ -553,6 +570,22 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
                     IjkSurfacePlayerView.this.onCompletion();
                 }
             };
+//    private IMediaPlayer.OnSeekCompleteListener mSeekCompletionListener =
+//            new IMediaPlayer.OnSeekCompleteListener() {
+//                @Override
+//                public void onSeekComplete(IMediaPlayer iMediaPlayer) {
+//
+//                    IjkSurfacePlayerView.this.onSeekCompletion((int) (mMediaPlayer.getCurrentPosition()/1000));
+//                }
+//
+////                @Override
+////                public void (IMediaPlayer mp) {
+////                    mCurrentState = STATE_PLAYBACK_COMPLETED;
+////                    mTargetState = STATE_PLAYBACK_COMPLETED;
+////
+////                    IjkSurfacePlayerView.this.onCompletion();
+////                }
+//            };
 
     private IMediaPlayer.OnInfoListener mInfoListener =
             new IMediaPlayer.OnInfoListener() {
@@ -688,4 +721,11 @@ public class IjkSurfacePlayerView extends AbsractPlayerView {
             mRenderView.setAspectRatio(mCurrentAspectRatio);
         return mCurrentAspectRatio;
     }
+
+    @Override
+    public boolean onInfo(int what, int extra) {
+        return false;
+    }
+
+    public
 }

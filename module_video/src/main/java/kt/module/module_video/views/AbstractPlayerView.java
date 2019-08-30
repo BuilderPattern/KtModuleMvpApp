@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 
 import java.util.Map;
 
-public abstract class AbsractPlayerView extends RelativeLayout implements ThinkoPlayerListener {
+public abstract class AbstractPlayerView extends RelativeLayout implements ThinkoPlayerListener {
 
     protected Context mContext;
     // 监听器
@@ -15,22 +15,21 @@ public abstract class AbsractPlayerView extends RelativeLayout implements Thinko
     private OnPreparedListener mPreparedListener;              //以下是ThinkoPlayerView 传入的listener
     private OnCompletionListener mCompletionListener;
     private OnErrorListener mOnErrorListener;
-    private OnInfoListener mOnInfoListener;
 
     public abstract void initPlayer();
     public abstract void initPlayer(String libraryPath);
     public abstract void play(String url);
     public abstract void play(Uri uri);
     public abstract void play(Uri uri, Map<String, String> headers);
-    public abstract void setVolun(float a,float b);
-    public abstract void setPlayerSize(float pivotX, float pivotY, float scaleX,
-			float scaleY);
+    public abstract void setVolume(float a,float b);
+    public abstract void setPlayerSize(float pivotX, float pivotY, float scaleX, float scaleY);
     public abstract void start();
     public abstract void seekTo(int pos);
     public abstract long getCurrentPosition();
     public abstract long getDuration();
     public abstract void pause();
     public abstract void stop();
+    public abstract void reset();
     public abstract boolean isPlaying();
     public abstract int getBufferPercentage();
     public abstract void removeSurface();
@@ -40,13 +39,13 @@ public abstract class AbsractPlayerView extends RelativeLayout implements Thinko
     //前一次播放位置
     public abstract void setLastPos(int lastPos);
 
-    public AbsractPlayerView(Context context) {
+    public AbstractPlayerView(Context context) {
         this(context, null);
     }
-    public AbsractPlayerView(Context context, AttributeSet attrs) {
+    public AbstractPlayerView(Context context, AttributeSet attrs) {
         this(context, attrs, -1);
     }
-    public AbsractPlayerView(Context context, AttributeSet attrs, int defStyle) {
+    public AbstractPlayerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
     }
@@ -132,11 +131,4 @@ public abstract class AbsractPlayerView extends RelativeLayout implements Thinko
     public interface OnInfoListener {
         public void onInfo(int what, int extra);
     }
-
-    public void setOnInfoListener(OnInfoListener listener) {
-        mOnInfoListener = listener;
-    }
-
-
 }
-

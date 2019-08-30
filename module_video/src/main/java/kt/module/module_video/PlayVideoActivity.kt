@@ -10,6 +10,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_play_video.*
 import kotlinx.android.synthetic.main.layout_play_video_controller_widgets.*
 import kotlinx.android.synthetic.main.layout_play_video_window.*
 import kt.module.base_module.base.presenter.IBasePresenter
@@ -30,6 +31,10 @@ import java.util.concurrent.TimeUnit
 @Route(path = RouteUtils.RouterMap.Play.PlayVideoAc)
 class PlayVideoActivity : BaseActivity<IBasePresenter>(), View.OnClickListener {
 
+    companion object {
+        const val TAG = "PlayVideoActivity"
+    }
+
     private var disposable: Disposable? = null
     private var progress: Int? = 0
 
@@ -37,9 +42,9 @@ class PlayVideoActivity : BaseActivity<IBasePresenter>(), View.OnClickListener {
         get() = R.layout.activity_play_video
 
     override fun initViews() {
-        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/3/30/20193301553928326321_21_4683.mp4?sign=700375653f8b0df29adb2387f2082a82&t=1566465305")
+//        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/5/14/20195141557805343303_61_4804.mp4?sign=afc451551425a71aade47e1e69895598&t=1567149465")
+        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805283300_21_4479.mp4?sign=427ad4a95629d09fff38d387225028ab&t=1567151178")
 
-        play_video_widgets_play_pauseCbx.isChecked = play_video_ijkPlayerView.isPlaying
     }
 
     @SuppressLint("CheckResult")
@@ -51,21 +56,31 @@ class PlayVideoActivity : BaseActivity<IBasePresenter>(), View.OnClickListener {
          * 播放器设置监听
          */
         play_video_ijkPlayerView.setPlayerListener(object : ThinkoPlayerListener {
+//            override fun onSeekCompletion(progress: Int) {
+//
+//            }
+
+            override fun onInfo(what: Int, extra: Int): Boolean {
+                return false
+            }
+
             override fun onPrepared() {
                 play_video_widgets_total_positionTv.text =
                     DateUtil.timeFormat((play_video_ijkPlayerView.duration) / 1000)
+
+                play_video_widgets_play_pauseCbx.isChecked = play_video_ijkPlayerView.isPlaying
             }
 
             override fun onBuffer(percent: Int) {
-                Log.e("---------percent", percent.toString())
+                Log.e(TAG, "onBuffer".plus(percent.toString()))
             }
 
             override fun onCompletion() {
-
+                Log.e(TAG, "onCompletion")
             }
 
             override fun onError(what: Int, extra: Int): Boolean {
-                return onError(what, extra)
+                return false
             }
 
             override fun onNetworkSpeedUpdate(speed: Int) {
@@ -76,19 +91,25 @@ class PlayVideoActivity : BaseActivity<IBasePresenter>(), View.OnClickListener {
         play_video_widgets_seekBar.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                Log.e("-----------", "onProgressChanged" + progress)
+                Log.e(TAG, "onProgressChanged" + seekBar!!.progress)
                 this@PlayVideoActivity.progress = progress
+//                play_video_ijkPlayerView.seekTo(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                Log.e("-----------", "onStartTrackingTouch")
-                play_video_ijkPlayerView.pause()
+                Log.e(TAG, "onStartTrackingTouch" + seekBar?.progress)
+//                play_video_ijkPlayerView.pause()
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                Log.e("-----------", "onStopTrackingTouch")
-                play_video_ijkPlayerView.seekTo(this@PlayVideoActivity.progress!!)
-                play_video_ijkPlayerView.start()
+                Log.e(TAG, "onStopTrackingTouch" + seekBar?.progress)
+
+                if (seekBar!!.progress == 0){
+                    play_video_ijkPlayerView.seekTo(0)
+                }else{
+                    val seekToTime = (play_video_ijkPlayerView.duration / 100 * (seekBar!!.progress + 1)).toInt()
+                    play_video_ijkPlayerView.seekTo(seekToTime)
+                }
             }
         })
 
@@ -102,10 +123,13 @@ class PlayVideoActivity : BaseActivity<IBasePresenter>(), View.OnClickListener {
                 if (!play_video_ijkPlayerView.isPlaying) {
                     return@subscribe
                 }
-                var currentPosition = play_video_ijkPlayerView.currentPosition
+
+                currentPosition = play_video_ijkPlayerView.currentPosition
                 EventBus.getDefault().post(BaseEvent(PLAY_PROGRESS, currentPosition))
             }
     }
+
+    private var currentPosition: Long = 0L
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -139,6 +163,21 @@ class PlayVideoActivity : BaseActivity<IBasePresenter>(), View.OnClickListener {
                         ((event.data as Long) * 100 / play_video_ijkPlayerView.duration).toInt() //设置当前进度条位置
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (play_video_ijkPlayerView != null){
+            play_video_ijkPlayerView.start()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (play_video_ijkPlayerView != null && play_video_ijkPlayerView.isPlaying){
+            play_video_ijkPlayerView.pause()
+            EventBus.getDefault().post(BaseEvent<Any>(PLAY_PAUSE))
         }
     }
 
