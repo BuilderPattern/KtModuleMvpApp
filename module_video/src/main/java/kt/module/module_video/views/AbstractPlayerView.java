@@ -15,6 +15,7 @@ public abstract class AbstractPlayerView extends RelativeLayout implements Think
     private OnPreparedListener mPreparedListener;              //以下是ThinkoPlayerView 传入的listener
     private OnCompletionListener mCompletionListener;
     private OnErrorListener mOnErrorListener;
+    private OnInfoListener mOnInfoListener;
 
     public abstract void initPlayer();
     public abstract void initPlayer(String libraryPath);
@@ -131,4 +132,8 @@ public abstract class AbstractPlayerView extends RelativeLayout implements Think
     public interface OnInfoListener {
         public void onInfo(int what, int extra);
     }
+    public void setOnInfoListener(OnInfoListener listener) {
+        mOnInfoListener = listener;
+    }
+
 }

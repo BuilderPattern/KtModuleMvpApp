@@ -42,8 +42,8 @@ class PlayVideoActivity : BaseActivity<IBasePresenter>(), View.OnClickListener {
         get() = R.layout.activity_play_video
 
     override fun initViews() {
-//        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/5/14/20195141557805343303_61_4804.mp4?sign=afc451551425a71aade47e1e69895598&t=1567149465")
-        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805283300_21_4479.mp4?sign=427ad4a95629d09fff38d387225028ab&t=1567151178")
+        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/5/14/20195141557805343303_61_4804.mp4?sign=afc451551425a71aade47e1e69895598&t=1567149465")
+//        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805283300_21_4479.mp4?sign=427ad4a95629d09fff38d387225028ab&t=1567151178")
 
     }
 

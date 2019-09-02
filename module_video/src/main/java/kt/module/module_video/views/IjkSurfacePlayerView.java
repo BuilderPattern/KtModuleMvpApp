@@ -180,11 +180,6 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
     public long getCurrentPosition() {
         if (isInPlaybackState()) {
             return mMediaPlayer.getCurrentPosition();
@@ -726,6 +721,4 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
     public boolean onInfo(int what, int extra) {
         return false;
     }
-
-    public
 }
