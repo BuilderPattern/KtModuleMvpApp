@@ -109,16 +109,16 @@ dependencies {
     //arouter
     kapt rootProject.ext.dependencies.arouter_compiler
 
-    implementation project(':base_module')
+    implementation project(':module_base')
 
     if (!isModule.toBoolean()) {
-        implementation project(':main_module')
-        implementation project(':first_module')
-        implementation project(':second_module')
-        implementation project(':home_module')
-        implementation project(':message_module')
-        implementation project(':further_module')
-        implementation project(':mine_module')
+        implementation project(':module_main')
+        implementation project(':module_first')
+        implementation project(':module_second')
+        implementation project(':module_home')
+        implementation project(':module_message')
+        implementation project(':module_further')
+        implementation project(':module_mine')
         implementation project(':module_video')
     }
 }

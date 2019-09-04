@@ -8,18 +8,18 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/adapter_library" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/base_module" />
-            <option value="$PROJECT_DIR$/common_module" />
-            <option value="$PROJECT_DIR$/first_module" />
-            <option value="$PROJECT_DIR$/further_module" />
-            <option value="$PROJECT_DIR$/home_module" />
-            <option value="$PROJECT_DIR$/main_module" />
-            <option value="$PROJECT_DIR$/message_module" />
-            <option value="$PROJECT_DIR$/mine_module" />
+            <option value="$PROJECT_DIR$/library_adapter" />
+            <option value="$PROJECT_DIR$/module_base" />
+            <option value="$PROJECT_DIR$/module_common" />
+            <option value="$PROJECT_DIR$/module_first" />
+            <option value="$PROJECT_DIR$/module_further" />
+            <option value="$PROJECT_DIR$/module_home" />
+            <option value="$PROJECT_DIR$/module_main" />
+            <option value="$PROJECT_DIR$/module_message" />
+            <option value="$PROJECT_DIR$/module_mine" />
+            <option value="$PROJECT_DIR$/module_second" />
             <option value="$PROJECT_DIR$/module_video" />
-            <option value="$PROJECT_DIR$/second_module" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

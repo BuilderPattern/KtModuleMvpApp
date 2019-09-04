@@ -109,7 +109,7 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
         SurfaceRenderView renderView = new SurfaceRenderView(getContext());
         setRenderView(renderView);
 
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
 
         //AudioManager am = (AudioManager) mAppContext.getSystemService(Context.AUDIO_SERVICE);
         //am.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
@@ -491,7 +491,7 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
             AudioManager am = (AudioManager) mAppContext.getSystemService(Context.AUDIO_SERVICE);
             am.abandonAudioFocus(null);
         }
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
     }
 
     private boolean isInPlaybackState() {

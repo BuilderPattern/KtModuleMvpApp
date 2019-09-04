@@ -72,5 +72,5 @@ dependencies {
 
     //arouter
     kapt rootProject.ext.dependencies.arouter_compiler
-    api project(':base_module')
+    api project(':module_base')
 }

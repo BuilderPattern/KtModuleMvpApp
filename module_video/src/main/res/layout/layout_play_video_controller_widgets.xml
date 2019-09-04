@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/color_00000000"
                 android:clickable="false"
                 android:id="@+id/play_video_widgets_rly">
@@ -26,6 +26,15 @@
             android:textColor="@color/color_f4f4f4"
             android:textSize="16sp"/>
 
+    <ImageView
+            android:id="@+id/btn_lock"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/icon_unlock_img"/>
+
     <LinearLayout
             android:id="@+id/play_video_widgets_bottom_lly"
             android:layout_width="match_parent"
@@ -41,7 +50,7 @@
                 android:layout_height="45dp"
                 android:button="@null"
                 android:checked="false"
-                android:background="@drawable/selector_play_play_pause_bg" />
+                android:background="@drawable/selector_play_play_pause_bg"/>
 
         <ImageView
                 android:id="@+id/play_video_widgets_nextImg"
