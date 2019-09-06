@@ -102,6 +102,8 @@ dependencies {
     api rootProject.ext.dependencies.ijkplayer_armv7a
 
     api rootProject.ext.dependencies.eventbus
+    api rootProject.ext.dependencies.filedownloader
+    api rootProject.ext.dependencies.rxpermissions
 
     api project(path: ':library_adapter')
 }
