@@ -12,4 +12,7 @@ object Constant {
     }
 
     const val Bugly_AppId = "5b4adcc6c9"
+    const val ACTION_GO_SETTING: String = "android.settings.APPLICATION_DETAILS_SETTINGS"
+    const val PACKAGE: String = "package"
+    const val APP_ID: String = "kt.module.mvp"
 }

@@ -104,6 +104,7 @@ dependencies {
     api rootProject.ext.dependencies.eventbus
     api rootProject.ext.dependencies.filedownloader
     api rootProject.ext.dependencies.rxpermissions
+    api rootProject.ext.dependencies.anko
 
     api project(path: ':library_adapter')
 }

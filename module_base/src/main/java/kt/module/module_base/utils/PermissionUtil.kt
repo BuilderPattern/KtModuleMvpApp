@@ -10,6 +10,8 @@ import com.trello.rxlifecycle2.components.support.RxFragment
 import kt.module.module_common.R
 import kt.module.module_common.constant.Constant
 import me.jessyan.autosize.AutoSizeCompat
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.support.v4.alert
 
 @SuppressLint("CheckResult")
 object PermissionUtil {

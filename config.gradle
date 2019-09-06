@@ -88,6 +88,7 @@ ext {
 
             //autosize
             autosize                            : 'me.jessyan:autosize:1.1.2',
-            BaseRecyclerViewAdapterHelper       : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+            BaseRecyclerViewAdapterHelper       : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46',
+            anko                                : 'org.jetbrains.anko:anko:0.10.8'
     ]
 }
