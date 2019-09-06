@@ -7,12 +7,12 @@ import android.widget.RelativeLayout;
 
 import java.util.Map;
 
-public abstract class AbstractPlayerView extends RelativeLayout implements ThinkoPlayerListener {
+public abstract class AbstractPlayerView extends RelativeLayout implements IjkPlayerListener {
 
     protected Context mContext;
     // 监听器
-    private ThinkoPlayerListener mListener;                    //PlayView 传入的listener
-    private OnPreparedListener mPreparedListener;              //以下是ThinkoPlayerView 传入的listener
+    private IjkPlayerListener mListener;  //PlayView 传入的listener
+    private OnPreparedListener mPreparedListener;
     private OnCompletionListener mCompletionListener;
     private OnErrorListener mOnErrorListener;
     private OnInfoListener mOnInfoListener;
@@ -100,7 +100,7 @@ public abstract class AbstractPlayerView extends RelativeLayout implements Think
      *  设置监听器
      * @param listener
      */
-    public void setPlayerListener(ThinkoPlayerListener listener){
+    public void setPlayerListener(IjkPlayerListener listener){
         mListener = listener;
     }
     

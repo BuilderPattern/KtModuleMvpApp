@@ -12,6 +12,23 @@
     
     <include layout="@layout/layout_play_video_controller_widgets"/>
 
+    <LinearLayout
+            android:id="@+id/layout_play_video_right_Lly"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/color_bb000000"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:gravity="center_vertical">
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/layout_play_video_recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
+
+    </LinearLayout>
+
+
     <!--如果要加广告View，就在这里-->
 
     <LinearLayout

@@ -20,4 +20,15 @@ object ConstantEvent {
     const val EVENT_SWITCH_TO_PLAY = 0x60048
     const val EVENT_SWITCH_TO_PAUSE = 0x60049
     const val EVENT_CHANGE_TITLE = 0x60050
+
+    const val EVENT_SWITCH_DEFINITION = 0x60054
+    const val EVENT_SWITCH_LOCK = 0x60055
+
+//    {
+//        mLocked = !mLocked
+//        mOrientationUtil!!.lock(mLocked)
+//    }
+
+//    http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805108072_21_4112.mp4?sign=ef3969893e9dbdf5f66d133e6f9e2e35&t=1567656798
+//    http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805108072_21_1621.mp4?sign=d08e0c2d2f8d28e1cf54aec7af54fcda&t=1567656798
 }

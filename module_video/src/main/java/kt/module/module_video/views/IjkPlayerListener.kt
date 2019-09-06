@@ -1,6 +1,6 @@
 package kt.module.module_video.views
 
-open interface ThinkoPlayerListener {
+open interface IjkPlayerListener {
     fun onPrepared()
     fun onBuffer(percent: Int)
     fun onCompletion()

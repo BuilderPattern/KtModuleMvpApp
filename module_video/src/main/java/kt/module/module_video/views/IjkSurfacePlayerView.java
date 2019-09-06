@@ -271,7 +271,6 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
     }
 
     private void setRenderView(IRenderView renderView) {
-        Log.d(TAG, "[setRenderView]");
         if (mRenderView != null) {
             removeRenderView();
         }
@@ -294,7 +293,6 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
         renderUIView.setLayoutParams(lp);
         addView(renderUIView, lp);
 
-        Log.d(TAG, "[setRenderView] addRenderCallback");
         mRenderView.addRenderCallback(mSHCallback);
         mRenderView.setVideoRotation(mVideoRotationDegree);
     }
@@ -326,9 +324,7 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
     IRenderView.IRenderCallback mSHCallback = new IRenderView.IRenderCallback() {
         @Override
         public void onSurfaceChanged(@NonNull IRenderView.ISurfaceHolder holder, int format, int w, int h) {
-            Log.e(TAG, "onSurfaceChanged\n");
             if (holder.getRenderView() != mRenderView) {
-                Log.e(TAG, "onSurfaceChanged: unmatched render callback\n");
                 return;
             }
 
@@ -346,9 +342,7 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
 
         @Override
         public void onSurfaceCreated(@NonNull IRenderView.ISurfaceHolder holder, int width, int height) {
-            Log.e(TAG, "onSurfaceCreated\n");
             if (holder.getRenderView() != mRenderView) {
-                Log.e(TAG, "onSurfaceCreated: unmatched render callback\n");
                 return;
             }
 
@@ -361,9 +355,7 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
 
         @Override
         public void onSurfaceDestroyed(@NonNull IRenderView.ISurfaceHolder holder) {
-            Log.e(TAG, "onSurfaceDestroyed\n");
             if (holder.getRenderView() != mRenderView) {
-                Log.e(TAG, "onSurfaceDestroyed: unmatched render callback\n");
                 return;
             }
 
@@ -376,7 +368,6 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
     };
 
     private void openVideo() {
-        Log.d(TAG,"[openVideo]");
         if (mUri == null) {
             // not ready for playback just yet, will try again later
             return;
@@ -420,22 +411,18 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
             // we don't set the target state here either, but preserve the
             // target state that was there before.
             mCurrentState = STATE_PREPARING;
-            Log.d(TAG, "[openVideo] STATE_PREPARING");
         } catch (IOException ex) {
-            Log.w(TAG, "Unable to open content: " + mUri, ex);
             mCurrentState = STATE_ERROR;
             mTargetState = STATE_ERROR;
             mErrorListener.onError(mMediaPlayer, MediaPlayer.MEDIA_ERROR_UNKNOWN, 0);
             return;
         } catch (IllegalArgumentException ex) {
-            Log.w(TAG, "Unable to open content: " + mUri, ex);
             mCurrentState = STATE_ERROR;
             mTargetState = STATE_ERROR;
             mErrorListener.onError(mMediaPlayer, MediaPlayer.MEDIA_ERROR_UNKNOWN, 0);
             return;
         } finally {
             // REMOVED: mPendingSubtitleTracks.clear();
-            Log.e(TAG, "[openVideo] finally");
         }
     }
 
@@ -476,9 +463,7 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
      * release the media player in any state
      */
     private void release(boolean cleartargetstate) {
-        Log.d(TAG,"[release]-0");
         if (mMediaPlayer != null) {
-            Log.d(TAG,"[release]-1");
             mMediaPlayer.reset();
             mMediaPlayer.release();
             mMediaPlayer = null;
@@ -519,8 +504,6 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
                     }
 
                     if (mVideoWidth != 0 && mVideoHeight != 0) {
-                        Log.d(TAG, "[OnPreparedListener] mVideoWidth:"+mVideoWidth+", mVideoHeight:"+mVideoHeight);
-                        Log.d(TAG, "[OnPreparedListener] mVideoSarNum:"+mVideoSarNum+", mVideoSarDen:"+mVideoSarDen);
                         if (mRenderView != null) {
                             mRenderView.setVideoSize(mVideoWidth, mVideoHeight);
                             mRenderView.setVideoSampleAspectRatio(mVideoSarNum, mVideoSarDen);
@@ -565,22 +548,6 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
                     IjkSurfacePlayerView.this.onCompletion();
                 }
             };
-//    private IMediaPlayer.OnSeekCompleteListener mSeekCompletionListener =
-//            new IMediaPlayer.OnSeekCompleteListener() {
-//                @Override
-//                public void onSeekComplete(IMediaPlayer iMediaPlayer) {
-//
-//                    IjkSurfacePlayerView.this.onSeekCompletion((int) (mMediaPlayer.getCurrentPosition()/1000));
-//                }
-//
-////                @Override
-////                public void (IMediaPlayer mp) {
-////                    mCurrentState = STATE_PLAYBACK_COMPLETED;
-////                    mTargetState = STATE_PLAYBACK_COMPLETED;
-////
-////                    IjkSurfacePlayerView.this.onCompletion();
-////                }
-//            };
 
     private IMediaPlayer.OnInfoListener mInfoListener =
             new IMediaPlayer.OnInfoListener() {

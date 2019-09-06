@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
@@ -15,14 +14,14 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_play_video.*
 import kotlinx.android.synthetic.main.layout_play_video_controller_widgets.*
 import kotlinx.android.synthetic.main.layout_play_video_window.*
 import kt.module.module_base.adapter.BaseRvQuickAdapter
 import kt.module.module_base.adapter.BaseRvViewHolder
 import kt.module.module_base.constant.ConstantEvent.EVENT_FULL_SCREEN
+import kt.module.module_base.constant.ConstantEvent.EVENT_SWITCH_DEFINITION
+import kt.module.module_base.constant.ConstantEvent.EVENT_SWITCH_LOCK
 import kt.module.module_base.constant.ConstantEvent.PLAY_COMPLETE
 import kt.module.module_base.constant.ConstantEvent.PLAY_PAUSE
 import kt.module.module_base.constant.ConstantEvent.PLAY_PREPARED
@@ -35,13 +34,14 @@ import kt.module.module_base.data.db.table.RvData
 import kt.module.module_base.utils.DataUtils
 import kt.module.module_base.utils.DateUtil
 import kt.module.module_base.utils.RouteUtils
+import kt.module.module_video.definition.DefinitionMenuAdapter
 import kt.module.module_video.entities.VideoInfoEntity
 import kt.module.module_video.utils.OrientationUtil
-import kt.module.module_video.views.ThinkoPlayerListener
+import kt.module.module_video.views.IjkPlayerListener
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.reactivestreams.Subscription
+import tv.danmaku.ijk.media.player.IMediaPlayer.MEDIA_INFO_AUDIO_RENDERING_START
 import java.util.concurrent.TimeUnit
 
 @Route(path = RouteUtils.RouterMap.Play.PlayVideoAc)
@@ -74,26 +74,27 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
     private fun initEvents() {
         EventBus.getDefault().register(this)
         play_video_widgets_backTv.setOnClickListener(this)
+        play_video_widgets_video_lockImg.setOnClickListener(this)
         play_video_widgets_play_pauseCbx.setOnClickListener(this)
+        play_video_widgets_switch_definitionTv.setOnClickListener(this)
         play_video_widgets_full_screenTv.setOnClickListener(this)
         play_video_ijkPlayerView.setOnClickListener(this)
 
         /**
          * 播放器设置监听
          */
-        play_video_ijkPlayerView.setPlayerListener(object : ThinkoPlayerListener {
-//            override fun onSeekCompletion(progress: Int) {
-//
-//            }
+        play_video_ijkPlayerView.setPlayerListener(object : IjkPlayerListener {
 
             override fun onInfo(what: Int, extra: Int): Boolean {
+                if (what == MEDIA_INFO_AUDIO_RENDERING_START) {//开始播放有声音了
+                    play_video_widgets_total_positionTv.text =
+                        DateUtil.timeFormat((play_video_ijkPlayerView.duration) / 1000)
+                    EventBus.getDefault().post(BaseEvent<Any>(PLAY_START))
+                }
                 return false
             }
 
             override fun onPrepared() {
-                play_video_widgets_total_positionTv.text =
-                    DateUtil.timeFormat((play_video_ijkPlayerView.duration) / 1000)
-
                 postDelayWindowStatus(1000, PLAY_PREPARED)
             }
 
@@ -153,10 +154,7 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
                 EventBus.getDefault().post(BaseEvent(PLAY_PROGRESS, currentPosition))
             }
 
-//        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805234563_21_4868.mp4?sign=9380751f05679ac86b842f0da4467508&t=1567391713")
-//        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805283300_21_4479.mp4?sign=181903c61c42da136f0135b5656d5435&t=1567483045")
-        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/6/6/2019661559805108072_21_4112.mp4?sign=442329a212581d44abd0027ea08c6228&t=1567587290")
-        EventBus.getDefault().post(BaseEvent(PLAY_START, VideoInfoEntity()))
+        play_video_ijkPlayerView.play("http://xxx.xxx.com/video/2019/6/6/2019661559804461397_21_415.mp4?sign=e5889e5edb9f8f7996dba512d273a115&t=1567734070")
 
         setOrientation(mForceLandscapePlay)
 
@@ -193,7 +191,11 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.play_video_widgets_backTv -> onBackPressed()
+            R.id.play_video_widgets_video_lockImg -> switchLock()
             R.id.play_video_widgets_play_pauseCbx -> playOrPause()
+            R.id.play_video_widgets_switch_definitionTv -> {
+                initChooseDefinitionMenu()
+            }
             R.id.play_video_widgets_full_screenTv -> {
                 if (mForceLandscapePlay) {
                     mOrientationUtil!!.clickToPortrait()
@@ -207,13 +209,58 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     play_video_widgets_rly.visibility = GONE
                 }
+
+                layout_play_video_right_Lly.visibility = GONE
                 disposableWindow?.dispose()
                 postDelayWindowStatus(3000, PLAY_WINDOW_STATUS)
             }
         }
     }
 
+    var currLevel: Int? = 0
+
+    var chooseMenuList: MutableList<VideoInfoEntity> = mutableListOf()
+    var definitionMenuAdapter: DefinitionMenuAdapter? = null
+    private fun initChooseDefinitionMenu() {
+        layout_play_video_right_Lly.visibility = VISIBLE
+        if (chooseMenuList.size == 0 || chooseMenuList == null) {
+            chooseMenuList.add(
+                VideoInfoEntity(
+                    "战狼",
+                    "http://xxx.xxx.com/video/2019/6/6/2019661559804461397_21_415.mp4?sign=e5889e5edb9f8f7996dba512d273a115&t=1567734070",
+                    level = 0
+                )
+            )
+            chooseMenuList.add(
+                VideoInfoEntity(
+                    "战狼",
+                    "http://xxx.xxx.com/video/2019/6/6/2019661559804461397_21_11.mp4?sign=0f1025812295ff88a788cb0ba8fc1891&t=1567734070",
+//                    "http://qcmedia.starschinalive.com/video/2019/6/7/2019671559878526610_21_4835.mp4?sign=7d9ef3dd336667d51b440b555e072157&t=1567743376",
+                    level = 1
+                )
+            )
+        }
+        if (definitionMenuAdapter == null) {
+            definitionMenuAdapter = DefinitionMenuAdapter(R.layout.item_choose_definition, chooseMenuList)
+            layout_play_video_recyclerView.layoutManager = LinearLayoutManager(this)
+            layout_play_video_recyclerView.adapter = definitionMenuAdapter
+        } else {
+            definitionMenuAdapter?.notifyDataSetChanged()
+        }
+
+        definitionMenuAdapter?.setOnItemClickListener { adapter, view, position ->
+            var videoInfoEntity: VideoInfoEntity = chooseMenuList[position]
+            if (currLevel != videoInfoEntity.level) {
+                videoInfoEntity.currPosition = play_video_ijkPlayerView.currentPosition
+                EventBus.getDefault().post(BaseEvent(EVENT_SWITCH_DEFINITION, videoInfoEntity))
+                layout_play_video_right_Lly.visibility = GONE
+            }
+        }
+    }
+
     private fun playOrPause() {
+
+
         if (play_video_ijkPlayerView.isPlaying) {
             pause()
         } else {
@@ -224,7 +271,7 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: BaseEvent<*>) {
         when (event.code) {
-//            PLAY_START ->
+            PLAY_START -> play_video_widgets_play_pauseCbx.isChecked = play_video_ijkPlayerView.isPlaying
 //            PLAY_PAUSE ->
             PLAY_PROGRESS -> {
                 if (event.data is Long) {
@@ -245,10 +292,52 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
             PLAY_WINDOW_STATUS -> {
                 play_video_widgets_rly.visibility = GONE
             }
-            PLAY_PREPARED -> play_video_widgets_play_pauseCbx.isChecked = play_video_ijkPlayerView.isPlaying
+            EVENT_SWITCH_DEFINITION -> {
+                play_video_widgets_bottom_lly.visibility = VISIBLE
+                if (event.data is VideoInfoEntity) {
+                    switchDefinition(event.data as VideoInfoEntity)
+                }
+            }
+//            PLAY_PREPARED -> play_video_widgets_play_pauseCbx.isChecked = play_video_ijkPlayerView.isPlaying
+            EVENT_SWITCH_LOCK -> {
+                if (event.data is Boolean) {
+
+//                    play_video_widgets_bottom_lly.apply {
+//                        visibility = VISIBLE
+//                        takeIf {
+//                            event.data as Boolean
+//                        }?.let {
+//                            visibility = GONE
+//                        }
+//                    }
+                    play_video_widgets_bottom_lly.run {
+                        visibility = VISIBLE
+                        takeIf {
+                            event.data as Boolean
+                        }?.let {
+                            visibility = GONE
+                        }
+                    }
+                }
+            }
         }
     }
 
+    private fun switchDefinition(videoInfoEntity: VideoInfoEntity) {
+        currLevel = videoInfoEntity.level
+        play_video_ijkPlayerView.play(videoInfoEntity.url)
+        play_video_ijkPlayerView.seekTo(videoInfoEntity.currPosition.toInt())
+        when (videoInfoEntity.level) {
+            0 -> play_video_widgets_switch_definitionTv.text = "流畅"
+            1 -> play_video_widgets_switch_definitionTv.text = "高清"
+            2 -> play_video_widgets_switch_definitionTv.text = "1080"
+        }
+
+    }
+
+    /**
+     * 横竖屏切换设置
+     */
     @SuppressLint("CheckResult")
     private fun setOrientation(fullScreen: Boolean?) {
         if (fullScreen == null) {
@@ -258,9 +347,16 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
         disposableWindow?.dispose()
 
         if (!fullScreen) {//竖屏
+
+            play_video_widgets_video_lockImg.visibility = GONE
+            play_video_widgets_switch_definitionTv.visibility = GONE
+
             val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 560)
             play_video_rly.layoutParams = lp
         } else {//横屏
+
+            play_video_widgets_video_lockImg.visibility = VISIBLE
+            play_video_widgets_switch_definitionTv.visibility = VISIBLE
 
             val lp = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -327,9 +423,16 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
             finish()
         }
     }
-//    fun switchLock() {
-//        mLocked.set(!mLocked.get())
-//        EventBus.getDefault().post(EventMessage(PlayerEvent.EVENT_SWITCH_LOCK, mLocked.get()))
-//    }
 
+    private var mLocked: Boolean = false//是否屏幕锁定
+    private fun switchLock() {
+        mLocked = !mLocked
+        if (mLocked) {
+            play_video_widgets_video_lockImg.setImageResource(R.mipmap.icon_lock_img)
+        } else {
+            play_video_widgets_video_lockImg.setImageResource(R.mipmap.icon_unlock_img)
+        }
+        mOrientationUtil?.lock(mLocked)
+        EventBus.getDefault().post(BaseEvent(EVENT_SWITCH_LOCK, mLocked))
+    }
 }

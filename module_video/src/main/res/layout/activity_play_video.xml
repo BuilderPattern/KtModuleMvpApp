@@ -6,7 +6,7 @@
     <include layout="@layout/layout_play_video_window"/>
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layout_play_video_recyclerView"
+            android:id="@+id/activity_play_video_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
