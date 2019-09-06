@@ -18,6 +18,9 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 import java.io.IOException;
 import java.util.Map;
 
+import static kt.module.module_base.constant.ConstantEvent.PLAY_START;
+import static tv.danmaku.ijk.media.player.IMediaPlayer.MEDIA_INFO_AUDIO_RENDERING_START;
+
 public class IjkSurfacePlayerView extends AbstractPlayerView {
 
     private final static String TAG = "IjkPlayerView";
@@ -592,9 +595,9 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
                             if (mRenderView != null)
                                 mRenderView.setVideoRotation(extra);
                             break;
-                        case IMediaPlayer.MEDIA_INFO_AUDIO_RENDERING_START://此处才是真正的开始播放，有声音了
+                        case MEDIA_INFO_AUDIO_RENDERING_START://此处是真正开始播放，有声音了
                             Log.d(TAG, "MEDIA_INFO_AUDIO_RENDERING_START:");
-                            IjkSurfacePlayerView.this.onPrepared();
+                            IjkSurfacePlayerView.this.onInfo(MEDIA_INFO_AUDIO_RENDERING_START, PLAY_START);
                             break;
                     }
                     return true;
@@ -684,8 +687,8 @@ public class IjkSurfacePlayerView extends AbstractPlayerView {
         return mCurrentAspectRatio;
     }
 
-    @Override
-    public boolean onInfo(int what, int extra) {
-        return false;
-    }
+//    @Override
+//    public boolean onInfo(int what, int extra) {
+//        return false;
+//    }
 }

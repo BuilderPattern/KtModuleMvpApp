@@ -24,7 +24,6 @@ import kt.module.module_base.constant.ConstantEvent.EVENT_SWITCH_DEFINITION
 import kt.module.module_base.constant.ConstantEvent.EVENT_SWITCH_LOCK
 import kt.module.module_base.constant.ConstantEvent.PLAY_COMPLETE
 import kt.module.module_base.constant.ConstantEvent.PLAY_PAUSE
-import kt.module.module_base.constant.ConstantEvent.PLAY_PREPARED
 import kt.module.module_base.constant.ConstantEvent.PLAY_PROGRESS
 import kt.module.module_base.constant.ConstantEvent.PLAY_START
 import kt.module.module_base.constant.ConstantEvent.PLAY_STOP
@@ -58,6 +57,9 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
     private var mOrientationUtil: OrientationUtil? = null
 
     private var mForceLandscapePlay: Boolean = false//是否强制横屏
+
+    private var currentPosition: Long = 0L//当前播放位置
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_video)
@@ -95,7 +97,6 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onPrepared() {
-                postDelayWindowStatus(1000, PLAY_PREPARED)
             }
 
             override fun onBuffer(percent: Int) {
@@ -154,11 +155,11 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
                 EventBus.getDefault().post(BaseEvent(PLAY_PROGRESS, currentPosition))
             }
 
-        play_video_ijkPlayerView.play("http://xxx.xxx.com/video/2019/6/6/2019661559804461397_21_415.mp4?sign=e5889e5edb9f8f7996dba512d273a115&t=1567734070")
+        play_video_ijkPlayerView.play("http://qcmedia.starschinalive.com/video/2019/5/15/20195151557897314923_21_1373.mp4?sign=e5b14571eaca11b28bf34e7f19d1f7f6&t=1567758535")
 
         setOrientation(mForceLandscapePlay)
 
-        //列表数据
+        //下方列表数据
         initData()
     }
 
@@ -185,8 +186,6 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
         mDatas.addAll(data)
         mAdapter?.notifyDataSetChanged()
     }
-
-    private var currentPosition: Long = 0L
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -227,14 +226,14 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
             chooseMenuList.add(
                 VideoInfoEntity(
                     "战狼",
-                    "http://xxx.xxx.com/video/2019/6/6/2019661559804461397_21_415.mp4?sign=e5889e5edb9f8f7996dba512d273a115&t=1567734070",
+                    "http://qcmedia.starschinalive.com/video/2019/5/15/20195151557897314923_21_1373.mp4?sign=e5b14571eaca11b28bf34e7f19d1f7f6&t=1567758535",
                     level = 0
                 )
             )
             chooseMenuList.add(
                 VideoInfoEntity(
                     "战狼",
-                    "http://xxx.xxx.com/video/2019/6/6/2019661559804461397_21_11.mp4?sign=0f1025812295ff88a788cb0ba8fc1891&t=1567734070",
+                    "http://qcmedia.starschinalive.com/video/2019/5/15/20195151557897314923_21_43.mp4?sign=5fff5fb1e49a347f8c98c5353ed99689&t=1567758535",
 //                    "http://qcmedia.starschinalive.com/video/2019/6/7/2019671559878526610_21_4835.mp4?sign=7d9ef3dd336667d51b440b555e072157&t=1567743376",
                     level = 1
                 )
@@ -258,21 +257,10 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun playOrPause() {
-
-
-        if (play_video_ijkPlayerView.isPlaying) {
-            pause()
-        } else {
-            play()
-        }
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: BaseEvent<*>) {
         when (event.code) {
-            PLAY_START -> play_video_widgets_play_pauseCbx.isChecked = play_video_ijkPlayerView.isPlaying
-//            PLAY_PAUSE ->
+            PLAY_START -> play_video_widgets_play_pauseCbx.isChecked = true
             PLAY_PROGRESS -> {
                 if (event.data is Long) {
 
@@ -298,7 +286,6 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
                     switchDefinition(event.data as VideoInfoEntity)
                 }
             }
-//            PLAY_PREPARED -> play_video_widgets_play_pauseCbx.isChecked = play_video_ijkPlayerView.isPlaying
             EVENT_SWITCH_LOCK -> {
                 if (event.data is Boolean) {
 
@@ -323,6 +310,9 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * 切换清晰度
+     */
     private fun switchDefinition(videoInfoEntity: VideoInfoEntity) {
         currLevel = videoInfoEntity.level
         play_video_ijkPlayerView.play(videoInfoEntity.url)
@@ -370,6 +360,14 @@ class PlayVideoActivity : AppCompatActivity(), View.OnClickListener {
     private fun postDelayWindowStatus(time: Long, status: Int) {
         disposableWindow = Observable.timer(time, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.io()).subscribe {
             EventBus.getDefault().post(BaseEvent<Any>(status))
+        }
+    }
+
+    private fun playOrPause() {
+        if (play_video_ijkPlayerView.isPlaying) {
+            pause()
+        } else {
+            play()
         }
     }
 

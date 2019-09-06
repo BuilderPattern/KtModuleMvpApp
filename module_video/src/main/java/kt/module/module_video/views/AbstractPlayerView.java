@@ -18,34 +18,56 @@ public abstract class AbstractPlayerView extends RelativeLayout implements IjkPl
     private OnInfoListener mOnInfoListener;
 
     public abstract void initPlayer();
+
     public abstract void initPlayer(String libraryPath);
+
     public abstract void play(String url);
+
     public abstract void play(Uri uri);
+
     public abstract void play(Uri uri, Map<String, String> headers);
-    public abstract void setVolume(float a,float b);
+
+    public abstract void setVolume(float a, float b);
+
     public abstract void setPlayerSize(float pivotX, float pivotY, float scaleX, float scaleY);
+
     public abstract void start();
+
     public abstract void seekTo(int pos);
+
     public abstract long getCurrentPosition();
+
     public abstract long getDuration();
+
     public abstract void pause();
+
     public abstract void stop();
+
     public abstract void reset();
+
     public abstract boolean isPlaying();
+
     public abstract int getBufferPercentage();
+
     public abstract void removeSurface();
+
     public abstract void release();
+
     public abstract void setUserAgent(String userAgent);
+
     public abstract void useMediaCodec(boolean use);
+
     //前一次播放位置
     public abstract void setLastPos(int lastPos);
 
     public AbstractPlayerView(Context context) {
         this(context, null);
     }
+
     public AbstractPlayerView(Context context, AttributeSet attrs) {
         this(context, attrs, -1);
     }
+
     public AbstractPlayerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
@@ -53,37 +75,48 @@ public abstract class AbstractPlayerView extends RelativeLayout implements IjkPl
 
     @Override
     public void onPrepared() {
-        if (mPreparedListener != null){
+        if (mPreparedListener != null) {
             mPreparedListener.onPrepared();
         }
-        if (mListener != null){
+        if (mListener != null) {
             mListener.onPrepared();
         }
     }
 
     @Override
+    public boolean onInfo(int what, int extra) {
+        if (mOnInfoListener != null) {
+            mOnInfoListener.onInfo(what, extra);
+        }
+        if (mListener != null) {
+            mListener.onInfo(what, extra);
+        }
+        return false;
+    }
+
+    @Override
     public void onBuffer(int percent) {
-        if (mListener != null){
+        if (mListener != null) {
             mListener.onBuffer(percent);
         }
     }
 
     @Override
     public void onCompletion() {
-    	if (mCompletionListener != null){
-    		mCompletionListener.onCompletion();
-    	}
-        if (mListener != null){
+        if (mCompletionListener != null) {
+            mCompletionListener.onCompletion();
+        }
+        if (mListener != null) {
             mListener.onCompletion();
         }
     }
 
     @Override
     public boolean onError(int what, int extra) {
-    	if (mOnErrorListener != null){
-    		mOnErrorListener.onError(what, extra);
-    	}
-        if (mListener != null){
+        if (mOnErrorListener != null) {
+            mOnErrorListener.onError(what, extra);
+        }
+        if (mListener != null) {
             return mListener.onError(what, extra);
         }
         return false;
@@ -91,47 +124,49 @@ public abstract class AbstractPlayerView extends RelativeLayout implements IjkPl
 
     @Override
     public void onNetworkSpeedUpdate(int speed) {
-        if (mListener != null){
+        if (mListener != null) {
             mListener.onNetworkSpeedUpdate(speed);
         }
     }
-    
+
     /**
-     *  设置监听器
+     * 设置监听器
+     *
      * @param listener
      */
-    public void setPlayerListener(IjkPlayerListener listener){
+    public void setPlayerListener(IjkPlayerListener listener) {
         mListener = listener;
     }
-    
+
 
     public interface OnPreparedListener {
         public void onPrepared();
     }
 
-    public void setOnPreparedListener(OnPreparedListener listener){
+    public void setOnPreparedListener(OnPreparedListener listener) {
         mPreparedListener = listener;
     }
-    
+
     public interface OnCompletionListener {
-    	public void onCompletion();
+        public void onCompletion();
     }
-    
-    public void setOnCompletionListener(OnCompletionListener listener){
-    	mCompletionListener = listener;
+
+    public void setOnCompletionListener(OnCompletionListener listener) {
+        mCompletionListener = listener;
     }
-    
+
     public interface OnErrorListener {
-    	public void onError(int what, int extra);
+        public void onError(int what, int extra);
     }
-    
-    public void setOnErrorListener(OnErrorListener listener){
-    	mOnErrorListener = listener;
+
+    public void setOnErrorListener(OnErrorListener listener) {
+        mOnErrorListener = listener;
     }
 
     public interface OnInfoListener {
         public void onInfo(int what, int extra);
     }
+
     public void setOnInfoListener(OnInfoListener listener) {
         mOnInfoListener = listener;
     }
