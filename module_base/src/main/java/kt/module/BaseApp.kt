@@ -8,10 +8,12 @@ import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.dopool.common.util.AppUtil
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.liulishuo.filedownloader.FileDownloader
 import com.tencent.bugly.crashreport.CrashReport
 import kt.module.module_base.data.db.dao.DaoMaster
 import kt.module.module_base.data.db.dao.DaoSession
 import kt.module.module_base.data.db.dao.utils.CustomOpenHelper
+import kt.module.module_base.utils.DownLoadUtil
 import kt.module.module_common.config.BuildConfig.IS_DEBUG
 import kt.module.module_common.constant.Constant.Bugly_AppId
 
@@ -48,6 +50,8 @@ open class BaseApp : Application() {
             initARouter()
             initBugly()
             Fresco.initialize(this)
+            FileDownloader.setup(applicationContext)
+            DownLoadUtil.init(applicationContext)
         }
     }
 
