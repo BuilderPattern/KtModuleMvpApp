@@ -51,7 +51,7 @@
 }
 
 #实体不被混淆
--keep class kt.module.base_module.data.** { *; }
+-keep class kt.module.module_base.data.** { *; }
 -keep class com.google.gson.** {*;}
 
 # 保持 Parcelable 不被混淆
