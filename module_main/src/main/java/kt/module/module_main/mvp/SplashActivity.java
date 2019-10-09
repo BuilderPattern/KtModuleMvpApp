@@ -8,8 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
@@ -29,6 +32,7 @@ import kt.module.module_base.adapter.BaseRvViewHolder;
 import kt.module.module_base.base.view.BaseActivity;
 import kt.module.module_base.data.db.table.RvData;
 import kt.module.module_base.utils.DataUtils;
+import kt.module.module_base.utils.StatusBarUtil;
 import kt.module.module_main.R;
 
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
@@ -40,6 +44,7 @@ public class SplashActivity extends BaseActivity {
     BaseRvQuickAdapter mAdapter;
     List<RvData> data;
     boolean isTouch = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +129,18 @@ public class SplashActivity extends BaseActivity {
     View headerSecondView;
     RecyclerView mSecondRecyclerView;
     BaseRvQuickAdapter mSecondAdapter;
+
     private void addHeader() {
+        LinearLayout view = (LinearLayout) LayoutInflater.from(SplashActivity.this).inflate(R.layout.status_bar_height_layout, null, false);
+        view.setBackgroundColor(getResources().getColor(R.color.color_25bac7));
+        TextView textView = view.findViewById(R.id.status_bar_heightTv);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        params.height = StatusBarUtil.INSTANCE.getStatusBarHeight(SplashActivity.this);
+        textView.setLayoutParams(params);
+
+        mAdapter.addHeaderView(view);
+
+
         headerFirstView = LayoutInflater.from(SplashActivity.this).inflate(R.layout.header_first_layout, null, false);
 
         headerSecondView = LayoutInflater.from(SplashActivity.this).inflate(R.layout.header_second_layout, null, false);
@@ -136,30 +152,31 @@ public class SplashActivity extends BaseActivity {
         mSecondAdapter = new BaseRvQuickAdapter<RvData>(R.layout.item_header_second_layout, data) {
             @Override
             protected void convert(@Nullable BaseRvViewHolder helper, RvData item) {
-                if (data.size() >= 12){
-                    if (helper.getAdapterPosition() < 11){
-                        helper.setGone(R.id.item_header_tv, true);
-                        helper.setDrawableBottom(R.id.item_header_tv, getResources().getDrawable(R.mipmap.icon_tab_home_select));
-                        helper.setText(R.id.item_header_tv, item.getName());
-                    }else if (helper.getAdapterPosition() == 11){
-                        helper.setGone(R.id.item_header_tv, true);
-                        helper.setText(R.id.item_header_tv, "更多");
-                    }else {
-                        helper.setGone(R.id.item_header_tv, false);
+                if (data.size() >= 8) {
+                    if (helper.getAdapterPosition() < 7) {
+                        helper.setGone(R.id.item_header_second_tv, true);
+                        helper.setDrawableTop(R.id.item_header_second_tv, getResources().getDrawable(R.mipmap.icon_document_img));
+                        helper.setText(R.id.item_header_second_tv, item.getName());
+                    } else if (helper.getAdapterPosition() == 7) {
+                        helper.setGone(R.id.item_header_second_tv, true);
+                        helper.setText(R.id.item_header_second_tv, "更多");
+                    } else {
+                        helper.setGone(R.id.item_header_second_tv, false);
                     }
-                }else {
-                    helper.setGone(R.id.item_header_tv, false);
-                    helper.setDrawableBottom(R.id.item_header_tv, getResources().getDrawable(R.mipmap.icon_tab_home_select));
-                    helper.setText(R.id.item_header_tv, item.getName());
+                } else {
+                    helper.setGone(R.id.item_header_second_tv, false);
+                    helper.setDrawableTop(R.id.item_header_second_tv, getResources().getDrawable(R.mipmap.icon_document_img));
+                    helper.setText(R.id.item_header_second_tv, item.getName());
                 }
             }
         };
-        mSecondRecyclerView.setLayoutManager(new GridLayoutManager(SplashActivity.this, 6));
+        mSecondRecyclerView.setLayoutManager(new GridLayoutManager(SplashActivity.this, 4));
         mSecondRecyclerView.setAdapter(mSecondAdapter);
 
     }
 
     View footerView;
+
     private void addFooter() {
         footerView = LayoutInflater.from(SplashActivity.this).inflate(R.layout.footer_home_layout, null, false);
         mAdapter.addFooterView(footerView);

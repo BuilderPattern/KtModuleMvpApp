@@ -3,13 +3,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
+        android:paddingTop="30dp"
         android:orientation="horizontal"
         tools:ignore="MissingDefaultResource">
 
     <TextView
-            android:id="@+id/item_header_tv"
+            android:id="@+id/item_header_second_tv"
             android:gravity="center"
+            android:textSize="18sp"
+            android:drawablePadding="5dp"
+            android:textColor="@color/color_ffffff"
             android:layout_width="match_parent"
-            android:layout_height="60dp"/>
+            android:layout_height="wrap_content"/>
 </LinearLayout>
