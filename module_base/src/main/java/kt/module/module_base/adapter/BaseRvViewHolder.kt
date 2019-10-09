@@ -21,6 +21,11 @@ class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
         view.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
         return this
     }
+    fun setDrawableBottom(viewId: Int, drawable: Drawable): BaseViewHolder {
+        var view = this.getView<TextView>(viewId)
+        view.setCompoundDrawablesWithIntrinsicBounds(null, null, null, drawable)
+        return this
+    }
 
     fun setDrawblePadding(viewId: Int, size: Int): BaseViewHolder {
         var view = this.getView<TextView>(viewId)

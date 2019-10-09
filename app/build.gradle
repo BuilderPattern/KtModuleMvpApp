@@ -42,17 +42,17 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("/kt_module.keystore")
+            storeFile file("/kt_mvp_module.keystore")
             storePassword "123456789"
-            keyAlias "module"
+            keyAlias "kt_mvp_module"
             keyPassword "123456789"
             v1SigningEnabled true
             v2SigningEnabled true//gradle2.2以上默认开启v2签名
         }
         debug {
-            storeFile file("/kt_module.keystore")
+            storeFile file("/kt_mvp_module.keystore")
             storePassword "123456789"
-            keyAlias "module"
+            keyAlias "kt_mvp_module"
             keyPassword "123456789"
             v1SigningEnabled true
             v2SigningEnabled true
