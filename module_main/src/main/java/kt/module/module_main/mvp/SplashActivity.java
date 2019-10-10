@@ -20,6 +20,7 @@ import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -35,11 +36,11 @@ import kt.module.module_base.utils.DataUtils;
 import kt.module.module_base.utils.StatusBarUtil;
 import kt.module.module_main.R;
 
-import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
+    SwipeRefreshLayout mRefreshLayout;
     RecyclerView mRecyclerView;
     BaseRvQuickAdapter mAdapter;
     List<RvData> data;
@@ -49,7 +50,9 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        mRecyclerView = findViewById(R.id.recyclerView);
+        mRefreshLayout = findViewById(R.id.activity_splash_refreshLayout);
+        mRefreshLayout.setProgressViewOffset(true, 50, 150);
+        mRecyclerView = findViewById(R.id.activity_splash_recyclerView);
 
         data = DataUtils.INSTANCE.createData(6);
 
@@ -122,6 +125,8 @@ public class SplashActivity extends BaseActivity {
                 }
             }
         });
+
+        mRefreshLayout.setOnRefreshListener(this);
     }
 
     View headerFirstView;
@@ -180,5 +185,15 @@ public class SplashActivity extends BaseActivity {
     private void addFooter() {
         footerView = LayoutInflater.from(SplashActivity.this).inflate(R.layout.footer_home_layout, null, false);
         mAdapter.addFooterView(footerView);
+    }
+
+    @Override
+    public void onRefresh() {
+        mRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
     }
 }
