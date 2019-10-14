@@ -2,9 +2,9 @@ package kt.module.module_main.mvp
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kt.module.common_module.constant.Constant
+import kt.module.module_common.constant.Constant
 import kt.module.module_base.http.ParamsBuilder
-import kt.module.common_module.base.presenter.BasePresenter
+import kt.module.module_common.base.presenter.BasePresenter
 
 class MainPresenter(view: MainContract.IMainView, var model: MainModel) : BasePresenter<MainContract.IMainView>(view) {
 

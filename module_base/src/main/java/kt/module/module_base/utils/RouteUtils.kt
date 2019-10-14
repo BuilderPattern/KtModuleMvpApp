@@ -28,15 +28,15 @@ object RouteUtils {
         }
 
         object First {
-            const val FirstAc = "/first/first_activity"
+            const val FirstAc = "/first/activity_first"
         }
 
         object Second {
-            const val SecondAc = "/second/second_activity"
+            const val SecondAc = "/second/activity_second"
         }
 
-        object Third {
-            const val ThirdAc = "/third/third_activity"
+        object Play {
+            const val PlayVideoAc = "/play/activity_video"
         }
     }
 

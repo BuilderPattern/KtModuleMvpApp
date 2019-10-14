@@ -5,10 +5,6 @@ import androidx.annotation.LayoutRes;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
-/**
- * Created by BlingBling on 2016/11/11.
- */
-
 public abstract class LoadMoreView {
 
     public static final int STATUS_DEFAULT = 1;

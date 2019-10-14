@@ -1,7 +1,4 @@
-package kt.module.common_module.base.view
-
-import io.reactivex.ObservableTransformer
-import com.trello.rxlifecycle2.android.ActivityEvent
+package kt.module.module_common.base.view
 
 interface IBaseView {
 

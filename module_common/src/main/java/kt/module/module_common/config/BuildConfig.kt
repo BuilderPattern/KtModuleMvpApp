@@ -1,4 +1,4 @@
-package kt.module.common_module.config
+package kt.module.module_common.config
 
 object BuildConfig {
 

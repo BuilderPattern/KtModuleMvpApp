@@ -1,4 +1,4 @@
-package kt.module.common_module.base.presenter
+package kt.module.module_common.base.presenter
 
 import kt.module.module_base.base.presenter.IBasePresenter
 

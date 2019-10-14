@@ -39,9 +39,7 @@ class SecondActivity : BaseActivity<IBasePresenter>() {
         var view = layoutInflater.inflate(R.layout.status_bar_height_layout, null, false) as LinearLayout
         var textView = view.findViewById<TextView>(R.id.status_bar_heightTv)
         textView.layoutParams.apply {
-            height = StatusBarUtil.getStatusBarHeight(this@SecondActivity).run {
-                (this!! * 1.8).toInt()
-            }
+            height = StatusBarUtil.getStatusBarHeight(this@SecondActivity)!!
         }
 
         mAdapter?.addHeaderView(view)

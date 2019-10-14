@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_333333"
+                android:id="@+id/play_video_rly">
+
+    <kt.module.module_video.views.IjkSurfacePlayerView
+            android:id="@+id/play_video_ijkPlayerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    
+    <include layout="@layout/layout_play_video_controller_widgets"/>
+
+    <LinearLayout
+            android:id="@+id/layout_play_video_right_Lly"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/color_bb000000"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:gravity="center_vertical">
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/layout_play_video_recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
+
+    </LinearLayout>
+
+
+    <!--如果要加广告View，就在这里-->
+
+    <LinearLayout
+            android:id="@+id/play_video_ad_lly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:padding="2dp">
+        <TextView
+                android:id="@+id/play_video_ad_skipTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="跳过"
+                android:textSize="16sp"
+                android:padding="2dp"
+                android:background="#78000000"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/color_e5e5e5"/>
+        <TextView
+                android:id="@+id/play_video_ad_removeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="4dp"
+                android:padding="2dp"
+                android:gravity="center"
+                android:text="去广告"
+                android:textSize="16sp"
+                android:textColor="#e5e5e5"
+                android:background="#78000000"/>
+
+        <TextView
+                android:id="@+id/play_video_ad_timerTv"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="4dp"
+                android:padding="2dp"
+                android:gravity="center"
+                android:text="5s"
+                android:textSize="16sp"
+                android:textColor="#e5e5e5"
+                android:background="#78000000"/>
+    </LinearLayout>
+
+</RelativeLayout>
