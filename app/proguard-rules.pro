@@ -51,7 +51,7 @@
 }
 
 #实体不被混淆
--keep class kt.module.module_base.data.** { *; }
+-keep class module_base.data.** { *; }
 -keep class com.google.gson.** {*;}
 
 # 保持 Parcelable 不被混淆
@@ -76,7 +76,7 @@
 -keep public class * extends android.content.BroadcastReceiver
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends android.preference.Preference
--keep public class * implements kt.module.common_module.base.view.IBaseView
+-keep public class * implements module_common.base.view.IBaseView
 
 -keep public interface com.facebook.**
 -keep class com.facebook.**

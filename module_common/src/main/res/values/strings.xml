@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">common_module</string>
     <string name="base_url">https://api.dev.now.unexplainablestore.cn/</string>
+    <string name="string_permission_title">获取权限</string>
+    <string name="string_permission_denid">重新获取权限</string>
+    <string name="string_permission_denid_never">权限被永久禁止</string>
+    <string name="string_permission_button_ok">好的</string>
+    <string name="string_permission_button_go_setting">去设置</string>
+    <string name="string_permission_button_cancle">取消</string>
 </resources>

@@ -2,9 +2,9 @@ package kt.module.module_further.mvp
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kt.module.common_module.constant.Constant.Key.KEY_WORD
+import kt.module.module_common.constant.Constant.Key.KEY_WORD
 import kt.module.module_base.http.ParamsBuilder
-import kt.module.common_module.base.presenter.BasePresenter
+import kt.module.module_common.base.presenter.BasePresenter
 
 class FurtherPresenter(mView: FurtherContract.IFurtherView, var model: FurtherModel) :
     BasePresenter<FurtherContract.IFurtherView>(mView) {

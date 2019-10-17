@@ -8,10 +8,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseViewHolder
 import java.io.File
-import android.R
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
-import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.common.RotationOptions
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 
@@ -21,6 +19,16 @@ class BaseRvViewHolder(view: View?) : BaseViewHolder(view) {
     fun setDrawableLeft(viewId: Int, drawable: Drawable): BaseViewHolder {
         var view = this.getView<TextView>(viewId)
         view.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        return this
+    }
+    fun setDrawableTop(viewId: Int, drawable: Drawable): BaseViewHolder {
+        var view = this.getView<TextView>(viewId)
+        view.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
+        return this
+    }
+    fun setDrawableBottom(viewId: Int, drawable: Drawable): BaseViewHolder {
+        var view = this.getView<TextView>(viewId)
+        view.setCompoundDrawablesWithIntrinsicBounds(null, null, null, drawable)
         return this
     }
 

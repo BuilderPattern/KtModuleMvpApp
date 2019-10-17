@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import kt.module.module_base.data.bean.BaseResponseData
 import kt.module.module_base.data.db.table.ObjectEntity
 import kt.module.module_base.http.ParamsBuilder
-import kt.module.common_module.base.view.IBaseView
+import kt.module.module_common.base.view.IBaseView
 
 class FurtherContract {
     interface IFurtherView :IBaseView{

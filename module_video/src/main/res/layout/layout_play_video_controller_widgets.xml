@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_00000000"
+                android:clickable="false"
+                android:id="@+id/play_video_widgets_rly">
+
+    <TextView
+            android:id="@+id/play_video_widgets_backTv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/selector_back_bg"/>
+
+    <TextView
+            android:id="@+id/play_video_widgets_video_nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:shadowColor="@color/color_000000"
+            android:shadowDx="1.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="2.0"
+            android:text="战狼2"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/color_f4f4f4"
+            android:textSize="16sp"/>
+
+    <LinearLayout
+            android:id="@+id/play_video_widgets_video_left_Lly"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/color_00000000"
+            android:clickable="false"
+            android:gravity="center_vertical">
+        <ImageView
+                android:id="@+id/play_video_widgets_video_lockImg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:src="@mipmap/icon_unlock_img"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:id="@+id/play_video_widgets_bottom_lly"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_play_bottom_bg"
+            android:orientation="horizontal">
+
+        <CheckBox
+                android:id="@+id/play_video_widgets_play_pauseCbx"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:button="@null"
+                android:checked="false"
+                android:background="@drawable/selector_play_play_pause_bg"/>
+
+        <ImageView
+                android:id="@+id/play_video_widgets_nextImg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:src="@mipmap/icon_play_next_red_img"/>
+
+        <TextView
+                android:id="@+id/play_video_widgets_current_positionTv"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_vertical"
+                android:shadowColor="@color/color_000000"
+                android:shadowDx="1.0"
+                android:shadowDy="1.0"
+                android:shadowRadius="2.0"
+                android:text="00:00:00"
+                android:textColor="@color/color_f4f4f4"
+                android:textSize="12sp"/>
+
+        <SeekBar
+                android:id="@+id/play_video_widgets_seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="100"
+                android:maxHeight="1dp"
+                android:minHeight="1dp"
+                android:progressDrawable="@drawable/shape_play_seek_style"
+                android:thumb="@drawable/shape_play_seek_thumb_bg"/>
+
+        <TextView
+                android:id="@+id/play_video_widgets_total_positionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingRight="8dp"
+                android:shadowColor="@color/color_000000"
+                android:shadowDx="1.0"
+                android:shadowDy="1.0"
+                android:shadowRadius="2.0"
+                android:text="00:00:00"
+                android:textColor="@color/color_f4f4f4"
+                android:textSize="12sp"/>
+
+        <TextView
+                android:id="@+id/play_video_widgets_switch_definitionTv"
+                style="@style/TextController"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="流畅"/>
+        <TextView
+                android:id="@+id/play_video_widgets_full_screenTv"
+                style="@style/TextController"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="全屏"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

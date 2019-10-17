@@ -2,7 +2,7 @@
           package="kt.module.module_first">
 
     <application>
-        <activity android:name="kt.module.module_first.FirstActivity"
+        <activity android:name=".FirstActivity"
                   android:screenOrientation="portrait"/>
     </application>
 </manifest>
