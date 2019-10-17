@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import kt.module.module_base.adapter.BaseRvQuickAdapter
 import kt.module.module_base.adapter.BaseRvViewHolder
@@ -64,6 +65,8 @@ class HomeFragment : BaseFragment<IBasePresenter>() {
 
 
     override fun initEvents() {
-
+        mAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            RouteUtils.go(RouteUtils.RouterMap.Play.PlayVideoAc).navigation()
+        }
     }
 }

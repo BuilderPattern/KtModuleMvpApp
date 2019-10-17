@@ -1,1 +1,1 @@
-include ':app', ':module_base', ':module_common', ':module_first', ':module_second', ':module_main', ':module_home', ':module_message', ':module_further', ':module_mine', ':library_adapter'
+include ':app', ':module_base', ':module_common', ':module_first', ':module_second', ':module_main', ':module_home', ':module_message', ':module_further', ':module_mine', ':library_adapter', ':module_video'

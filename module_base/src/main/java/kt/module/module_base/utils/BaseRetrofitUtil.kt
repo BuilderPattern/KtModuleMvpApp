@@ -4,7 +4,7 @@ import android.os.Build
 import android.webkit.WebSettings
 import kt.module.BaseApp
 import kt.module.module_base.R
-import kt.module.common_module.config.BuildConfig
+import kt.module.module_common.config.BuildConfig
 import kt.module.module_base.http.LogInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

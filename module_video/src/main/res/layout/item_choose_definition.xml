@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+    <TextView
+            android:id="@+id/item_choose_definitionTv"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_ffffff"
+            android:singleLine="true"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:textSize="16sp"/>
+
+    <!--<TextView-->
+            <!--android:id="@+id/vip_url"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="140dp"-->
+            <!--android:background="@drawable/vip_churl"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="2dp"-->
+            <!--android:text="@string/vip_url"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="8sp"/>-->
+
+    <!--<View-->
+            <!--android:id="@+id/divider"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.5dp"-->
+            <!--android:layout_below="@id/textview_definiton"-->
+            <!--android:background="#19ffffff"/>-->
+</RelativeLayout>

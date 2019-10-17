@@ -1,7 +1,6 @@
 package kt.module.module_base.data.db.utils;
 
 import android.database.sqlite.SQLiteDatabaseLockedException;
-import android.util.Log;
 import kt.module.BaseApp;
 import kt.module.module_base.data.db.dao.DaoSession;
 import kt.module.module_base.data.db.table.ChildEntity;

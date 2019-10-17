@@ -53,6 +53,6 @@ object StatusBarUtil {
     fun getStatusBarHeight(context: Context): Int? {
         val resources = context.resources
         var resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-        return resources?.getDimensionPixelSize(resourceId!!)
+        return resources?.getDimensionPixelSize(resourceId!!)?.times(2)
     }
 }
